@@ -1,0 +1,100 @@
+/* ============================================================
+   INSTALLATION CAROUSEL — Almine Rech style
+   Center image prominent, prev/next peeking from edges.
+   Click to fullscreen via lightbox.
+   ============================================================ */
+
+.install-carousel {
+  position: relative;
+  padding: 0 0 32px;
+  overflow: hidden;
+}
+
+/* Viewport clips the overflow */
+.install-carousel-viewport {
+  overflow: hidden;
+  padding: 0 15%;
+}
+
+/* Track slides horizontally */
+.install-carousel-track {
+  display: flex;
+  gap: 16px;
+  transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+  will-change: transform;
+}
+
+/* Each slide */
+.install-carousel-slide {
+  flex: 0 0 70%;
+  cursor: pointer;
+  transition: opacity .3s ease, filter .3s ease;
+  opacity: .4;
+  filter: brightness(.95);
+}
+.install-carousel-slide.active {
+  opacity: 1;
+  filter: brightness(1);
+}
+.install-carousel-slide:hover {
+  opacity: .85;
+}
+.install-carousel-slide.active:hover {
+  opacity: 1;
+}
+
+/* Image */
+.install-carousel-image {
+  width: 100%;
+  aspect-ratio: 3/2;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Controls — right-aligned like Almine Rech */
+.install-carousel-controls {
+  display: flex;
+  gap: 4px;
+  position: absolute;
+  top: 50%;
+  right: 52px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.install-carousel-arrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.install-carousel-arrow:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  background: var(--bg-alt);
+}
+
+/* Caption */
+.install-carousel-caption {
+  padding: 16px 52px 0;
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.install-carousel-counter {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+  opacity: .6;
+}

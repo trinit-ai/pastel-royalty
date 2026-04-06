@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { EXHIBITIONS, ARTISTS, TYPE_LABELS } from '../data/demo'
+import InstallCarousel from '../components/ui/InstallCarousel'
 import './exhibition-detail.css'
 
 export default function ExhibitionDetail() {
@@ -97,21 +98,14 @@ export default function ExhibitionDetail() {
         </div>
       </div>
 
-      {/* 5. INSTALLATION VIEWS — full width, stacked, not a grid */}
+      {/* 5. INSTALLATION VIEWS — carousel */}
       <div className="exd-install">
         <h2 className="exd-section-title reveal">Installation Views</h2>
-        <div className="exd-install-images">
-          {installColors.map((color, i) => (
-            <div
-              key={i}
-              className="exd-install-image reveal"
-              style={{ background: `linear-gradient(160deg, ${color}, ${exhibition.color}aa)` }}
-            >
-              <div className="exd-install-caption">
-                Installation view, <em>{exhibition.title}</em>, {exhibition.location}, {new Date(exhibition.start_date).getFullYear()}
-              </div>
-            </div>
-          ))}
+        <div className="reveal">
+          <InstallCarousel
+            images={installColors.map((color, i) => ({ color, src: '' }))}
+            exhibitionTitle={exhibition.title}
+          />
         </div>
       </div>
 
