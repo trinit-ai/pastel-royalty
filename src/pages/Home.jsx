@@ -4,14 +4,14 @@ import './home.css'
 
 // Demo data — replaced by Supabase in production
 const DEMO_EXHIBITIONS = [
-  { id: 1, title: 'The Axial Age', date: 'Summer 2026', artists: 'Loren Eiferman & Rob Ventura', status: 'current', color: '#C4D2C0' },
-  { id: 2, title: 'Into The Woods', date: 'Winter 2025', artists: 'Group Exhibition', color: '#DDD8E8' },
-  { id: 3, title: 'Future Art Fair', date: 'Fall 2025', artists: 'New York, NY', color: '#D4E4F0' },
+  { id: 1, title: 'Still Life with Light', date: 'Summer 2026', artists: 'Elena Marsh & Julian Cole', status: 'current', color: '#C4D2C0' },
+  { id: 2, title: 'Salt & Stone', date: 'Winter 2025', artists: 'Group Exhibition', color: '#DDD8E8' },
+  { id: 3, title: 'Coastal Contemporary', date: 'Fall 2025', artists: 'Art Fair, NY', color: '#D4E4F0' },
 ]
 
 const DEMO_ARTISTS = [
-  { id: 1, name: 'Rob Ventura', medium: 'Painting, Ceramics', location: 'Jersey City, NJ', onView: true, color: '#d4ece8' },
-  { id: 2, name: 'Loren Eiferman', medium: 'Wood Sculpture', location: 'New York, NY', onView: true, color: '#e8e0d4' },
+  { id: 1, name: 'Elena Marsh', medium: 'Painting, Mixed Media', location: 'Brooklyn, NY', onView: true, color: '#d4ece8' },
+  { id: 2, name: 'Julian Cole', medium: 'Sculpture', location: 'Hudson Valley, NY', onView: true, color: '#e8e0d4' },
   { id: 3, name: 'Artist Name', medium: 'Medium', location: '', onView: false, color: '#d8dce8' },
   { id: 4, name: 'Artist Name', medium: 'Medium', location: '', onView: false, color: '#e8d8d4' },
 ]
@@ -23,11 +23,11 @@ export default function Home({ galleryName }) {
     <main>
       {/* TICKER */}
       <div className="ticker">
-        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>Now on view</strong> — The Axial Age</div></div>
+        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>Now on view</strong> — Still Life with Light</div></div>
         <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>Hours</strong> — Thu–Sun, 11–5</div></div>
-        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>Spring Lake, NJ</strong> — Directions</div></div>
-        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>(732) 449-1234</strong></div></div>
-        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>info@gallery.com</strong></div></div>
+        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>Your City, ST</strong> — Directions</div></div>
+        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>(555) 000-0000</strong></div></div>
+        <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>info@yourgallery.com</strong></div></div>
       </div>
 
       {/* HERO */}
@@ -37,12 +37,12 @@ export default function Home({ galleryName }) {
             <div className="hero-rule" />
             <div className="hero-label">Current Exhibition</div>
           </div>
-          <h1 className="hero-title fade-up fade-up-2">The Axial Age</h1>
-          <div className="hero-artist fade-up fade-up-2">Loren Eiferman &amp; Rob Ventura</div>
+          <h1 className="hero-title fade-up fade-up-2">Still Life with Light</h1>
+          <div className="hero-artist fade-up fade-up-2">Elena Marsh &amp; Julian Cole</div>
           <div className="hero-dates fade-up fade-up-3">Summer 2026</div>
           <div className="hero-divider fade-up fade-up-3" />
           <p className="hero-body fade-up fade-up-3">
-            Two artists working at the intersection of natural form and human craft — wood sculpture and oil painting in dialogue across millennia of making.
+            Two artists exploring the quiet tension between permanence and impermanence — painting and sculpture in conversation with coastal light.
           </p>
           <div className="hero-actions fade-up fade-up-4">
             <a href="#" className="btn btn-outline">View Exhibition →</a>
@@ -75,9 +75,9 @@ export default function Home({ galleryName }) {
         <div className="hero-image">
           <div className="hero-image-placeholder" />
           <div className="artwork-label">
-            <div className="artwork-label-title">Camellias I</div>
+            <div className="artwork-label-title">Morning Harbor</div>
             <div className="artwork-label-detail">
-              Rob Ventura, 2025<br />Oil and beeswax on hemp<br />50 × 43 × 1½ in
+              Elena Marsh, 2025<br />Oil on linen<br />48 × 36 in
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function Home({ galleryName }) {
           <h2 className="section-title">Gallery Information</h2>
           <div className="section-divider reveal-line" />
           <p className="about-summary reveal">
-            A fine art gallery and full-service advisory firm in Spring Lake, New Jersey — curating exhibitions and building collections with fifteen years of expertise in contemporary and modern art.
+            A fine art gallery and full-service advisory firm — curating exhibitions and building collections with deep expertise in contemporary and modern art.
           </p>
         </div>
         <div className="services-grid">
@@ -179,10 +179,10 @@ export default function Home({ galleryName }) {
         <div className="visit-grid reveal">
           <div className="visit-left">
             <div className="eyebrow-gold" style={{ marginBottom: 20 }}>Visit</div>
-            <div className="visit-title">Spring Lake,<br />New Jersey</div>
+            <div className="visit-title">Your City,<br />Your State</div>
             <div className="visit-detail">
               <div className="visit-label">Address</div>
-              <div className="visit-value">1308 Third Avenue, Suite #1A<br />Spring Lake, NJ 07762</div>
+              <div className="visit-value">123 Main Street, Suite #1<br />Your City, ST 00000</div>
             </div>
             <div className="visit-detail">
               <div className="visit-label">Hours</div>
@@ -190,18 +190,18 @@ export default function Home({ galleryName }) {
             </div>
             <div className="visit-detail">
               <div className="visit-label">Contact</div>
-              <div className="visit-value">info@gallery.com</div>
+              <div className="visit-value">info@yourgallery.com</div>
             </div>
             <div className="visit-detail" style={{ borderBottom: 'none' }}>
               <div className="visit-label">Instagram</div>
-              <div className="visit-value">@galleryname</div>
+              <div className="visit-value">@yourgallery</div>
             </div>
           </div>
           <div className="visit-right">
             <div className="eyebrow" style={{ marginBottom: 20 }}>About</div>
-            <div className="visit-right-title">Contemporary art<br />at the Jersey Shore.</div>
+            <div className="visit-right-title">Contemporary art<br />for the modern collector.</div>
             <p className="visit-right-body">
-              The gallery presents contemporary painting, sculpture, and works on paper in Spring Lake, New Jersey. Founded in 2022, the gallery represents emerging and established artists working across media, with a focus on material craft, visual intensity, and curatorial precision.
+              The gallery presents contemporary painting, sculpture, and works on paper. We represent emerging and established artists working across media, with a focus on material craft, visual intensity, and curatorial precision.
             </p>
             <a href="mailto:info@gallery.com" className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px' }}>
               Inquire →

@@ -10,7 +10,7 @@ const NAV_ITEMS = [
 
 export default function Header({ galleryName = 'Gallery Name' }) {
   const [theme, setTheme] = useState(
-    document.documentElement.getAttribute('data-theme') || 'dark'
+    document.documentElement.getAttribute('data-theme') || 'light'
   )
 
   const toggleTheme = () => {
