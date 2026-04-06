@@ -12,8 +12,8 @@
 /* Three-panel stage */
 .install-carousel-stage {
   display: grid;
-  grid-template-columns: 14% 1fr 14%;
-  gap: 8px;
+  grid-template-columns: 18% 1fr 18%;
+  gap: 6px;
   align-items: center;
 }
 
@@ -37,7 +37,8 @@
 /* All images */
 .install-carousel-image {
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 2.4/1;
+  max-height: 480px;
 }
 
 /* Arrows — overlaid on left/right edges of active image */
