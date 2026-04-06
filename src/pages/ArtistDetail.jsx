@@ -89,18 +89,18 @@ export default function ArtistDetail() {
           <div className="atd-hero-medium fade-up fade-up-2">{artist.medium}</div>
           <div className="atd-hero-divider fade-up fade-up-3" />
           <p className="atd-hero-bio fade-up fade-up-3">{artist.bio}</p>
-          <p className="atd-hero-bio-extended fade-up fade-up-3">
+          <p className="atd-hero-bio-extended reveal">
             Selected works have been exhibited nationally and internationally. The artist's practice draws on sustained observation and a deep engagement with material process, resulting in works that reward close, unhurried looking.
           </p>
-          <p className="atd-hero-bio-extended fade-up fade-up-3">
+          <p className="atd-hero-bio-extended reveal">
             Recent exhibitions include group presentations at institutional and commercial venues across the United States. Work is held in private and public collections. The artist maintains an active studio practice and is available for commissions and site-specific projects.
           </p>
-          <div className="atd-hero-actions fade-up fade-up-4">
+          <div className="atd-hero-actions reveal">
             <a className="btn btn-outline" onClick={() => openInquire()} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
             <a href="#" className="btn btn-gold">Download CV ↓</a>
           </div>
 
-          <div className="atd-hero-press fade-up fade-up-4">
+          <div className="atd-hero-press reveal">
             <div className="atd-hero-press-label">Press</div>
             <a href="#" target="_blank" rel="noopener noreferrer" className="atd-press-item"><em>Title of Review</em> — Publication Name, 2025</a>
             <a href="#" target="_blank" rel="noopener noreferrer" className="atd-press-item"><em>Title of Feature</em> — Publication Name, 2024</a>
