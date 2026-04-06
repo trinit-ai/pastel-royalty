@@ -475,7 +475,11 @@
 
   .exd-install-header {
     padding: 0 24px;
-    position: static;
+    position: relative;
+  }
+  .exd-install-header::before {
+    left: 24px;
+    top: 0;
   }
   .exd-section-title {
     position: static;
