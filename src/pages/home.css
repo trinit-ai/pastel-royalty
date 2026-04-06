@@ -654,10 +654,9 @@
   }
   .section-header {
     padding: 16px 24px;
-    margin-left: -24px;
-    margin-right: -24px;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: 32px;
-    top: 56px;
     position: static;
   }
 
