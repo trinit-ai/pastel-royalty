@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useInquire } from '../hooks/useInquire'
@@ -13,6 +14,14 @@ const FEATURED_ARTISTS = ARTISTS.slice(0, 4)
 export default function Home({ galleryName }) {
   useScrollReveal()
   const { openInquire } = useInquire()
+  const [cookieDismissed, setCookieDismissed] = useState(
+    () => localStorage.getItem('cookie_consent') !== null
+  )
+
+  const handleDecline = () => {
+    localStorage.setItem('cookie_consent', 'declined')
+    setCookieDismissed(true)
+  }
 
   return (
     <main className="home-page">
@@ -58,13 +67,15 @@ export default function Home({ galleryName }) {
             </form>
           </div>
 
-          <div className="cookie-inline">
-            <span className="cookie-text">This site uses analytics cookies.</span>
-            <span className="cookie-sep">·</span>
-            <a href="#" className="cookie-link">Privacy</a>
-            <span className="cookie-sep">·</span>
-            <button className="cookie-btn">→ Decline</button>
-          </div>
+          {!cookieDismissed && (
+            <div className="cookie-inline">
+              <span className="cookie-text">This site uses essential cookies only.</span>
+              <span className="cookie-sep">·</span>
+              <Link to="/legal/privacy-policy" className="cookie-link">Privacy</Link>
+              <span className="cookie-sep">·</span>
+              <button className="cookie-btn" onClick={handleDecline}>Decline →</button>
+            </div>
+          )}
         </div>
 
         <div className="hero-image">
