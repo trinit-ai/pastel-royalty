@@ -15,6 +15,7 @@ import Services from './pages/Services'
 import Artists from './pages/Artists'
 import ArtistDetail from './pages/ArtistDetail'
 import News from './pages/News'
+import NewsDetail from './pages/NewsDetail'
 import Legal from './pages/Legal'
 import NotFound from './pages/NotFound'
 import Private from './pages/Private'
@@ -52,6 +53,7 @@ function AppShell() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/news" element={<News />} />
+          <Route path="/news/:slug" element={<NewsDetail />} />
           <Route path="/legal/:slug" element={<Legal />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
