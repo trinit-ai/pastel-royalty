@@ -3,6 +3,7 @@ import { LightboxProvider } from './hooks/useLightbox'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import Newsletter from './components/layout/Newsletter'
 import Lightbox from './components/lightbox/Lightbox'
 import Home from './pages/Home'
 import Exhibitions from './pages/Exhibitions'
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/exhibitions" element={<Exhibitions />} />
           <Route path="/exhibitions/:slug" element={<ExhibitionDetail />} />
         </Routes>
+        <Newsletter />
         <Footer galleryName={GALLERY_NAME} />
         <Lightbox />
       </LightboxProvider>

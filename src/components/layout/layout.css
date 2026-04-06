@@ -157,3 +157,49 @@
   text-transform: uppercase;
   color: var(--footer-bottom-right);
 }
+
+/* ─── Newsletter ───────────────────────────────────────── */
+
+.newsletter {
+  background: var(--newsletter-bg);
+  padding: 36px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  border-bottom: 1px solid rgba(58,90,140,.12);
+}
+.newsletter-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+}
+.newsletter-form { display: flex; }
+.newsletter-input {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-right: none;
+  background: white;
+  color: var(--text);
+  width: 280px;
+  outline: none;
+}
+.newsletter-input::placeholder { color: #B0ACA6; }
+.newsletter-input:focus { border-color: var(--accent-secondary); }
+.newsletter-submit {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  background: var(--newsletter-btn-bg);
+  color: white;
+  border: 1px solid var(--newsletter-btn-bg);
+  cursor: pointer;
+  transition: background .15s;
+}
+.newsletter-submit:hover { background: #2A5580; }

@@ -162,16 +162,6 @@ export default function ExhibitionDetail() {
         </div>
       )}
 
-      {/* 8. NEWSLETTER */}
-      <div className="exd-newsletter reveal">
-        <div className="exd-newsletter-inner">
-          <div className="exd-newsletter-text">Stay informed about upcoming exhibitions.</div>
-          <form className="exd-newsletter-form" onSubmit={e => e.preventDefault()}>
-            <input type="email" className="exd-newsletter-input" placeholder="Email address" />
-            <button type="submit" className="exd-newsletter-submit">Subscribe</button>
-          </form>
-        </div>
-      </div>
     </main>
   )
 }

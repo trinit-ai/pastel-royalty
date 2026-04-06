@@ -203,14 +203,6 @@ export default function Home({ galleryName }) {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <div className="newsletter reveal">
-        <div className="newsletter-text">Stay informed about exhibitions and events.</div>
-        <form className="newsletter-form" onSubmit={e => e.preventDefault()}>
-          <input type="email" className="newsletter-input" placeholder="Email address" />
-          <button type="submit" className="newsletter-submit">Subscribe</button>
-        </form>
-      </div>
     </main>
   )
 }
