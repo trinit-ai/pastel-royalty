@@ -205,7 +205,7 @@ export default function Home({ galleryName }) {
             <p className="visit-right-body">
               The gallery presents contemporary painting, sculpture, and works on paper. We represent emerging and established artists working across media, with a focus on material craft, visual intensity, and curatorial precision.
             </p>
-            <a className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px', cursor: 'pointer', alignSelf: 'flex-start' }} onClick={openInquire} role="button">
+            <a className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px', cursor: 'pointer' }} onClick={openInquire} role="button">
               Inquire
             </a>
           </div>
