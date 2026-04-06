@@ -475,20 +475,11 @@
 
   .exd-install-header {
     padding: 0 24px;
-    position: relative;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 20px;
+    position: static;
+    margin-bottom: 16px;
   }
   .exd-install-header::before {
-    position: static;
-    display: block;
-    width: 36px;
-    height: 2px;
-    flex-basis: 100%;
-  }
-  .exd-install .exd-section-title {
-    font-size: 20px;
+    display: none;
   }
   .install-header-arrow {
     width: 32px;
