@@ -478,8 +478,11 @@
     position: relative;
   }
   .exd-install-header::before {
-    left: 24px;
-    top: 0;
+    display: none;
+  }
+  .install-header-arrow {
+    width: 36px;
+    height: 36px;
   }
   .exd-section-title {
     position: static;
