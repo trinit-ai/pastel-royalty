@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { useLightbox } from '../hooks/useLightbox'
 import { EXHIBITIONS, ARTISTS, TYPE_LABELS } from '../data/demo'
 import InstallCarousel from '../components/ui/InstallCarousel'
 import './exhibition-detail.css'
@@ -8,6 +9,7 @@ import './exhibition-detail.css'
 export default function ExhibitionDetail() {
   const { slug } = useParams()
   useScrollReveal([slug])
+  const { open } = useLightbox()
   const carouselRef = useRef(null)
 
   const exhibition = EXHIBITIONS.find(e => e.slug === slug)
@@ -72,7 +74,7 @@ export default function ExhibitionDetail() {
         )}
 
         <a href="mailto:info@yourgallery.com" className="exd-inquire-btn reveal">
-          Inquire →
+          Inquire
         </a>
       </div>
 
@@ -91,15 +93,10 @@ export default function ExhibitionDetail() {
         </div>
       )}
 
-      {/* 4. PRESS RELEASE */}
-      <div className="exd-press reveal">
-        <div className="exd-press-inner">
-          <div className="exd-press-label">Press</div>
-          <div className="exd-press-actions">
-            <button className="exd-press-btn">Download Press Release (PDF) ↓</button>
-            <button className="exd-press-btn">Download Checklist (PDF) ↓</button>
-          </div>
-        </div>
+      {/* 4. PRESS — compact inline links */}
+      <div className="exd-press-compact reveal">
+        <button className="exd-press-btn">Press Release (PDF) ↓</button>
+        <button className="exd-press-btn">Checklist (PDF) ↓</button>
       </div>
 
       {/* 5. INSTALLATION VIEWS — carousel */}
@@ -125,39 +122,55 @@ export default function ExhibitionDetail() {
         </div>
       </div>
 
-      {/* 6. SELECTED ARTWORKS — 3 column grid */}
-      <div className="exd-artworks">
-        <h2 className="exd-section-title reveal">Selected Works</h2>
-        <div className="exd-artworks-grid">
-          {[
-            { title: 'Morning Harbor', artist: 'Elena Marsh', year: 2025, medium: 'Oil on linen', dims: '48 × 36 in' },
-            { title: 'Coastal Fragment III', artist: 'Julian Cole', year: 2025, medium: 'Carved walnut', dims: '22 × 14 × 10 in' },
-            { title: 'Green Passage', artist: 'Elena Marsh', year: 2026, medium: 'Oil and beeswax on hemp', dims: '60 × 48 in' },
-            { title: 'Tidal Form', artist: 'Julian Cole', year: 2026, medium: 'Bronze', dims: '18 × 12 × 8 in' },
-            { title: 'Late Summer', artist: 'Elena Marsh', year: 2025, medium: 'Oil on linen', dims: '40 × 32 in' },
-            { title: 'Shore Bone', artist: 'Julian Cole', year: 2026, medium: 'Bleached oak', dims: '36 × 8 × 6 in' },
-            { title: 'Estuary', artist: 'Elena Marsh', year: 2026, medium: 'Oil on canvas', dims: '36 × 28 in' },
-            { title: 'Drift', artist: 'Julian Cole', year: 2025, medium: 'Found wood, steel', dims: '42 × 16 × 12 in' },
-          ].map((work, i) => (
-            <div key={i} className={`exd-artwork-card reveal ${i > 2 ? 'reveal-delay-1' : ''}`}>
-              <div
-                className="exd-artwork-image"
-                style={{
-                  background: `linear-gradient(160deg, ${exhibition.color}${i % 2 === 0 ? 'cc' : 'aa'}, ${exhibition.color}${i % 2 === 0 ? '99' : 'bb'})`,
-                  aspectRatio: i % 3 === 0 ? '3/4' : i % 2 === 0 ? '1/1' : '4/5',
-                }}
-              />
-              <div className="exd-artwork-info">
-                <div className="exd-artwork-artist">{work.artist}</div>
-                <div className="exd-artwork-title"><em>{work.title}</em>, {work.year}</div>
-                <div className="exd-artwork-medium">{work.medium}</div>
-                <div className="exd-artwork-dims">{work.dims}</div>
-                <a href={`mailto:info@yourgallery.com?subject=Inquiry: ${work.title} by ${work.artist}`} className="exd-artwork-inquire">Inquire →</a>
-              </div>
+      {/* 6. SELECTED ARTWORKS — 4 column grid with lightbox */}
+      {(() => {
+        const exWorks = [
+          { title: 'Morning Harbor', artist: 'Elena Marsh', year: 2025, medium: 'Oil on linen', dims: '48 × 36 in' },
+          { title: 'Coastal Fragment III', artist: 'Julian Cole', year: 2025, medium: 'Carved walnut', dims: '22 × 14 × 10 in' },
+          { title: 'Green Passage', artist: 'Elena Marsh', year: 2026, medium: 'Oil and beeswax on hemp', dims: '60 × 48 in' },
+          { title: 'Tidal Form', artist: 'Julian Cole', year: 2026, medium: 'Bronze', dims: '18 × 12 × 8 in' },
+          { title: 'Late Summer', artist: 'Elena Marsh', year: 2025, medium: 'Oil on linen', dims: '40 × 32 in' },
+          { title: 'Shore Bone', artist: 'Julian Cole', year: 2026, medium: 'Bleached oak', dims: '36 × 8 × 6 in' },
+          { title: 'Estuary', artist: 'Elena Marsh', year: 2026, medium: 'Oil on canvas', dims: '36 × 28 in' },
+          { title: 'Drift', artist: 'Julian Cole', year: 2025, medium: 'Found wood, steel', dims: '42 × 16 × 12 in' },
+        ]
+        const lightboxItems = exWorks.map(w => ({
+          title: w.title,
+          artistName: w.artist,
+          year: w.year,
+          medium: w.medium,
+          dimensions: w.dims,
+          status: 'available',
+          exhibitionTitle: exhibition.title,
+          displaySrc: '',
+          fullSrc: '',
+          dominantColor: exhibition.color,
+        }))
+        return (
+          <div className="exd-artworks">
+            <h2 className="exd-section-title reveal">Selected Works</h2>
+            <div className="exd-artworks-grid">
+              {exWorks.map((work, i) => (
+                <div key={i} className={`exd-artwork-card reveal ${i > 2 ? 'reveal-delay-1' : ''}`} onClick={() => open(lightboxItems, i)} role="button" tabIndex={0}>
+                  <div
+                    className="exd-artwork-image"
+                    style={{
+                      background: `linear-gradient(160deg, ${exhibition.color}${i % 2 === 0 ? 'cc' : 'aa'}, ${exhibition.color}${i % 2 === 0 ? '99' : 'bb'})`,
+                      aspectRatio: i % 3 === 0 ? '3/4' : i % 2 === 0 ? '1/1' : '4/5',
+                    }}
+                  />
+                  <div className="exd-artwork-info">
+                    <div className="exd-artwork-artist">{work.artist}</div>
+                    <div className="exd-artwork-title"><em>{work.title}</em>, {work.year}</div>
+                    <div className="exd-artwork-medium">{work.medium}</div>
+                    <div className="exd-artwork-dims">{work.dims}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        )
+      })()}
 
       {/* 7. ARTISTS IN SHOW */}
       {showArtists.length > 0 && (

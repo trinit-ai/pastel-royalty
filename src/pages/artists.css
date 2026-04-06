@@ -1,0 +1,115 @@
+/* ============================================================
+   ARTISTS ROSTER — Two-column alphabetical list
+   Small thumbnails, name + medium, click to detail
+   ============================================================ */
+
+.artists-page {
+  min-height: 60vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.artists-page-header {
+  padding: 64px 52px 32px;
+}
+
+.artists-count {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* ─── Roster Grid ─────────────────────────────────────── */
+
+.artists-roster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 48px;
+  padding: 0 52px 80px;
+}
+
+.artists-roster-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Artist Row ──────────────────────────────────────── */
+
+.artist-roster-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: background .2s;
+}
+.artist-roster-row:first-child {
+  border-top: 1px solid var(--border);
+}
+.artist-roster-row:hover {
+  background: var(--bg-alt);
+}
+
+.artist-roster-thumb {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.artist-roster-info {
+  min-width: 0;
+}
+
+.artist-roster-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist-roster-meta {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.artist-roster-bio {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: .7;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .artists-page-header {
+    padding: 40px 24px 24px;
+  }
+  .artists-roster {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 24px 56px;
+  }
+  /* Remove double border between columns on mobile */
+  .artists-roster-col:last-child .artist-roster-row:first-child {
+    border-top: none;
+  }
+  .artist-roster-thumb {
+    width: 44px;
+    height: 44px;
+  }
+  .artist-roster-name {
+    font-size: 16px;
+  }
+}

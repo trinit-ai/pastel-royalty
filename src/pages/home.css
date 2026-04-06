@@ -219,7 +219,7 @@
 }
 .hero-image-placeholder {
   width: 70%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/5;
   background: linear-gradient(160deg, #a8d4c8, #90c0b0);
   box-shadow: 0 6px 32px rgba(0,0,0,.1);
 }

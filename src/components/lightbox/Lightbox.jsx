@@ -2,42 +2,31 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { useLightbox } from '../../hooks/useLightbox'
 import LightboxDetails from './LightboxDetails'
-import LightboxControls from './LightboxControls'
 import './lightbox.css'
 
 /**
  * Gallery-grade lightbox.
  *
- * Design philosophy:
- * - The art is the only thing that matters
- * - Zero chrome until interaction
- * - Cinematic open/close from source element position
- * - Progressive image loading (thumb → display → full)
- * - Integrated inquiry — the "buy" moment lives here
- * - Keyboard + gesture native
+ * Design: White wall. Image + details always side by side.
+ * Clean minimal chrome. No shadows. Art-first.
  */
 export default function Lightbox() {
-  const {
-    isOpen, current, items, close, next, prev,
-    sourceRect, detailsVisible, toggleDetails
-  } = useLightbox()
+  const { isOpen, current, items, close, next, prev } = useLightbox()
 
   const overlayRef = useRef(null)
   const imageRef = useRef(null)
   const [loaded, setLoaded] = useState(false)
   const [hdLoaded, setHdLoaded] = useState(false)
-  const [phase, setPhase] = useState('closed') // closed → entering → open → exiting
+  const [phase, setPhase] = useState('closed')
   const [pinch, setPinch] = useState({ scale: 1, x: 0, y: 0 })
 
-  // Cinematic enter animation
+  // Enter animation
   useEffect(() => {
     if (isOpen && phase === 'closed') {
       setPhase('entering')
       setLoaded(false)
       setHdLoaded(false)
       setPinch({ scale: 1, x: 0, y: 0 })
-
-      // Allow the entering CSS to paint, then transition to open
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setPhase('open'))
       })
@@ -56,12 +45,11 @@ export default function Lightbox() {
         case 'Escape': close(); break
         case 'ArrowRight': next(); break
         case 'ArrowLeft': prev(); break
-        case 'i': case 'I': toggleDetails(); break
       }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [isOpen, close, next, prev, toggleDetails])
+  }, [isOpen, close, next, prev])
 
   // Lock body scroll
   useEffect(() => {
@@ -73,10 +61,9 @@ export default function Lightbox() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  // Progressive load: display image first, then full-res on demand
+  // Progressive load
   const handleDisplayLoad = useCallback(() => {
     setLoaded(true)
-    // Start loading full-res in background
     if (current?.fullSrc) {
       const hdImg = new Image()
       hdImg.onload = () => setHdLoaded(true)
@@ -84,7 +71,7 @@ export default function Lightbox() {
     }
   }, [current])
 
-  // Pinch-to-zoom (touch)
+  // Pinch-to-zoom
   const touchState = useRef({ initialDistance: 0, initialScale: 1 })
   const handleTouchStart = (e) => {
     if (e.touches.length === 2) {
@@ -109,7 +96,7 @@ export default function Lightbox() {
     if (pinch.scale < 1.1) setPinch({ scale: 1, x: 0, y: 0 })
   }
 
-  // Swipe to navigate (single touch)
+  // Swipe to navigate
   const swipeRef = useRef({ startX: 0, startY: 0 })
   const handleSwipeStart = (e) => {
     if (e.touches.length === 1 && pinch.scale === 1) {
@@ -124,7 +111,6 @@ export default function Lightbox() {
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 60) {
       dx > 0 ? prev() : next()
     }
-    // Swipe down to close
     if (dy > 100 && Math.abs(dy) > Math.abs(dx)) {
       close()
     }
@@ -151,74 +137,83 @@ export default function Lightbox() {
   const artwork = current
   if (!artwork) return null
 
-  // Determine which image to show (progressive)
   const imageSrc = hdLoaded ? artwork.fullSrc : artwork.displaySrc
+  const hasImage = !!imageSrc
+  const currentIndex = items.indexOf(current)
 
   return createPortal(
     <div
       ref={overlayRef}
       className={`lightbox-overlay lightbox-${phase}`}
-      onClick={(e) => { if (e.target === overlayRef.current) close() }}
       role="dialog"
       aria-modal="true"
       aria-label={`${artwork.title} by ${artwork.artistName}`}
     >
-      {/* Dark surround — gallery wall */}
       <div className="lightbox-backdrop" />
 
-      {/* The image — the only thing that matters */}
+      {/* Image area — click left half = prev, right half = next */}
       <div
         className="lightbox-stage"
+        onClick={(e) => {
+          if (e.target !== e.currentTarget) return
+          const rect = e.currentTarget.getBoundingClientRect()
+          const clickX = e.clientX - rect.left
+          if (clickX < rect.width / 2) { prev() } else { next() }
+        }}
         onTouchStart={(e) => { handleTouchStart(e); handleSwipeStart(e) }}
         onTouchMove={handleTouchMove}
         onTouchEnd={(e) => { handleTouchEnd(); handleSwipeEnd(e) }}
         onDoubleClick={handleDoubleClick}
       >
-        {/* BlurHash placeholder */}
-        {!loaded && artwork.blurhash && (
+        <div className="lightbox-watermark">Pastel Royalty Gallery</div>
+
+        {hasImage ? (
+          <>
+            {!loaded && (
+              <div
+                className="lightbox-placeholder"
+                style={{
+                  aspectRatio: artwork.aspectRatio || 'auto',
+                  backgroundColor: artwork.dominantColor || '#e8e4de'
+                }}
+              />
+            )}
+
+            <img
+              ref={imageRef}
+              src={imageSrc}
+              alt={`${artwork.title} by ${artwork.artistName}`}
+              className={`lightbox-image ${loaded ? 'loaded' : ''}`}
+              style={{
+                transform: `scale(${pinch.scale}) translate(${pinch.x}px, ${pinch.y}px)`,
+                aspectRatio: artwork.aspectRatio || 'auto'
+              }}
+              onLoad={handleDisplayLoad}
+              draggable={false}
+            />
+
+            {loaded && hdLoaded && (
+              <div className="lightbox-hd-badge">HD</div>
+            )}
+          </>
+        ) : (
           <div
-            className="lightbox-placeholder"
+            className="lightbox-image loaded lightbox-placeholder-art"
             style={{
-              aspectRatio: artwork.aspectRatio || 'auto',
-              backgroundColor: artwork.dominantColor || '#1a1a1a'
+              aspectRatio: artwork.aspectRatio || '3/4',
+              background: `linear-gradient(160deg, ${artwork.dominantColor || '#e8e4de'}cc, ${artwork.dominantColor || '#e8e4de'}88)`,
             }}
           />
         )}
-
-        <img
-          ref={imageRef}
-          src={imageSrc}
-          alt={`${artwork.title} by ${artwork.artistName}`}
-          className={`lightbox-image ${loaded ? 'loaded' : ''}`}
-          style={{
-            transform: `scale(${pinch.scale}) translate(${pinch.x}px, ${pinch.y}px)`,
-            aspectRatio: artwork.aspectRatio || 'auto'
-          }}
-          onLoad={handleDisplayLoad}
-          draggable={false}
-        />
-
-        {/* HD indicator */}
-        {loaded && hdLoaded && (
-          <div className="lightbox-hd-badge">HD</div>
-        )}
       </div>
 
-      {/* Artwork details panel — slides in from right */}
+      {/* Details — always visible. Nav, close, inquiry all here. */}
       <LightboxDetails
         artwork={artwork}
-        visible={detailsVisible}
-        onClose={toggleDetails}
-      />
-
-      {/* Minimal controls — appear on hover/tap */}
-      <LightboxControls
         onClose={close}
-        onPrev={items.length > 1 ? prev : null}
-        onNext={items.length > 1 ? next : null}
-        onToggleDetails={toggleDetails}
-        detailsVisible={detailsVisible}
-        currentIndex={items.indexOf(current)}
+        onPrev={prev}
+        onNext={next}
+        currentIndex={currentIndex}
         totalItems={items.length}
       />
     </div>,

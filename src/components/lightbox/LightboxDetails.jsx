@@ -2,58 +2,58 @@ import { useState } from 'react'
 import InquireForm from '../inquiry/InquireForm'
 
 /**
- * The details panel that slides in from the right.
- * Contains artwork info + integrated inquiry form.
- * This is where the viewing becomes a conversation.
+ * Details panel — always visible.
+ * Content scrolls, nav pinned to bottom.
  */
-export default function LightboxDetails({ artwork, visible, onClose }) {
+export default function LightboxDetails({ artwork, onClose, onPrev, onNext, currentIndex, totalItems }) {
   const [showInquiry, setShowInquiry] = useState(false)
 
   if (!artwork) return null
 
+  const fields = [
+    artwork.year && ['Year', artwork.year],
+    artwork.medium && ['Medium', artwork.medium],
+    artwork.dimensions && ['Dimensions', artwork.dimensions],
+  ].filter(Boolean)
+
   return (
-    <div className={`lightbox-details ${visible ? 'visible' : ''}`}>
-      <button className="lightbox-details-close" onClick={onClose} aria-label="Close details">
-        &times;
+    <div className="lightbox-details visible">
+      {/* Close */}
+      <button className="lightbox-details-close" onClick={onClose} aria-label="Close lightbox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
       </button>
 
+      {/* Scrollable content */}
       <div className="lightbox-details-content">
-        {/* Artist name — quiet, not competing with the art */}
         <div className="lightbox-details-artist">{artwork.artistName}</div>
 
-        {/* Title — italic, the identity of the piece */}
         <h2 className="lightbox-details-title">
-          <em>{artwork.title}</em>{artwork.year ? `, ${artwork.year}` : ''}
+          <em>{artwork.title}</em>
         </h2>
 
-        {/* Medium + dimensions */}
-        {artwork.medium && (
-          <div className="lightbox-details-medium">{artwork.medium}</div>
-        )}
-        {artwork.dimensions && (
-          <div className="lightbox-details-dimensions">{artwork.dimensions}</div>
+        {fields.length > 0 && (
+          <div className="lightbox-details-fields">
+            {fields.map(([label, value]) => (
+              <div key={label} className="lightbox-details-field">
+                <div className="lightbox-details-field-label">{label}</div>
+                <div className="lightbox-details-field-value">{value}</div>
+              </div>
+            ))}
+          </div>
         )}
 
-        {/* Availability indicator */}
-        <div className={`lightbox-details-status status-${artwork.status || 'available'}`}>
-          {artwork.status === 'sold' ? 'Sold' :
-           artwork.status === 'nfs' ? 'Not for Sale' :
-           artwork.status === 'on_hold' ? 'On Hold' :
-           'Available'}
-        </div>
-
-        {/* Description — if present */}
         {artwork.description && (
           <p className="lightbox-details-description">{artwork.description}</p>
         )}
 
-        {/* The moment: Inquire */}
-        {artwork.status === 'available' && !showInquiry && (
+        {artwork.status !== 'sold' && artwork.status !== 'nfs' && !showInquiry && (
           <button
             className="lightbox-inquire-btn"
             onClick={() => setShowInquiry(true)}
           >
-            Inquire About This Work &rarr;
+            Inquire About This Work
           </button>
         )}
 
@@ -65,13 +65,35 @@ export default function LightboxDetails({ artwork, visible, onClose }) {
           />
         )}
 
-        {/* Exhibition context — if viewing from an exhibition */}
-        {artwork.exhibitionTitle && (
-          <div className="lightbox-details-exhibition">
-            Shown in <em>{artwork.exhibitionTitle}</em>
+        {/* Footer */}
+        <div className="lightbox-details-footer">
+          {artwork.exhibitionTitle && (
+            <div className="lightbox-details-exhibition">
+              Shown in <em>{artwork.exhibitionTitle}</em>
+            </div>
+          )}
+          <div className="lightbox-details-inquiries">
+            Inquiries: <a href="mailto:info@yourgallery.com">info@yourgallery.com</a>
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Nav — pinned to bottom of panel */}
+      {totalItems > 1 && (
+        <div className="lightbox-details-nav">
+          <button className="lightbox-details-nav-btn" onClick={onPrev} aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 4l-8 8 8 8"/>
+            </svg>
+          </button>
+          <div className="lightbox-details-counter">{currentIndex + 1} / {totalItems}</div>
+          <button className="lightbox-details-nav-btn" onClick={onNext} aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 4l8 8-8 8"/>
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   )
 }

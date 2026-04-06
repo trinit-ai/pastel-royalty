@@ -43,7 +43,6 @@ export function LightboxProvider({ children }) {
     setState(prev => ({
       ...prev,
       currentIndex: (prev.currentIndex + 1) % prev.items.length,
-      detailsVisible: false,
     }))
   }, [])
 
@@ -51,7 +50,6 @@ export function LightboxProvider({ children }) {
     setState(prev => ({
       ...prev,
       currentIndex: (prev.currentIndex - 1 + prev.items.length) % prev.items.length,
-      detailsVisible: false,
     }))
   }, [])
 

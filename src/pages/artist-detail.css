@@ -1,0 +1,591 @@
+/* ============================================================
+   ARTIST DETAIL — Full-height hero + works grid + exhibitions
+   Hero mirrors homepage formfactor
+   ============================================================ */
+
+.atd {
+  min-height: 80vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.atd-empty {
+  padding: 120px 52px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ─── Ticker ──────────────────────────────────────────── */
+
+.atd-ticker {
+  background: var(--ticker-bg);
+  border-top: 1px solid rgba(0,0,0,.06);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  padding: 14px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+/* ─── Hero Card — newsletter / inquire ────────────────── */
+
+.atd-hero-card {
+  margin-top: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 16px 20px;
+  border-radius: 2px;
+}
+
+.atd-hero-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.atd-hero-card-label {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--hero-text-muted);
+  opacity: .6;
+}
+
+.atd-hero-card-link {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.atd-hero-card-link:hover { opacity: .7; }
+
+.atd-hero-card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.atd-hero-card-row {
+  display: flex;
+  gap: 8px;
+}
+
+.atd-hero-card-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: 'DM Sans';
+  font-size: 12px;
+  background: var(--card-input-bg);
+  border: 1px solid var(--card-input-border);
+  color: var(--card-input-text);
+  outline: none;
+  border-radius: 1px;
+  resize: vertical;
+  min-height: 60px;
+}
+.atd-hero-card-textarea::placeholder {
+  color: var(--card-input-text);
+  opacity: .35;
+}
+
+.atd-hero-card-input {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: 'DM Sans';
+  font-size: 12px;
+  background: var(--card-input-bg);
+  border: 1px solid var(--card-input-border);
+  color: var(--card-input-text);
+  outline: none;
+  border-radius: 1px;
+}
+.atd-hero-card-input::placeholder {
+  color: var(--card-input-text);
+  opacity: .35;
+}
+
+.atd-hero-card-submit {
+  width: 100%;
+  padding: 12px 18px;
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--ink);
+  border: none;
+  cursor: pointer;
+  transition: opacity .2s;
+  border-radius: 1px;
+}
+.atd-hero-card-submit:hover { opacity: .85; }
+
+/* ─── Hero — full height, matches homepage ────────────── */
+
+.atd-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 92vh;
+  border-bottom: 1px solid var(--border);
+}
+
+.atd-hero-content {
+  background: var(--hero-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 80px 64px;
+  position: relative;
+}
+
+.atd-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.atd-hero-rule {
+  width: 24px;
+  height: 1px;
+  background: var(--hero-rule);
+  opacity: .5;
+}
+
+.atd-hero-label {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--hero-label);
+}
+
+.atd-hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--hero-title);
+  font-style: italic;
+  letter-spacing: -.01em;
+  margin-bottom: 20px;
+}
+
+.atd-hero-medium {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--hero-artist);
+  margin-bottom: 6px;
+}
+
+.atd-hero-location {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: var(--hero-dates);
+  font-style: italic;
+  margin-bottom: 40px;
+}
+
+.atd-hero-divider {
+  width: 36px;
+  height: 1px;
+  background: var(--accent);
+  opacity: .3;
+  margin-bottom: 32px;
+}
+
+.atd-hero-bio {
+  font-family: 'DM Sans';
+  font-size: 13px;
+  line-height: 1.78;
+  color: var(--hero-text-muted);
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+.atd-hero-bio-extended {
+  font-family: 'DM Sans';
+  font-size: 13px;
+  line-height: 1.78;
+  color: var(--hero-text-muted);
+  max-width: 420px;
+  opacity: .7;
+}
+
+.atd-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.atd-hero-links {
+  margin-top: auto;
+  display: flex;
+  gap: 24px;
+  padding-top: 40px;
+}
+
+.atd-link {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--hero-text-muted);
+  text-decoration: none;
+  opacity: .6;
+  transition: opacity .2s;
+}
+.atd-link:hover { opacity: 1; }
+
+/* ─── Press Links ─────────────────────────────────────── */
+
+.atd-hero-press {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.atd-hero-press-label {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--hero-label);
+  margin-bottom: 4px;
+}
+
+.atd-press-item {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  color: var(--hero-text-muted);
+  text-decoration: none;
+  opacity: .5;
+  transition: opacity .2s;
+}
+.atd-press-item:hover { opacity: .9; }
+
+/* ─── Hero Image — featured artwork ──────────────────── */
+
+.atd-hero-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 48px;
+  position: relative;
+}
+
+.atd-hero-artwork {
+  width: 70%;
+  aspect-ratio: 4/5;
+}
+
+.atd-hero-artwork-label {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 70%;
+  gap: 16px;
+}
+
+.atd-hero-artwork-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  opacity: .7;
+}
+
+.atd-hero-artwork-detail {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--ink);
+  opacity: .35;
+  text-align: right;
+}
+
+/* ─── Section Title ───────────────────────────────────── */
+
+.atd-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 16px;
+  position: sticky;
+  top: 72px;
+  z-index: 5;
+  padding: 12px 0;
+}
+
+.atd-works .atd-section-title {
+  background: var(--bg);
+}
+
+.atd-exhibitions .atd-section-title {
+  background: var(--bg-alt);
+}
+
+/* ─── Selected Works Grid ─────────────────────────────── */
+
+.atd-works {
+  padding: 52px;
+  background: var(--bg);
+}
+
+.atd-works-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.atd-work-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.atd-work-card:hover {
+  opacity: 0.8;
+}
+.atd-work-card:hover .atd-work-image {
+  transform: scale(1.01);
+}
+
+.atd-work-image {
+  width: 100%;
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease;
+}
+
+.atd-work-info {
+  padding: 12px 0;
+}
+
+.atd-work-title {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.atd-work-medium {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.atd-work-dims {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: .6;
+}
+
+/* ─── Exhibitions List ────────────────────────────────── */
+
+.atd-exhibitions {
+  padding: 52px;
+  background: var(--bg-alt);
+}
+
+.atd-exhibitions-divider {
+  width: 36px;
+  height: 1px;
+  background: var(--accent);
+  opacity: .4;
+  margin-bottom: 20px;
+}
+
+.atd-exhibitions-list {
+  border-top: 1px solid var(--border);
+}
+
+.atd-exh-row {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+}
+
+.atd-exh-linked {
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.atd-exh-linked:hover { opacity: .7; }
+
+.atd-exh-thumb {
+  width: 120px;
+  height: 80px;
+  flex-shrink: 0;
+}
+.atd-exh-thumb-placeholder {
+  background: var(--border);
+  opacity: .5;
+}
+
+.atd-exh-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.atd-exh-type {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.atd-exh-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.atd-exh-venue {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.atd-exh-right {
+  text-align: right;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.atd-exh-date {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.atd-exh-view {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  transition: color .15s;
+}
+.atd-exh-linked:hover .atd-exh-view { color: var(--text); }
+
+/* ─── End Divider ─────────────────────────────────────── */
+
+.atd-end-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 52px 0;
+}
+
+.atd-end-line {
+  width: 36px;
+  height: 1px;
+  background: var(--border);
+}
+
+.atd-end-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ─── Back Link ───────────────────────────────────────── */
+
+.atd-back {
+  padding: 32px 52px 64px;
+}
+
+.atd-back-link {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.atd-back-link:hover { color: var(--text); }
+
+/* ─── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .atd-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .atd-hero-content {
+    padding: 40px 24px;
+    order: 2;
+  }
+  .atd-hero-image {
+    order: 1;
+    min-height: 340px;
+    padding: 24px;
+  }
+  .atd-hero-artwork { width: 60%; }
+  .atd-hero-artwork-label { width: 60%; }
+  .atd-hero-links {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .atd-works {
+    padding: 32px 24px;
+  }
+  .atd-works-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .atd-exhibitions {
+    padding: 32px 24px;
+  }
+  .atd-exh-row {
+    grid-template-columns: 80px 1fr auto;
+    gap: 16px;
+    padding: 20px 0;
+  }
+  .atd-exh-thumb {
+    width: 80px;
+    height: 56px;
+  }
+  .atd-exh-venue {
+    display: none;
+  }
+  .atd-back {
+    padding: 24px 24px 48px;
+  }
+}

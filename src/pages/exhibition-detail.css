@@ -158,32 +158,12 @@
   opacity: .8;
 }
 
-/* ─── 4. Press Release ─────────────────────────────────── */
+/* ─── 4. Press — compact inline links ─────────────────── */
 
-.exd-press {
+.exd-press-compact {
   padding: 0 52px 48px;
-}
-
-.exd-press-inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.exd-press-label {
-  font-family: 'DM Sans';
-  font-size: 10px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.exd-press-actions {
-  display: flex;
-  gap: 16px;
+  gap: 24px;
 }
 
 .exd-press-btn {
@@ -202,9 +182,12 @@
 
 .exd-install {
   padding: 48px 0;
+  border-top: 1px solid var(--border);
 }
 .exd-install .exd-section-title {
   padding: 0;
+  position: static;
+  background: none;
 }
 
 .exd-install-header {
@@ -213,6 +196,12 @@
   justify-content: space-between;
   padding: 0 52px;
   margin-bottom: 28px;
+  position: sticky;
+  top: 72px;
+  z-index: 5;
+  background: var(--bg);
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .install-header-nav {
@@ -244,7 +233,19 @@
   font-weight: 300;
   font-style: italic;
   color: var(--text);
-  margin-bottom: 28px;
+  margin-bottom: 12px;
+  position: sticky;
+  top: 72px;
+  z-index: 5;
+  padding: 12px 0;
+}
+
+.exd-artworks .exd-section-title {
+  background: var(--bg-alt);
+}
+
+.exd-show-artists .exd-section-title {
+  background: var(--bg);
 }
 
 .exd-install-images {
@@ -276,12 +277,15 @@
 .exd-artworks {
   padding: 48px 52px;
   border-top: 1px solid var(--border);
+  background: var(--bg-alt);
 }
 
 .exd-artworks-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .exd-artwork-card {
@@ -347,6 +351,7 @@
 .exd-show-artists {
   padding: 48px 52px;
   border-top: 1px solid var(--border);
+  background: var(--bg);
 }
 
 .exd-show-artists-grid {

@@ -48,7 +48,7 @@ export default function Home({ galleryName }) {
             </div>
             <div className="hero-contact-top">
               <span className="hero-contact-label">Stay connected</span>
-              <a href="mailto:info@gallery.com" className="hero-contact-link">Inquire →</a>
+              <a href="mailto:info@gallery.com" className="hero-contact-link">Inquire</a>
             </div>
             <form className="hero-contact-form" onSubmit={e => e.preventDefault()}>
               <input type="email" className="hero-contact-input" placeholder="Your email" />
@@ -102,10 +102,6 @@ export default function Home({ galleryName }) {
         </div>
       </section>
 
-      <div className="ornament reveal">
-        <div className="line" /><div className="dot" /><div className="line" />
-      </div>
-
       {/* ARTISTS */}
       <section className="section section-alt" id="artists">
         <div className="section-header reveal">
@@ -150,19 +146,19 @@ export default function Home({ galleryName }) {
             <div className="service-icon" />
             <div className="service-title">Consultations</div>
             <div className="service-body">Private advisory for collectors at every stage — from first acquisitions to comprehensive collection strategy.</div>
-            <a href="mailto:info@gallery.com" className="service-link">Inquire →</a>
+            <a href="mailto:info@gallery.com" className="service-link">Inquire</a>
           </div>
           <div className="service-card service-lavender reveal reveal-delay-1">
             <div className="service-icon" />
             <div className="service-title">Appraisals</div>
             <div className="service-body">USPAP-compliant appraisals for insurance, estate planning, charitable donation, and equitable distribution.</div>
-            <a href="mailto:info@gallery.com" className="service-link">Inquire →</a>
+            <a href="mailto:info@gallery.com" className="service-link">Inquire</a>
           </div>
           <div className="service-card service-blush reveal reveal-delay-2">
             <div className="service-icon" />
             <div className="service-title">Art Advisory</div>
             <div className="service-body">Long-term advisory relationships with institutions and private clients seeking a trusted curatorial partner.</div>
-            <a href="mailto:info@gallery.com" className="service-link">Inquire →</a>
+            <a href="mailto:info@gallery.com" className="service-link">Inquire</a>
           </div>
         </div>
       </section>
@@ -197,7 +193,7 @@ export default function Home({ galleryName }) {
               The gallery presents contemporary painting, sculpture, and works on paper. We represent emerging and established artists working across media, with a focus on material craft, visual intensity, and curatorial precision.
             </p>
             <a href="mailto:info@gallery.com" className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px' }}>
-              Inquire →
+              Inquire
             </a>
           </div>
         </div>

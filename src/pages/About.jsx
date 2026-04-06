@@ -1,4 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal'
+
 import './about.css'
 
 const GALLERY_DESCRIPTION = [
