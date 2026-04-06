@@ -7,9 +7,9 @@
 
 // Image size tiers — the three derivatives generated on upload
 export const IMAGE_TIERS = {
-  thumb:   { maxWidth: 400,  quality: 75, format: 'webp' },
-  display: { maxWidth: 1600, quality: 82, format: 'webp' },
-  full:    { maxWidth: 3200, quality: 88, format: 'webp' },
+  thumb:   { maxWidth: 400,  quality: 85, format: 'webp' },
+  display: { maxWidth: 1600, quality: 90, format: 'webp' },
+  full:    { maxWidth: 3200, quality: 92, format: 'webp' },
 }
 
 // Minimum upload requirements
