@@ -357,13 +357,13 @@
   .newsletter-wrapper { border-top: 1px solid var(--border); }
   .newsletter-guild { padding: 20px 24px; }
   .newsletter {
-    padding: 24px;
+    padding: 20px;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
     align-items: flex-start;
   }
-  .newsletter-text { font-size: 20px; }
+  .newsletter-text { font-size: 18px; }
   .newsletter-form { width: 100%; display: flex; max-width: 100%; }
-  .newsletter-input { flex: 1; min-width: 0; font-size: 16px; }
-  .newsletter-submit { flex-shrink: 0; padding: 14px 18px; }
+  .newsletter-input { flex: 1; min-width: 0; font-size: 16px; padding: 12px 16px; }
+  .newsletter-submit { flex-shrink: 0; padding: 12px 18px; }
 }
