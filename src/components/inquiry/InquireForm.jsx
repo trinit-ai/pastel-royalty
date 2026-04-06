@@ -2,6 +2,37 @@ import { useState, useRef } from 'react'
 import { supabase } from '../../lib/supabase'
 
 const GALLERY_EMAIL = 'info@yourgallery.com'
+const RATE_LIMIT_KEY = 'pr_inquiry_ts'
+const RATE_LIMIT_MAX = 5
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000 // 1 hour
+
+/** Strip HTML tags and trim whitespace */
+function sanitize(str) {
+  return str.replace(/<[^>]*>/g, '').trim()
+}
+
+/** Check client-side rate limit — returns true if blocked */
+function isRateLimited() {
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY)
+    const timestamps = raw ? JSON.parse(raw) : []
+    const now = Date.now()
+    const recent = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW)
+    return recent.length >= RATE_LIMIT_MAX
+  } catch { return false }
+}
+
+/** Record a submission timestamp */
+function recordSubmission() {
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY)
+    const timestamps = raw ? JSON.parse(raw) : []
+    const now = Date.now()
+    const recent = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW)
+    recent.push(now)
+    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(recent))
+  } catch { /* localStorage unavailable */ }
+}
 
 /**
  * The inquiry form — gallery's revenue conversion point.
@@ -34,8 +65,17 @@ export default function InquireForm({
     e.preventDefault()
     if (form._hp) return
 
-    if (!form.name.trim() || !form.email.trim()) {
+    const cleanName = sanitize(form.name)
+    const cleanEmail = sanitize(form.email)
+    const cleanMessage = sanitize(form.message)
+
+    if (!cleanName || !cleanEmail) {
       setError('Please enter your name and email.')
+      return
+    }
+
+    if (isRateLimited()) {
+      setError('Too many inquiries. Please try again later or email us directly.')
       return
     }
 
@@ -44,17 +84,16 @@ export default function InquireForm({
       const message = [
         contextLine,
         '',
-        form.message.trim() || 'I would like more information.',
+        cleanMessage || 'I would like more information.',
         '',
-        `— ${form.name.trim()}`,
-        form.email.trim(),
+        `— ${cleanName}`,
+        cleanEmail,
       ].filter(Boolean).join('\n')
 
       try {
         await navigator.clipboard.writeText(message)
-      } catch {
-        // clipboard API may fail in some contexts — still show success
-      }
+      } catch { /* clipboard unavailable */ }
+      recordSubmission()
       setStatus('success')
       onSuccess?.()
       return
@@ -68,9 +107,9 @@ export default function InquireForm({
         artwork_id: artwork?.id || null,
         exhibition_id: exhibition?.id || null,
         artist_id: artwork?.artistId || null,
-        name: form.name.trim(),
-        email: form.email.trim(),
-        message: form.message.trim() || null,
+        name: cleanName,
+        email: cleanEmail,
+        message: cleanMessage || null,
         source_page: window.location.pathname,
         source_context: contextLine || null,
       })
@@ -79,13 +118,14 @@ export default function InquireForm({
 
       await supabase.from('contacts').upsert(
         {
-          email: form.email.trim(),
-          name: form.name.trim(),
+          email: cleanEmail,
+          name: cleanName,
           source: 'inquiry',
         },
         { onConflict: 'email', ignoreDuplicates: false }
       ).catch(() => {})
 
+      recordSubmission()
       setStatus('success')
       onSuccess?.()
     } catch (err) {

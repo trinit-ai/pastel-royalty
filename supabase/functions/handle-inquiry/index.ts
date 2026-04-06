@@ -14,10 +14,31 @@ const GALLERY_EMAIL = Deno.env.get('GALLERY_EMAIL')!
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SUPABASE_SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
+/** Escape HTML entities to prevent XSS in email templates */
+function escapeHtml(str: string): string {
+  if (!str) return ''
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 serve(async (req) => {
   try {
     const payload = await req.json()
-    const inquiry = payload.record
+    const raw = payload.record
+    // Sanitize all user-supplied fields
+    const inquiry = {
+      ...raw,
+      name: escapeHtml(raw.name),
+      email: escapeHtml(raw.email),
+      phone: escapeHtml(raw.phone),
+      message: escapeHtml(raw.message),
+      source_context: escapeHtml(raw.source_context),
+      source_page: escapeHtml(raw.source_page),
+    }
 
     // Fetch artwork details if present
     let artworkInfo = ''
