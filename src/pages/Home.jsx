@@ -55,7 +55,7 @@ export default function Home({ galleryName }) {
 
           <div className="hero-contact-card fade-up fade-up-4">
             <div className="hero-contact-logo">
-              <span className="hero-contact-logo-text">{galleryName}</span>
+              <img src="/logo-embossed.png" alt={galleryName} className="hero-contact-logo-img" />
             </div>
             <div className="hero-contact-top">
               <span className="hero-contact-label">Stay connected</span>

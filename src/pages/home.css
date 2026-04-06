@@ -131,6 +131,12 @@
   text-transform: uppercase;
   color: var(--card-text);
 }
+.hero-contact-logo-img {
+  max-height: 64px;
+  width: auto;
+  opacity: 0.8;
+  display: block;
+}
 .hero-contact-top {
   display: flex;
   align-items: center;

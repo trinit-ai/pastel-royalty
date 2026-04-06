@@ -1,0 +1,53 @@
+.not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.not-found-content {
+  max-width: 400px;
+}
+
+.not-found-code {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.not-found-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.not-found-body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.not-found-link {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.not-found-link:hover {
+  color: var(--text);
+}

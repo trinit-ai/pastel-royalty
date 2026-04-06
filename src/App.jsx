@@ -16,6 +16,8 @@ import Artists from './pages/Artists'
 import ArtistDetail from './pages/ArtistDetail'
 import News from './pages/News'
 import Legal from './pages/Legal'
+import NotFound from './pages/NotFound'
+import Private from './pages/Private'
 import ScrollToTop from './components/ui/ScrollToTop'
 import './styles/global.css'
 
@@ -25,6 +27,16 @@ function AppShell() {
   useSmoothScroll()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
+
+  // Private portal renders without any chrome
+  if (pathname === '/private') {
+    return (
+      <>
+        <ScrollToTop />
+        <Private />
+      </>
+    )
+  }
 
   return (
     <InquireProvider>
@@ -41,6 +53,7 @@ function AppShell() {
           <Route path="/services" element={<Services />} />
           <Route path="/news" element={<News />} />
           <Route path="/legal/:slug" element={<Legal />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Newsletter hideGuild={isHome} />
         <Footer galleryName={GALLERY_NAME} />
