@@ -201,8 +201,10 @@
 /* ─── 5. Installation Views ────────────────────────────── */
 
 .exd-install {
-  padding: 48px 52px;
-  max-width: 960px;
+  padding: 48px 0;
+}
+.exd-install .exd-section-title {
+  padding: 0 52px;
 }
 
 .exd-section-title {

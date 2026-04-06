@@ -1,81 +1,65 @@
 /* ============================================================
    INSTALLATION CAROUSEL — Almine Rech style
-   Center image prominent, prev/next peeking from edges.
-   Click to fullscreen via lightbox.
+   Full-width. Center image prominent, prev/next peeking.
+   Arrows overlaid right side of active image.
+   Click active image to open lightbox fullscreen.
    ============================================================ */
 
 .install-carousel {
   position: relative;
-  padding: 0 0 32px;
-  overflow: hidden;
+  padding: 0 0 24px;
 }
 
-/* Viewport clips the overflow */
+/* Viewport — full width, clips overflow */
 .install-carousel-viewport {
   overflow: hidden;
-  padding: 0 15%;
+  width: 100%;
 }
 
 /* Track slides horizontally */
 .install-carousel-track {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   transition: transform .5s cubic-bezier(.16, 1, .3, 1);
   will-change: transform;
+  padding: 0 12%;
 }
 
 /* Each slide */
 .install-carousel-slide {
-  flex: 0 0 70%;
+  flex: 0 0 76%;
   cursor: pointer;
-  transition: opacity .3s ease, filter .3s ease;
-  opacity: .4;
-  filter: brightness(.95);
+  transition: opacity .35s ease;
+  opacity: .35;
 }
 .install-carousel-slide.active {
   opacity: 1;
-  filter: brightness(1);
 }
-.install-carousel-slide:hover {
-  opacity: .85;
-}
-.install-carousel-slide.active:hover {
-  opacity: 1;
+.install-carousel-slide:not(.active):hover {
+  opacity: .55;
 }
 
-/* Image */
+/* Image placeholder */
 .install-carousel-image {
   width: 100%;
   aspect-ratio: 3/2;
 }
 
-/* Controls — overlaid right side */
+/* Arrows — bottom right of carousel, inline with caption */
 .install-carousel-controls {
   display: flex;
-  gap: 4px;
-  position: absolute;
-  top: 50%;
-  right: 24px;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-@media (max-width: 900px) {
-  .install-carousel-controls {
-    position: static;
-    transform: none;
-    justify-content: center;
-    margin-top: 16px;
-  }
+  gap: 2px;
+  padding: 16px 52px 0;
+  justify-content: flex-end;
 }
 
 .install-carousel-arrow {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
+  background: none;
   border: 1px solid var(--border);
   color: var(--text-muted);
   cursor: pointer;
@@ -83,13 +67,18 @@
 }
 .install-carousel-arrow:hover {
   color: var(--text);
-  border-color: var(--text-muted);
-  background: var(--bg-alt);
+  border-color: var(--accent-secondary);
 }
 
-/* Caption */
-.install-carousel-caption {
+/* Caption — left aligned, arrows right */
+.install-carousel-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 16px 52px 0;
+}
+
+.install-carousel-caption {
   font-family: 'DM Sans';
   font-size: 11px;
   color: var(--text-muted);
@@ -103,5 +92,5 @@
   font-size: 10px;
   letter-spacing: .08em;
   color: var(--text-muted);
-  opacity: .6;
+  opacity: .5;
 }

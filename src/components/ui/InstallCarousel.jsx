@@ -44,7 +44,7 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
         <div
           ref={trackRef}
           className="install-carousel-track"
-          style={{ transform: `translateX(calc(-${current * 70}% - ${current * 16}px))` }}
+          style={{ transform: `translateX(calc(-${current * 76}% - ${current * 12}px))` }}
         >
           {images.map((img, i) => (
             <div
@@ -61,28 +61,28 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
         </div>
       </div>
 
-      {/* Arrows */}
-      {images.length > 1 && (
-        <div className="install-carousel-controls">
-          <button className="install-carousel-arrow" onClick={prev} aria-label="Previous">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-              <line x1="20" y1="12" x2="4" y2="12" />
-              <polyline points="10 18 4 12 10 6" />
-            </svg>
-          </button>
-          <button className="install-carousel-arrow" onClick={next} aria-label="Next">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <polyline points="14 6 20 12 14 18" />
-            </svg>
-          </button>
+      {/* Caption + Arrows on same row */}
+      <div className="install-carousel-bottom">
+        <div className="install-carousel-caption">
+          Installation view, <em>{exhibitionTitle}</em>
+          <span className="install-carousel-counter">{current + 1} / {images.length}</span>
         </div>
-      )}
-
-      {/* Caption */}
-      <div className="install-carousel-caption">
-        Installation view, <em>{exhibitionTitle}</em>
-        <span className="install-carousel-counter">{current + 1} / {images.length}</span>
+        {images.length > 1 && (
+          <div className="install-carousel-controls">
+            <button className="install-carousel-arrow" onClick={prev} aria-label="Previous">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="11 18 5 12 11 6" />
+              </svg>
+            </button>
+            <button className="install-carousel-arrow" onClick={next} aria-label="Next">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="13 6 19 12 13 18" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
