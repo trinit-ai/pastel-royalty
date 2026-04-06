@@ -126,6 +126,8 @@ export default function ExhibitionDetail() {
             { title: 'Tidal Form', artist: 'Julian Cole', year: 2026, medium: 'Bronze', dims: '18 × 12 × 8 in' },
             { title: 'Late Summer', artist: 'Elena Marsh', year: 2025, medium: 'Oil on linen', dims: '40 × 32 in' },
             { title: 'Shore Bone', artist: 'Julian Cole', year: 2026, medium: 'Bleached oak', dims: '36 × 8 × 6 in' },
+            { title: 'Estuary', artist: 'Elena Marsh', year: 2026, medium: 'Oil on canvas', dims: '36 × 28 in' },
+            { title: 'Drift', artist: 'Julian Cole', year: 2025, medium: 'Found wood, steel', dims: '42 × 16 × 12 in' },
           ].map((work, i) => (
             <div key={i} className={`exd-artwork-card reveal ${i > 2 ? 'reveal-delay-1' : ''}`}>
               <div
@@ -140,6 +142,7 @@ export default function ExhibitionDetail() {
                 <div className="exd-artwork-title"><em>{work.title}</em>, {work.year}</div>
                 <div className="exd-artwork-medium">{work.medium}</div>
                 <div className="exd-artwork-dims">{work.dims}</div>
+                <a href={`mailto:info@yourgallery.com?subject=Inquiry: ${work.title} by ${work.artist}`} className="exd-artwork-inquire">Inquire →</a>
               </div>
             </div>
           ))}

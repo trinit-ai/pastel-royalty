@@ -247,8 +247,8 @@
 
 .exd-artworks-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 
 .exd-artwork-card {
@@ -257,7 +257,7 @@
 
 .exd-artwork-image {
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   transition: transform .2s;
 }
 .exd-artwork-card:hover .exd-artwork-image {
@@ -272,28 +272,42 @@
 
 .exd-artwork-artist {
   font-family: 'DM Sans';
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--text);
 }
 
 .exd-artwork-title {
   font-family: 'DM Sans';
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text);
 }
 
 .exd-artwork-medium {
   font-family: 'DM Sans';
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
 }
 
 .exd-artwork-dims {
   font-family: 'DM Sans';
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
 }
+
+.exd-artwork-inquire {
+  font-family: 'DM Sans';
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  text-decoration: none;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity .15s, color .15s;
+}
+.exd-artwork-card:hover .exd-artwork-inquire { opacity: 1; }
+.exd-artwork-inquire:hover { color: var(--text); }
 
 /* ─── 7. Artists in Show ───────────────────────────────── */
 
