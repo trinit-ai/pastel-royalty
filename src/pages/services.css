@@ -59,6 +59,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   padding: 56px 0;
+  border-top: 1px solid var(--border);
 }
 
 .services-section-header {
