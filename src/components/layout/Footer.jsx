@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './layout.css'
 
 export default function Footer({ galleryName = 'Gallery Name' }) {
@@ -29,10 +30,10 @@ export default function Footer({ galleryName = 'Gallery Name' }) {
         <div className="footer-col">
           <div className="footer-col-title">Legal</div>
           <nav className="footer-nav">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Cookie Policy</a>
-            <a href="#">Accessibility</a>
+            <Link to="/legal/privacy-policy">Privacy Policy</Link>
+            <Link to="/legal/terms-of-use">Terms of Use</Link>
+            <Link to="/legal/cookie-policy">Cookie Policy</Link>
+            <Link to="/legal/accessibility">Accessibility</Link>
           </nav>
         </div>
         <div className="footer-col">

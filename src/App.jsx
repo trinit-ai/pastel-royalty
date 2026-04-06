@@ -9,6 +9,10 @@ import Home from './pages/Home'
 import Exhibitions from './pages/Exhibitions'
 import ExhibitionDetail from './pages/ExhibitionDetail'
 import About from './pages/About'
+import Services from './pages/Services'
+import Artists from './pages/Artists'
+import ArtistDetail from './pages/ArtistDetail'
+import Legal from './pages/Legal'
 import ScrollToTop from './components/ui/ScrollToTop'
 import './styles/global.css'
 
@@ -26,7 +30,11 @@ export default function App() {
           <Route path="/" element={<Home galleryName={GALLERY_NAME} />} />
           <Route path="/exhibitions" element={<Exhibitions />} />
           <Route path="/exhibitions/:slug" element={<ExhibitionDetail />} />
+          <Route path="/artists" element={<Artists />} />
+          <Route path="/artists/:slug" element={<ArtistDetail />} />
           <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/legal/:slug" element={<Legal />} />
         </Routes>
         <Newsletter />
         <Footer galleryName={GALLERY_NAME} />
