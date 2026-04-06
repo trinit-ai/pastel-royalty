@@ -1,0 +1,140 @@
+/* ============================================================
+   PASTEL ROYALTY — Theme Variables
+   Two skins: dark (default) and light
+   ============================================================ */
+
+:root,
+[data-theme="dark"] {
+  --ink: #1A1814;
+  --cream: #FAFAF7;
+  --parchment: #F2EEE8;
+  --blue: #3A5A8C;
+  --blue-light: #E0EAF6;
+  --blue-dark: #0A1220;
+  --gold: #C9A844;
+  --gold-light: #E8D090;
+  --muted: #7A7670;
+  --border: #E2DED8;
+  --sage: #C4D2C0;
+  --lavender: #DDD8E8;
+  --blush: #D2C8C4;
+  --sky: #D4E4F0;
+
+  /* Semantic */
+  --bg: var(--cream);
+  --bg-alt: var(--parchment);
+  --text: var(--ink);
+  --text-muted: var(--muted);
+  --accent: var(--gold);
+  --accent-secondary: #336699;
+  --header-bg: var(--cream);
+  --header-border-top: var(--gold);
+  --hero-bg: linear-gradient(160deg, #0A1220 0%, #16243C 40%, #1E3258 70%, #1A2C4E 100%);
+  --hero-text: var(--cream);
+  --hero-text-muted: rgba(250,250,247,.38);
+  --hero-label: rgba(250,250,247,.35);
+  --hero-artist: rgba(250,250,247,.5);
+  --hero-dates: rgba(250,250,247,.3);
+  --hero-rule: var(--gold);
+  --hero-title: var(--gold);
+  --btn-outline-color: rgba(250,250,247,.5);
+  --btn-outline-border: rgba(250,250,247,.12);
+  --ticker-bg: linear-gradient(90deg, #C9A844, #D4B85C, #C9A844);
+  --ticker-text: rgba(26,24,20,.4);
+  --ticker-strong: rgba(26,24,20,.7);
+  --card-bg: rgba(224,234,246,.08);
+  --card-border: rgba(224,234,246,.1);
+  --card-text: rgba(250,250,247,.3);
+  --card-input-bg: rgba(250,250,247,.05);
+  --card-input-border: rgba(250,250,247,.08);
+  --card-input-text: var(--cream);
+  --visit-bg: linear-gradient(160deg, #0A1220, #16243C, #1E3258);
+  --visit-label: rgba(250,250,247,.2);
+  --visit-value: rgba(250,250,247,.5);
+  --visit-border: rgba(250,250,247,.06);
+  --footer-bg: #0A0C10;
+  --footer-text: rgba(250,250,247,.35);
+  --footer-heading: var(--gold);
+  --footer-gallery-name: var(--gold);
+  --footer-link-hover: var(--gold);
+  --footer-bottom-left: rgba(250,250,247,.18);
+  --footer-bottom-right: rgba(250,250,247,.1);
+  --footer-border: rgba(250,250,247,.06);
+  --footer-rule: linear-gradient(90deg, var(--gold) 0%, rgba(201,168,68,.15) 100%);
+  --newsletter-bg: var(--blue-light);
+  --newsletter-btn-bg: #336699;
+  --cookie-text: rgba(250,250,247,.2);
+  --cookie-link: rgba(250,250,247,.3);
+  --exhibit-date: var(--gold);
+  --exhibit-title: var(--cream);
+  --exhibit-artists: rgba(250,250,247,.4);
+  --exhibit-badge-bg: var(--gold);
+  --exhibit-badge-text: var(--ink);
+  --logo-color: #336699;
+  --nav-hover: #336699;
+}
+
+[data-theme="light"] {
+  --ink: #2A2A2A;
+  --cream: #FFFFFF;
+  --parchment: #F8F8F8;
+  --blue: #336699;
+  --blue-light: #EEF3F9;
+  --blue-dark: #1A3355;
+  --gold: #C9A844;
+  --gold-light: #99BBdd;
+  --muted: #8A8A8A;
+  --border: #E8E8E8;
+
+  --bg: #FFFFFF;
+  --bg-alt: #F8F8F8;
+  --text: #2A2A2A;
+  --text-muted: #8A8A8A;
+  --accent: var(--gold);
+  --accent-secondary: #336699;
+  --header-bg: #FFFFFF;
+  --header-border-top: var(--gold);
+  --hero-bg: #FFFFFF;
+  --hero-text: var(--ink);
+  --hero-text-muted: var(--muted);
+  --hero-label: var(--muted);
+  --hero-artist: var(--muted);
+  --hero-dates: #AAAAAA;
+  --hero-rule: var(--gold);
+  --hero-title: var(--blue);
+  --btn-outline-color: var(--blue);
+  --btn-outline-border: var(--border);
+  --ticker-bg: var(--sky);
+  --ticker-text: rgba(26,24,20,.4);
+  --ticker-strong: rgba(26,24,20,.7);
+  --card-bg: var(--parchment);
+  --card-border: var(--border);
+  --card-text: var(--muted);
+  --card-input-bg: white;
+  --card-input-border: var(--border);
+  --card-input-text: var(--ink);
+  --visit-bg: #336699;
+  --visit-label: rgba(255,255,255,.5);
+  --visit-value: rgba(255,255,255,.85);
+  --visit-border: rgba(255,255,255,.2);
+  --footer-bg: var(--parchment);
+  --footer-text: #555555;
+  --footer-heading: var(--blue);
+  --footer-gallery-name: var(--gold);
+  --footer-link-hover: var(--blue);
+  --footer-bottom-left: #888888;
+  --footer-bottom-right: #AAAAAA;
+  --footer-border: #DCDCDC;
+  --footer-rule: var(--border);
+  --newsletter-bg: var(--blue-light);
+  --newsletter-btn-bg: #336699;
+  --cookie-text: var(--muted);
+  --cookie-link: var(--blue);
+  --exhibit-date: var(--gold);
+  --exhibit-title: var(--ink);
+  --exhibit-artists: var(--muted);
+  --exhibit-badge-bg: var(--blue);
+  --exhibit-badge-text: white;
+  --logo-color: #336699;
+  --nav-hover: #336699;
+}

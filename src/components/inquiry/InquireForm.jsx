@@ -136,7 +136,7 @@ export default function InquireForm({
           className="inquire-input"
         />
         <textarea
-          placeholder={compact ? 'Message (optional)' : 'Tell us what you're looking for...'}
+          placeholder={compact ? 'Message (optional)' : 'Tell us what you\'re looking for...'}
           value={form.message}
           onChange={(e) => setForm(prev => ({ ...prev, message: e.target.value }))}
           className="inquire-textarea"
