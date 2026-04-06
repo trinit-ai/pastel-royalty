@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useLightbox } from '../../hooks/useLightbox'
 import './install-carousel.css'
 
@@ -6,21 +6,23 @@ import './install-carousel.css'
  * Installation views carousel — Almine Rech style.
  *
  * Center image prominent, previous/next peeking from sides.
- * Arrows navigate. Click opens in lightbox fullscreen.
- * Captions below current image.
+ * Arrows on left/right edges of the active image.
+ * Click active image opens lightbox fullscreen.
+ * Wraps infinitely.
  */
 export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
   const [current, setCurrent] = useState(0)
-  const trackRef = useRef(null)
   const { open } = useLightbox()
 
+  const total = images.length
+
   const next = useCallback(() => {
-    setCurrent(i => (i + 1) % images.length)
-  }, [images.length])
+    setCurrent(i => (i + 1) % total)
+  }, [total])
 
   const prev = useCallback(() => {
-    setCurrent(i => (i - 1 + images.length) % images.length)
-  }, [images.length])
+    setCurrent(i => (i - 1 + total) % total)
+  }, [total])
 
   const openLightbox = (index) => {
     const items = images.map((img, i) => ({
@@ -35,54 +37,71 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
     open(items, index)
   }
 
-  if (images.length === 0) return null
+  if (total === 0) return null
+
+  // Build visible slides: prev, current, next (wrapping)
+  const getIndex = (offset) => ((current + offset) % total + total) % total
 
   return (
     <div className="install-carousel">
-      {/* Track */}
-      <div className="install-carousel-viewport">
+      {/* Three-panel layout: prev | current | next */}
+      <div className="install-carousel-stage">
+        {/* Previous (peek) */}
         <div
-          ref={trackRef}
-          className="install-carousel-track"
-          style={{ transform: `translateX(calc(-${current * 76}% - ${current * 12}px))` }}
+          className="install-carousel-peek install-carousel-peek-prev"
+          onClick={prev}
         >
-          {images.map((img, i) => (
-            <div
-              key={i}
-              className={`install-carousel-slide ${i === current ? 'active' : ''}`}
-              onClick={() => i === current ? openLightbox(i) : setCurrent(i)}
-            >
-              <div
-                className="install-carousel-image"
-                style={{ background: img.color ? `linear-gradient(160deg, ${img.color}, ${img.color}dd)` : '#e0e0e0' }}
-              />
-            </div>
-          ))}
+          <div
+            className="install-carousel-image"
+            style={{ background: `linear-gradient(160deg, ${images[getIndex(-1)].color}, ${images[getIndex(-1)].color}dd)` }}
+          />
+        </div>
+
+        {/* Active */}
+        <div
+          className="install-carousel-active"
+          onClick={() => openLightbox(current)}
+        >
+          <div
+            className="install-carousel-image"
+            style={{ background: `linear-gradient(160deg, ${images[current].color}, ${images[current].color}dd)` }}
+          />
+
+          {/* Arrows overlaid on active image edges */}
+          {total > 1 && (
+            <>
+              <button className="install-arrow install-arrow-prev" onClick={(e) => { e.stopPropagation(); prev() }} aria-label="Previous">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                  <line x1="19" y1="12" x2="5" y2="12" />
+                  <polyline points="11 18 5 12 11 6" />
+                </svg>
+              </button>
+              <button className="install-arrow install-arrow-next" onClick={(e) => { e.stopPropagation(); next() }} aria-label="Next">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="13 6 19 12 13 18" />
+                </svg>
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Next (peek) */}
+        <div
+          className="install-carousel-peek install-carousel-peek-next"
+          onClick={next}
+        >
+          <div
+            className="install-carousel-image"
+            style={{ background: `linear-gradient(160deg, ${images[getIndex(1)].color}, ${images[getIndex(1)].color}dd)` }}
+          />
         </div>
       </div>
 
-      {/* Caption + Arrows on same row */}
-      <div className="install-carousel-bottom">
-        <div className="install-carousel-caption">
-          Installation view, <em>{exhibitionTitle}</em>
-          <span className="install-carousel-counter">{current + 1} / {images.length}</span>
-        </div>
-        {images.length > 1 && (
-          <div className="install-carousel-controls">
-            <button className="install-carousel-arrow" onClick={prev} aria-label="Previous">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-                <line x1="19" y1="12" x2="5" y2="12" />
-                <polyline points="11 18 5 12 11 6" />
-              </svg>
-            </button>
-            <button className="install-carousel-arrow" onClick={next} aria-label="Next">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="13 6 19 12 13 18" />
-              </svg>
-            </button>
-          </div>
-        )}
+      {/* Caption */}
+      <div className="install-carousel-caption">
+        Installation view, <em>{exhibitionTitle}</em>
+        <span className="install-carousel-counter">{current + 1} / {total}</span>
       </div>
     </div>
   )
