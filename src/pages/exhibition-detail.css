@@ -202,6 +202,7 @@
 
 .exd-install {
   padding: 48px 52px;
+  max-width: 960px;
 }
 
 .exd-section-title {
@@ -210,18 +211,18 @@
   font-weight: 300;
   font-style: italic;
   color: var(--text);
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .exd-install-images {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .exd-install-image {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 3/2;
   position: relative;
 }
 
