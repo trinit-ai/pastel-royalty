@@ -656,6 +656,8 @@
     margin-left: -24px;
     margin-right: -24px;
     margin-bottom: 32px;
+    top: 56px;
+    position: static;
   }
 
   .exhibitions-grid {
