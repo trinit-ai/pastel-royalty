@@ -348,7 +348,7 @@
 
   .footer { padding: 32px 24px 20px; }
   .footer-top {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 28px;
   }
   .footer-gallery-name { font-size: 20px; }
