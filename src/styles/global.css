@@ -10,6 +10,56 @@ html { scroll-behavior: smooth; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
+/* Theme transition — smooth crossfade on key elements */
+body,
+.header,
+.header-logo,
+.header-nav-link,
+.footer,
+.footer-gallery-name,
+.footer-col-title,
+.footer-col-text,
+.footer-nav a,
+.footer-bottom-left,
+.footer-bottom-right,
+.section,
+.section-alt,
+.section-title,
+.section-header,
+.eyebrow,
+.eyebrow-gold,
+.ticker,
+.hero-content,
+.hero-image,
+.visit-left,
+.visit-right,
+.visit-right-title,
+.visit-right-body,
+.newsletter,
+.newsletter-text,
+.btn-outline,
+.exhibit-card-badge,
+.exhibit-card-date,
+.exhibit-card-title,
+.exhibit-card-artists,
+.artist-row-name,
+.artist-row-badge,
+.about-summary,
+.hero-title,
+.hero-body,
+.hero-artist,
+.hero-dates,
+.hero-label,
+.hero-contact-card,
+.hero-contact-label,
+.hero-contact-link {
+  transition:
+    background-color .4s ease,
+    background .4s ease,
+    color .4s ease,
+    border-color .4s ease;
+}
+
 body {
   background: var(--bg);
   font-family: 'DM Sans', system-ui, sans-serif;

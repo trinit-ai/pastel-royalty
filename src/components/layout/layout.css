@@ -42,14 +42,32 @@
 .theme-toggle {
   background: none;
   border: none;
-  font-size: 14px;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 4px;
-  transition: color .15s;
+  padding: 6px;
+  transition: color .3s;
   line-height: 1;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .theme-toggle:hover { color: var(--accent); }
+
+.theme-icon {
+  position: absolute;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+/* Light theme: show moon (to switch to dark), hide sun */
+.theme-toggle.light .theme-icon-sun { opacity: 0; transform: scale(.6) rotate(-90deg); }
+.theme-toggle.light .theme-icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
+
+/* Dark theme: show sun (to switch to light), hide moon */
+.theme-toggle.dark .theme-icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
+.theme-toggle.dark .theme-icon-moon { opacity: 0; transform: scale(.6) rotate(90deg); }
 
 /* ─── Footer ───────────────────────────────────────────── */
 
