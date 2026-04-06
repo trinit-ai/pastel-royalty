@@ -1,23 +1,33 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-export function useScrollReveal() {
+export function useScrollReveal(deps = []) {
+  const observerRef = useRef(null)
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    // Disconnect previous observer
+    if (observerRef.current) observerRef.current.disconnect()
+
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
-            observer.unobserve(entry.target)
+            observerRef.current.unobserve(entry.target)
           }
         })
       },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     )
 
-    document.querySelectorAll('.reveal, .reveal-scale, .reveal-line').forEach(el => {
-      observer.observe(el)
+    // Small delay to let DOM render after state change
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.reveal:not(.visible), .reveal-scale:not(.visible), .reveal-line:not(.visible)').forEach(el => {
+        observerRef.current.observe(el)
+      })
     })
 
-    return () => observer.disconnect()
-  }, [])
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect()
+    }
+  }, deps)
 }

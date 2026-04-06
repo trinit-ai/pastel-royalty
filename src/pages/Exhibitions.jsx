@@ -13,7 +13,7 @@ const TABS = [
 export default function Exhibitions() {
   const [activeTab, setActiveTab] = useState('current')
   const [typeFilter, setTypeFilter] = useState(null)
-  useScrollReveal()
+  useScrollReveal([activeTab, typeFilter])
 
   const current = EXHIBITIONS.filter(e => e.status === 'current')
   const forthcoming = EXHIBITIONS.filter(e => e.status === 'upcoming')
