@@ -363,6 +363,7 @@
     align-items: flex-start;
   }
   .newsletter-text { font-size: 20px; }
-  .newsletter-form { width: 100%; }
-  .newsletter-input { width: 100%; flex: 1; }
+  .newsletter-form { width: 100%; display: flex; }
+  .newsletter-input { width: 100%; flex: 1; font-size: 16px; }
+  .newsletter-submit { flex-shrink: 0; }
 }
