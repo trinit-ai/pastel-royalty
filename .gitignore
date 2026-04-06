@@ -30,3 +30,4 @@ dist-ssr
 
 # Clients
 clients/
+.vercel
