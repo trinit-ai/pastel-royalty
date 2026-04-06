@@ -47,19 +47,26 @@
 .install-carousel-image {
   width: 100%;
   aspect-ratio: 3/2;
-  background-size: cover;
-  background-position: center;
 }
 
-/* Controls — right-aligned like Almine Rech */
+/* Controls — overlaid right side */
 .install-carousel-controls {
   display: flex;
   gap: 4px;
   position: absolute;
   top: 50%;
-  right: 52px;
+  right: 24px;
   transform: translateY(-50%);
   z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .install-carousel-controls {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 16px;
+  }
 }
 
 .install-carousel-arrow {

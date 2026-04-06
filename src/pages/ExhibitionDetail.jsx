@@ -35,9 +35,11 @@ export default function ExhibitionDetail() {
 
   // Demo installation view colors
   const installColors = [
-    `${exhibition.color}ee`,
-    `${exhibition.color}cc`,
-    `${exhibition.color}dd`,
+    '#d4ddd0',
+    '#c8d8c4',
+    '#dde4d8',
+    '#ccd4c8',
+    '#d8e0d4',
   ]
 
   return (
