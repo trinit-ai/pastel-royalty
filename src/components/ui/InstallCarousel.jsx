@@ -1,13 +1,13 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useImperativeHandle, forwardRef } from 'react'
 import { useLightbox } from '../../hooks/useLightbox'
 import './install-carousel.css'
 
 /**
  * Installation views carousel.
  * Native horizontal scroll with scroll-snap.
- * Arrows advance by one slide. Click image for lightbox.
+ * Exposes prev/next via ref for external arrow controls.
  */
-export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
+const InstallCarousel = forwardRef(function InstallCarousel({ images = [], exhibitionTitle = '', disableLightbox = false }, ref) {
   const trackRef = useRef(null)
   const [current, setCurrent] = useState(0)
   const { open } = useLightbox()
@@ -37,6 +37,13 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
     }
   }
 
+  useImperativeHandle(ref, () => ({
+    next: () => scrollTo(current + 1),
+    prev: () => scrollTo(current - 1),
+    current,
+    total,
+  }))
+
   const openLightbox = (index) => {
     const items = images.map((img, i) => ({
       id: `install-${i}`,
@@ -63,7 +70,8 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
           <div
             key={i}
             className="install-carousel-slide"
-            onClick={() => openLightbox(i)}
+            style={disableLightbox ? { cursor: 'default' } : undefined}
+            onClick={() => !disableLightbox && openLightbox(i)}
           >
             <div
               className="install-carousel-image"
@@ -73,25 +81,12 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
         ))}
       </div>
 
-      {total > 1 && (
-        <div className="install-carousel-arrows">
-          <button className="install-carousel-arrow" onClick={() => scrollTo(current - 1)} aria-label="Previous">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-          <button className="install-carousel-arrow" onClick={() => scrollTo(current + 1)} aria-label="Next">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </button>
-        </div>
-      )}
-
       <div className="install-carousel-caption">
         Installation view, <em>{exhibitionTitle}</em>
         <span className="install-carousel-counter">{current + 1} / {total}</span>
       </div>
     </div>
   )
-}
+})
+
+export default InstallCarousel

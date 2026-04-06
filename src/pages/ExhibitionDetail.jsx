@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { EXHIBITIONS, ARTISTS, TYPE_LABELS } from '../data/demo'
@@ -7,6 +8,7 @@ import './exhibition-detail.css'
 export default function ExhibitionDetail() {
   const { slug } = useParams()
   useScrollReveal([slug])
+  const carouselRef = useRef(null)
 
   const exhibition = EXHIBITIONS.find(e => e.slug === slug)
 
@@ -102,11 +104,23 @@ export default function ExhibitionDetail() {
 
       {/* 5. INSTALLATION VIEWS — carousel */}
       <div className="exd-install">
-        <h2 className="exd-section-title reveal">Installation Views</h2>
+        <div className="exd-install-header reveal">
+          <h2 className="exd-section-title" style={{ marginBottom: 0 }}>Installation Views</h2>
+          <div className="install-header-nav">
+            <button className="install-header-arrow" onClick={() => carouselRef.current?.prev()}>
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3L5 8L10 13" /></svg>
+            </button>
+            <button className="install-header-arrow" onClick={() => carouselRef.current?.next()}>
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 3L11 8L6 13" /></svg>
+            </button>
+          </div>
+        </div>
         <div className="reveal">
           <InstallCarousel
+            ref={carouselRef}
             images={installColors.map((color, i) => ({ color, src: '' }))}
             exhibitionTitle={exhibition.title}
+            disableLightbox
           />
         </div>
       </div>

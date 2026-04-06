@@ -204,7 +204,38 @@
   padding: 48px 0;
 }
 .exd-install .exd-section-title {
+  padding: 0;
+}
+
+.exd-install-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0 52px;
+  margin-bottom: 28px;
+}
+
+.install-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.install-header-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.install-header-arrow:hover {
+  border-color: var(--text);
 }
 
 .exd-section-title {

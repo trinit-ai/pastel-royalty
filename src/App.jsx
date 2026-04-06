@@ -8,6 +8,7 @@ import Lightbox from './components/lightbox/Lightbox'
 import Home from './pages/Home'
 import Exhibitions from './pages/Exhibitions'
 import ExhibitionDetail from './pages/ExhibitionDetail'
+import About from './pages/About'
 import ScrollToTop from './components/ui/ScrollToTop'
 import './styles/global.css'
 
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/" element={<Home galleryName={GALLERY_NAME} />} />
           <Route path="/exhibitions" element={<Exhibitions />} />
           <Route path="/exhibitions/:slug" element={<ExhibitionDetail />} />
+          <Route path="/about" element={<About />} />
         </Routes>
         <Newsletter />
         <Footer galleryName={GALLERY_NAME} />
