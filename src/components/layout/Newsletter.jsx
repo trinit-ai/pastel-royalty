@@ -1,13 +1,15 @@
 import './layout.css'
 
-export default function Newsletter() {
+export default function Newsletter({ hideGuild = false }) {
   return (
     <div className="newsletter-wrapper">
-      <div className="newsletter-guild">
-        <span className="newsletter-guild-line" />
-        <span className="newsletter-guild-dot" />
-        <span className="newsletter-guild-line" />
-      </div>
+      {!hideGuild && (
+        <div className="newsletter-guild">
+          <span className="newsletter-guild-line" />
+          <span className="newsletter-guild-dot" />
+          <span className="newsletter-guild-line" />
+        </div>
+      )}
       <div className="newsletter">
         <div className="newsletter-text">Stay informed about exhibitions and events.</div>
         <form className="newsletter-form" onSubmit={e => e.preventDefault()}>

@@ -13,7 +13,7 @@ export default function Home({ galleryName }) {
   useScrollReveal()
 
   return (
-    <main>
+    <main className="home-page">
       {/* TICKER */}
       <div className="ticker">
         <div className="ticker-item"><div className="ticker-dot" /><div className="ticker-text"><strong>Now on view</strong> — Still Life with Light</div></div>

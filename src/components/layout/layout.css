@@ -226,3 +226,35 @@
   transition: background .15s;
 }
 .newsletter-submit:hover { background: #2A5580; }
+
+/* ─── Mobile ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+    height: 56px;
+  }
+  .header-logo { font-size: 11px; letter-spacing: .14em; }
+  .header-nav { gap: 16px; }
+  .header-nav-link { font-size: 9px; letter-spacing: .12em; }
+
+  .footer { padding: 32px 24px 20px; }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .footer-gallery-name { font-size: 20px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  .newsletter-wrapper { border-top: 1px solid var(--border); }
+  .newsletter-guild { padding: 20px 24px; }
+  .newsletter {
+    padding: 24px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .newsletter-text { font-size: 20px; }
+  .newsletter-form { width: 100%; }
+  .newsletter-input { width: 100%; flex: 1; }
+}

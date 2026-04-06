@@ -143,7 +143,6 @@ export default function ArtistDetail() {
 
       {/* Exhibitions */}
       <section className="atd-exhibitions" id="exhibitions">
-        <div className="atd-exhibitions-divider reveal-line" />
         <h2 className="atd-section-title reveal">Selected Exhibitions</h2>
         <div className="atd-exhibitions-list">
           {realExhibitions.map(ex => (

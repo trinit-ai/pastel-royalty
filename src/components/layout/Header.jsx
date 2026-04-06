@@ -4,9 +4,9 @@ import './layout.css'
 
 const NAV_ITEMS = [
   { label: 'Exhibitions', to: '/exhibitions' },
-  { label: 'Artists', to: '/#artists' },
+  { label: 'Artists', to: '/artists' },
+  { label: 'Services', to: '/services' },
   { label: 'About', to: '/about' },
-  { label: 'Visit', to: '/#visit' },
 ]
 
 export default function Header({ galleryName = 'Pastel Royalty Gallery' }) {

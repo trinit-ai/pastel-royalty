@@ -1,0 +1,143 @@
+/* ============================================================
+   SERVICES PAGE
+   Hero → image row → stacked service sections
+   ============================================================ */
+
+.services-page {
+  min-height: 60vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ─── Hero ────────────────────────────────────────────── */
+
+.services-hero {
+  padding: 64px 52px 40px;
+  max-width: 720px;
+}
+
+.services-hero-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.services-hero-subtitle {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ─── Image Row ───────────────────────────────────────── */
+
+.services-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 0 52px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 64px;
+}
+
+.services-image-placeholder {
+  aspect-ratio: 3/4;
+  border: 1px solid var(--border);
+}
+
+/* ─── Service Sections ────────────────────────────────── */
+
+.services-section {
+  padding: 0 52px;
+}
+
+.services-section-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  padding: 56px 0;
+}
+
+.services-section-header {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+
+.services-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.services-section-body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.services-offerings {
+  padding: 8px 0 20px 8px;
+}
+
+.services-offering-item {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 2.2;
+  color: var(--text-muted);
+}
+
+.services-cta {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.services-cta:hover {
+  border-color: var(--accent-secondary);
+}
+
+.services-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .services-hero {
+    padding: 40px 24px 28px;
+  }
+  .services-images {
+    grid-template-columns: 1fr;
+    padding: 0 24px 40px;
+  }
+  .services-section {
+    padding: 0 24px;
+  }
+  .services-section-inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 36px 0;
+  }
+  .services-section-header {
+    position: static;
+  }
+}

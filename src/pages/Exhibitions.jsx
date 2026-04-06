@@ -13,7 +13,8 @@ const TABS = [
 export default function Exhibitions() {
   const [activeTab, setActiveTab] = useState('current')
   const [typeFilter, setTypeFilter] = useState(null)
-  useScrollReveal([activeTab, typeFilter])
+  const [visibleYears, setVisibleYears] = useState(2)
+  useScrollReveal([activeTab, typeFilter, visibleYears])
 
   const current = EXHIBITIONS.filter(e => e.status === 'current')
   const forthcoming = EXHIBITIONS.filter(e => e.status === 'upcoming')
@@ -59,7 +60,7 @@ export default function Exhibitions() {
             <button
               key={tab.key}
               className={`exhibitions-tab ${activeTab === tab.key ? 'active' : ''}`}
-              onClick={() => { setActiveTab(tab.key); setTypeFilter(null) }}
+              onClick={() => { setActiveTab(tab.key); setTypeFilter(null); setVisibleYears(2) }}
             >
               {tab.label}
               {tab.key === 'current' && current.length > 0 && (
@@ -134,24 +135,55 @@ export default function Exhibitions() {
       )}
 
       {/* Archive */}
-      {activeTab === 'archive' && (
-        <div className="exhibitions-archive">
-          {filteredArchive.map(ex => (
-            <Link to={`/exhibitions/${ex.slug}`} key={ex.id} className="exhibition-archive-row reveal">
-              <div className="exhibition-archive-thumb" style={{ background: `linear-gradient(160deg, ${ex.color}, ${ex.color}dd)` }} />
-              <div className="exhibition-archive-info">
-                <span className="exhibition-type-badge">{TYPE_LABELS[ex.type]}</span>
-                <h3 className="exhibition-archive-title">{ex.title}</h3>
-                <div className="exhibition-archive-location">{ex.location} — {ex.artists}</div>
-              </div>
-              <div className="exhibition-archive-right">
-                <div className="exhibition-archive-dates">{formatDateRange(ex.start_date, ex.end_date)}</div>
-                <span className="exhibition-archive-link">View →</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+      {activeTab === 'archive' && (() => {
+        const years = [...new Set(filteredArchive.map(e => new Date(e.start_date).getFullYear()))].sort((a, b) => b - a)
+        const shownYears = years.slice(0, visibleYears)
+        const hasMore = visibleYears < years.length
+        return (
+          <div className="exhibitions-archive">
+            <div className="archive-year-nav reveal">
+              {years.map(y => (
+                <a key={y} href={`#year-${y}`} className={`archive-year-link ${shownYears.includes(y) ? '' : 'dimmed'}`} onClick={e => {
+                  e.preventDefault()
+                  if (!shownYears.includes(y)) {
+                    setVisibleYears(years.indexOf(y) + 1)
+                    setTimeout(() => document.getElementById(`year-${y}`)?.scrollIntoView({ behavior: 'smooth' }), 50)
+                  } else {
+                    document.getElementById(`year-${y}`)?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}>{y}</a>
+              ))}
+            </div>
+            {shownYears.map(year => {
+              const yearExhibitions = filteredArchive.filter(e => new Date(e.start_date).getFullYear() === year)
+              return (
+                <div key={year} id={`year-${year}`} className="archive-year-group">
+                  <div className="archive-year-header reveal">{year}</div>
+                  {yearExhibitions.map(ex => (
+                    <Link to={`/exhibitions/${ex.slug}`} key={ex.id} className="exhibition-archive-row reveal">
+                      <div className="exhibition-archive-thumb" style={{ background: `linear-gradient(160deg, ${ex.color}, ${ex.color}dd)` }} />
+                      <div className="exhibition-archive-info">
+                        <span className="exhibition-type-badge">{TYPE_LABELS[ex.type]}</span>
+                        <h3 className="exhibition-archive-title">{ex.title}</h3>
+                        <div className="exhibition-archive-location">{ex.location} — {ex.artists}</div>
+                      </div>
+                      <div className="exhibition-archive-right">
+                        <div className="exhibition-archive-dates">{formatDateRange(ex.start_date, ex.end_date)}</div>
+                        <span className="exhibition-archive-link">View →</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )
+            })}
+            {hasMore && (
+              <button className="archive-load-more reveal" onClick={() => setVisibleYears(v => v + 2)}>
+                Load Earlier Exhibitions
+              </button>
+            )}
+          </div>
+        )
+      })()}
     </main>
   )
 }

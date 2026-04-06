@@ -189,19 +189,29 @@
   position: static;
   background: none;
 }
+.exd-install .exd-section-title::before {
+  display: none;
+}
 
 .exd-install-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 52px;
+  padding: 16px 52px;
   margin-bottom: 28px;
   position: sticky;
   top: 72px;
   z-index: 5;
   background: var(--bg);
-  padding-top: 16px;
-  padding-bottom: 16px;
+}
+.exd-install-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 52px;
+  width: 36px;
+  height: 2px;
+  background: var(--accent);
 }
 
 .install-header-nav {
@@ -238,6 +248,14 @@
   top: 72px;
   z-index: 5;
   padding: 12px 0;
+}
+.exd-section-title::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 16px;
 }
 
 .exd-artworks .exd-section-title {
@@ -440,3 +458,41 @@
   transition: background .15s;
 }
 .exd-newsletter-submit:hover { background: #2A5580; }
+
+/* ─── Mobile ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .exd-hero { aspect-ratio: 16/9; }
+  .exd-hero-badge { left: 24px; }
+
+  .exd-header { padding: 28px 24px 32px; }
+  .exd-title { font-size: clamp(28px, 6vw, 40px); }
+
+  .exd-essay { padding: 0 24px 36px; }
+  .exd-pullquote { font-size: 18px; padding-left: 20px; }
+
+  .exd-press-compact { padding: 0 24px 32px; flex-wrap: wrap; gap: 16px; }
+
+  .exd-install-header {
+    padding: 0 24px;
+    position: static;
+  }
+  .exd-section-title {
+    position: static;
+  }
+
+  .exd-artworks {
+    padding: 32px 24px;
+  }
+  .exd-artworks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .exd-show-artists { padding: 32px 24px; }
+  .exd-show-artists-grid {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .exd-artist-portrait { width: 120px; height: 120px; }
+}

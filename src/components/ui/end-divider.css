@@ -1,0 +1,21 @@
+.end-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 52px;
+  border-top: 1px solid var(--border);
+}
+
+.end-divider-line {
+  width: 36px;
+  height: 1px;
+  background: var(--border);
+}
+
+.end-divider-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}

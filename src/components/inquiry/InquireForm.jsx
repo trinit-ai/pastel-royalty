@@ -1,15 +1,17 @@
 import { useState, useRef } from 'react'
 import { supabase } from '../../lib/supabase'
 
+const GALLERY_EMAIL = 'info@yourgallery.com'
+
 /**
  * The inquiry form — gallery's revenue conversion point.
  *
- * Design principles:
- * - Feels like writing a note to a gallerist, not a web form
- * - Minimal fields: name, email, message. That's it.
- * - Contextual: knows what artwork/exhibition you're asking about
- * - Confirmation is elegant, not a redirect
- * - Honeypot field for spam (no CAPTCHA — kills the mood)
+ * Two modes:
+ * - With Supabase: saves to DB, upserts contact, shows confirmation
+ * - Without Supabase: opens mailto with pre-filled subject/body
+ *
+ * Design: feels like writing a note to a gallerist, not a web form.
+ * Minimal fields. Honeypot for spam. No CAPTCHA.
  */
 export default function InquireForm({
   artwork = null,
@@ -18,11 +20,10 @@ export default function InquireForm({
   onSuccess,
 }) {
   const [form, setForm] = useState({ name: '', email: '', message: '', _hp: '' })
-  const [status, setStatus] = useState('idle') // idle → sending → success → error
+  const [status, setStatus] = useState('idle')
   const [error, setError] = useState(null)
   const formRef = useRef(null)
 
-  // Build contextual default message
   const contextLine = artwork
     ? `Inquiring about "${artwork.title}" by ${artwork.artistName}`
     : exhibition
@@ -31,13 +32,22 @@ export default function InquireForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // Honeypot check
     if (form._hp) return
 
-    // Basic validation
     if (!form.name.trim() || !form.email.trim()) {
       setError('Please enter your name and email.')
+      return
+    }
+
+    // If no Supabase, fall back to mailto
+    if (!supabase) {
+      const subject = encodeURIComponent(contextLine || 'Gallery Inquiry')
+      const body = encodeURIComponent(
+        `${form.message.trim() || 'I would like more information.'}\n\n— ${form.name.trim()}\n${form.email.trim()}`
+      )
+      window.location.href = `mailto:${GALLERY_EMAIL}?subject=${subject}&body=${body}`
+      setStatus('success')
+      onSuccess?.()
       return
     }
 
@@ -45,7 +55,6 @@ export default function InquireForm({
     setError(null)
 
     try {
-      // 1. Insert inquiry
       const { error: inquiryError } = await supabase.from('inquiries').insert({
         artwork_id: artwork?.id || null,
         exhibition_id: exhibition?.id || null,
@@ -59,7 +68,6 @@ export default function InquireForm({
 
       if (inquiryError) throw inquiryError
 
-      // 2. Upsert contact (don't fail if this errors)
       await supabase.from('contacts').upsert(
         {
           email: form.email.trim(),
@@ -67,7 +75,7 @@ export default function InquireForm({
           source: 'inquiry',
         },
         { onConflict: 'email', ignoreDuplicates: false }
-      ).catch(() => {}) // silent fail — inquiry is what matters
+      ).catch(() => {})
 
       setStatus('success')
       onSuccess?.()
@@ -83,7 +91,9 @@ export default function InquireForm({
       <div className={`inquire-success ${compact ? 'compact' : ''}`}>
         <div className="inquire-success-title">Thank you.</div>
         <p className="inquire-success-body">
-          We've received your inquiry{artwork ? ` about "${artwork.title}"` : ''} and will be in touch shortly.
+          {supabase
+            ? `We've received your inquiry${artwork ? ` about "${artwork.title}"` : ''} and will be in touch shortly.`
+            : 'Your email client should open now. If not, please email us directly.'}
         </p>
       </div>
     )
@@ -106,7 +116,6 @@ export default function InquireForm({
         </div>
       )}
 
-      {/* Honeypot — hidden from humans, visible to bots */}
       <input
         type="text"
         name="_hp"

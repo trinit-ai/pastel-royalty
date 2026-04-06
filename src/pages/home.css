@@ -606,3 +606,76 @@
 .fade-up-2 { animation-delay: .2s; opacity: 0; }
 .fade-up-3 { animation-delay: .35s; opacity: 0; }
 .fade-up-4 { animation-delay: .5s; opacity: 0; }
+
+/* ─── Mobile ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .ticker {
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-start;
+  }
+  .ticker-item { padding: 0 12px; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero-content {
+    padding: 40px 24px;
+    order: 2;
+  }
+  .hero-image {
+    order: 1;
+    min-height: 300px;
+    padding: 24px;
+  }
+  .hero-image-placeholder { width: 50%; }
+  .artwork-label { width: 50%; }
+
+  .section {
+    padding: 48px 24px;
+  }
+  .section-header {
+    padding: 16px 24px;
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-bottom: 32px;
+  }
+
+  .exhibitions-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .exhibit-card-info { padding: 20px; }
+  .exhibit-card-title { font-size: 18px; }
+  .exhibit-card-featured .exhibit-card-title { font-size: 22px; }
+
+  .artist-row {
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+  }
+  .artist-row-thumb { width: 64px; height: 48px; }
+  .artist-row-right { display: none; }
+  .artist-row-name { font-size: 18px; }
+  .artist-row:hover { margin: 0; padding: 20px 0; }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    margin: 0 -24px;
+  }
+  .service-card {
+    padding: 32px 24px;
+    min-height: auto;
+  }
+
+  .visit-grid {
+    grid-template-columns: 1fr;
+  }
+  .visit-left { padding: 32px 24px; }
+  .visit-right { padding: 32px 24px; }
+
+  .about-summary { font-size: 18px; }
+}

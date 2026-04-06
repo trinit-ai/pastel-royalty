@@ -333,6 +333,14 @@
   z-index: 5;
   padding: 12px 0;
 }
+.atd-section-title::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 16px;
+}
 
 .atd-works .atd-section-title {
   background: var(--bg);
@@ -405,14 +413,6 @@
 .atd-exhibitions {
   padding: 52px;
   background: var(--bg-alt);
-}
-
-.atd-exhibitions-divider {
-  width: 36px;
-  height: 1px;
-  background: var(--accent);
-  opacity: .4;
-  margin-bottom: 20px;
 }
 
 .atd-exhibitions-list {
@@ -544,6 +544,13 @@
 /* ─── Responsive ──────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  .atd-ticker {
+    padding: 10px 24px;
+    gap: 16px;
+  }
+  .atd-section-title {
+    position: static;
+  }
   .atd-hero {
     grid-template-columns: 1fr;
     min-height: auto;
