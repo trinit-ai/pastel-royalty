@@ -1,63 +1,90 @@
-/* ─── Exhibition Detail Page ────────────────────────────── */
+/* ============================================================
+   EXHIBITION DETAIL — Almine Rech-inspired structure
+   Full-bleed hero → header → essay → press → install views →
+   selected works → artists → newsletter
+   ============================================================ */
 
-.exhibition-detail-page {
+.exd {
   min-height: 80vh;
   background: var(--bg);
   color: var(--text);
 }
 
-.exhibition-detail-hero {
+/* ─── 1. Full-bleed Hero ───────────────────────────────── */
+
+.exd-hero {
   width: 100%;
   aspect-ratio: 21/9;
   position: relative;
 }
-.exhibition-detail-hero .exhibit-card-badge {
+.exd-hero-badge {
   position: absolute;
   top: 24px;
   left: 52px;
+  font-family: 'DM Sans';
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: var(--exhibit-badge-bg);
+  color: var(--exhibit-badge-text);
+  padding: 4px 10px;
 }
 
-.exhibition-detail-content {
-  padding: 40px 52px 80px;
-  max-width: 900px;
+/* ─── 2. Exhibition Header ─────────────────────────────── */
+
+.exd-header {
+  padding: 40px 52px 48px;
+  max-width: 800px;
 }
 
-.exhibition-back {
+.exd-back {
   font-family: 'DM Sans';
   font-size: 11px;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
   color: var(--text-muted);
   text-decoration: none;
   transition: color .15s;
   display: inline-block;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
-.exhibition-back:hover { color: var(--accent-secondary); }
+.exd-back:hover { color: var(--accent-secondary); }
 
-.exhibition-detail-meta {
+.exd-header-meta {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
 }
 
-.exhibition-detail-location {
+.exd-type-badge {
+  font-family: 'DM Sans';
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 4px 10px;
+  border: 1px solid var(--accent);
+  opacity: .7;
+  width: fit-content;
+}
+
+.exd-location {
   font-family: 'DM Sans';
   font-size: 11px;
   color: var(--text-muted);
 }
 
-.exhibition-detail-title {
+.exd-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(36px, 4.5vw, 56px);
   font-weight: 300;
   font-style: italic;
   color: var(--text);
-  line-height: 1.1;
+  line-height: 1.08;
   margin-bottom: 12px;
 }
 
-.exhibition-detail-artists {
+.exd-artists {
   font-family: 'DM Sans';
   font-size: 13px;
   letter-spacing: .1em;
@@ -66,81 +93,297 @@
   margin-bottom: 8px;
 }
 
-.exhibition-detail-dates {
+.exd-dates {
   font-family: 'DM Sans';
   font-size: 13px;
   color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.exd-opening {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--accent);
   margin-bottom: 24px;
 }
 
-.exhibition-detail-divider {
+.exd-inquire-btn {
+  display: inline-block;
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  background: var(--accent-secondary);
+  color: white;
+  text-decoration: none;
+  transition: background .15s;
+}
+.exd-inquire-btn:hover { background: #2A5580; }
+
+/* ─── 3. Curatorial Essay ──────────────────────────────── */
+
+.exd-essay {
+  padding: 0 52px 56px;
+  max-width: 780px;
+}
+
+.exd-essay-divider {
   width: 48px;
   height: 1px;
   background: var(--accent);
   opacity: .4;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
-.exhibition-detail-description {
+.exd-essay-para {
   font-family: 'DM Sans';
   font-size: 15px;
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--text-muted);
-  max-width: 640px;
-  margin-bottom: 56px;
+  margin-bottom: 24px;
 }
 
-/* Works */
-.exhibition-detail-works-header {
-  margin-bottom: 28px;
+.exd-pullquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.45;
+  padding: 32px 0 32px 28px;
+  border-left: 2px solid var(--accent);
+  margin: 36px 0;
+  opacity: .8;
 }
-.exhibition-detail-works-title {
+
+/* ─── 4. Press Release ─────────────────────────────────── */
+
+.exd-press {
+  padding: 0 52px 48px;
+}
+
+.exd-press-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.exd-press-label {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.exd-press-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.exd-press-btn {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--accent-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color .15s;
+}
+.exd-press-btn:hover { color: var(--text); }
+
+/* ─── 5. Installation Views ────────────────────────────── */
+
+.exd-install {
+  padding: 48px 52px;
+}
+
+.exd-section-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 24px;
   font-weight: 300;
   font-style: italic;
   color: var(--text);
+  margin-bottom: 32px;
 }
 
-.exhibition-detail-works-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 56px;
-}
-
-.exhibition-work-placeholder {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .2s;
-}
-.exhibition-work-placeholder:hover { transform: scale(1.01); }
-
-.exhibition-work-label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 16px;
-  background: linear-gradient(transparent, rgba(0,0,0,.25));
-}
-.exhibition-work-label-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  font-style: italic;
-  color: white;
-  margin-bottom: 2px;
-}
-.exhibition-work-label-detail {
-  font-family: 'DM Sans';
-  font-size: 10px;
-  color: rgba(255,255,255,.6);
-}
-
-/* Actions */
-.exhibition-detail-actions {
+.exd-install-images {
   display: flex;
-  gap: 16px;
-  align-items: center;
-  padding-top: 32px;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.exd-install-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+}
+
+.exd-install-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: rgba(0,0,0,.4);
+  font-style: italic;
+}
+
+/* ─── 6. Selected Artworks ─────────────────────────────── */
+
+.exd-artworks {
+  padding: 48px 52px;
   border-top: 1px solid var(--border);
 }
+
+.exd-artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.exd-artwork-card {
+  cursor: pointer;
+}
+
+.exd-artwork-image {
+  width: 100%;
+  margin-bottom: 14px;
+  transition: transform .2s;
+}
+.exd-artwork-card:hover .exd-artwork-image {
+  transform: scale(1.01);
+}
+
+.exd-artwork-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exd-artwork-artist {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.exd-artwork-title {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  color: var(--text);
+}
+
+.exd-artwork-medium {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.exd-artwork-dims {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── 7. Artists in Show ───────────────────────────────── */
+
+.exd-show-artists {
+  padding: 48px 52px;
+  border-top: 1px solid var(--border);
+}
+
+.exd-show-artists-grid {
+  display: flex;
+  gap: 32px;
+}
+
+.exd-artist-card {
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.exd-artist-card:hover { opacity: .8; }
+
+.exd-artist-portrait {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 14px;
+}
+
+.exd-artist-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.exd-artist-medium {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── 8. Newsletter ────────────────────────────────────── */
+
+.exd-newsletter {
+  border-top: 1px solid var(--border);
+}
+
+.exd-newsletter-inner {
+  padding: 36px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  background: var(--newsletter-bg);
+}
+
+.exd-newsletter-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+}
+
+.exd-newsletter-form {
+  display: flex;
+}
+
+.exd-newsletter-input {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-right: none;
+  background: white;
+  color: var(--text);
+  width: 260px;
+  outline: none;
+}
+.exd-newsletter-input::placeholder { color: #B0ACA6; }
+.exd-newsletter-input:focus { border-color: var(--accent-secondary); }
+
+.exd-newsletter-submit {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  background: var(--newsletter-btn-bg);
+  color: white;
+  border: 1px solid var(--newsletter-btn-bg);
+  cursor: pointer;
+  transition: background .15s;
+}
+.exd-newsletter-submit:hover { background: #2A5580; }
