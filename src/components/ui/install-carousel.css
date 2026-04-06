@@ -1,73 +1,75 @@
 /* ============================================================
-   INSTALLATION CAROUSEL
-   Three-panel: prev peek | active | next peek
-   Arrows overlaid on active image edges.
-   Wraps infinitely. Click active to open lightbox.
+   INSTALLATION CAROUSEL — Almine Rech reference
+   Active image ~65%, next image peeks ~30% from right.
+   Small chevron arrows float between the two images.
+   Tall images, nearly viewport height. Click to lightbox.
    ============================================================ */
 
 .install-carousel {
   position: relative;
 }
 
-/* Three-panel stage */
+/* Two-panel: active + next peek */
 .install-carousel-stage {
-  display: grid;
-  grid-template-columns: 18% 1fr 18%;
-  gap: 6px;
-  align-items: center;
-}
-
-/* Peek panels (prev/next) */
-.install-carousel-peek {
-  cursor: pointer;
-  opacity: .35;
-  transition: opacity .3s ease;
+  display: flex;
+  gap: 10px;
   overflow: hidden;
-}
-.install-carousel-peek:hover {
-  opacity: .55;
+  position: relative;
 }
 
-/* Active panel */
+/* Active image — dominant */
 .install-carousel-active {
+  flex: 0 0 65%;
   position: relative;
   cursor: pointer;
 }
 
-/* All images */
-.install-carousel-image {
-  width: 100%;
-  aspect-ratio: 2.4/1;
-  max-height: 480px;
+/* Peek image — next, partial view */
+.install-carousel-peek {
+  flex: 0 0 33%;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .3s ease;
+}
+.install-carousel-peek:hover {
+  opacity: .9;
+}
+.install-carousel-peek-prev {
+  display: none;
 }
 
-/* Arrows — overlaid on left/right edges of active image */
-.install-arrow {
+/* Images — tall, gallery-scale */
+.install-carousel-image {
+  width: 100%;
+  aspect-ratio: 4/5;
+}
+
+/* Arrows — stacked vertically, floating between active and peek */
+.install-arrows {
   position: absolute;
+  right: -24px;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,.85);
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  z-index: 2;
+}
+.install-arrow {
+  background: none;
   border: none;
-  color: #2a2a2a;
-  width: 44px;
-  height: 44px;
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity .25s, background .15s;
-  z-index: 2;
-}
-.install-carousel-active:hover .install-arrow {
-  opacity: 1;
+  transition: color .2s;
 }
 .install-arrow:hover {
-  background: rgba(255,255,255,1);
+  color: var(--text);
 }
-
-.install-arrow-prev { left: 12px; }
-.install-arrow-next { right: 12px; }
 
 /* Caption */
 .install-carousel-caption {
