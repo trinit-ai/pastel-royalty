@@ -6,7 +6,7 @@ import Lightbox from './components/lightbox/Lightbox'
 import Home from './pages/Home'
 import './styles/global.css'
 
-const GALLERY_NAME = import.meta.env.VITE_SITE_NAME || 'Pastel Royalty Gallery'
+const GALLERY_NAME = 'Pastel Royalty Gallery'
 
 export default function App() {
   useSmoothScroll()
