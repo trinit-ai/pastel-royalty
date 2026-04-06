@@ -617,28 +617,36 @@
 
 @media (max-width: 768px) {
   .ticker {
-    padding: 10px 20px;
-    flex-wrap: wrap;
-    gap: 4px;
-    justify-content: flex-start;
+    display: none;
   }
-  .ticker-item { padding: 0 12px; }
 
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
   }
   .hero-content {
-    padding: 40px 24px;
+    padding: 32px 24px;
     order: 2;
   }
   .hero-image {
     order: 1;
-    min-height: 300px;
-    padding: 24px;
+    min-height: 360px;
+    padding: 0;
   }
-  .hero-image-placeholder { width: 50%; }
-  .artwork-label { width: 50%; }
+  .hero-image-placeholder {
+    width: 100%;
+    aspect-ratio: auto;
+    height: 100%;
+  }
+  .artwork-label {
+    width: 100%;
+    padding: 16px 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.15));
+  }
 
   .section {
     padding: 48px 24px;
