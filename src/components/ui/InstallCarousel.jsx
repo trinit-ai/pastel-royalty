@@ -1,24 +1,41 @@
-import { useState, useCallback } from 'react'
+import { useRef, useState } from 'react'
 import { useLightbox } from '../../hooks/useLightbox'
 import './install-carousel.css'
 
 /**
- * Installation views carousel — Almine Rech style.
- *
- * Active image ~65% width, next image peeks ~30% from right.
- * Small chevron arrows stacked vertically between the two.
- * Click active image to open lightbox. Click peek to navigate.
- * Wraps infinitely.
+ * Installation views carousel.
+ * Native horizontal scroll with scroll-snap.
+ * Arrows advance by one slide. Click image for lightbox.
  */
 export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
+  const trackRef = useRef(null)
   const [current, setCurrent] = useState(0)
   const { open } = useLightbox()
   const total = images.length
 
-  const next = useCallback(() => setCurrent(i => (i + 1) % total), [total])
-  const prev = useCallback(() => setCurrent(i => (i - 1 + total) % total), [total])
+  const scrollTo = (index) => {
+    const wrapped = ((index % total) + total) % total
+    const track = trackRef.current
+    if (!track) return
+    const slide = track.children[wrapped]
+    if (slide) {
+      track.scrollTo({ left: slide.offsetLeft - 52, behavior: 'smooth' })
+    }
+    setCurrent(wrapped)
+  }
 
-  const getIndex = (offset) => ((current + offset) % total + total) % total
+  const handleScroll = () => {
+    const track = trackRef.current
+    if (!track) return
+    const scrollLeft = track.scrollLeft + 52
+    for (let i = 0; i < track.children.length; i++) {
+      const child = track.children[i]
+      if (child.offsetLeft + child.offsetWidth / 2 > scrollLeft) {
+        setCurrent(i)
+        break
+      }
+    }
+  }
 
   const openLightbox = (index) => {
     const items = images.map((img, i) => ({
@@ -28,7 +45,7 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
       displaySrc: img.src || '',
       fullSrc: img.src || '',
       dominantColor: img.color || '#f0ece8',
-      aspectRatio: 4 / 5,
+      aspectRatio: 3 / 2,
     }))
     open(items, index)
   }
@@ -37,41 +54,40 @@ export default function InstallCarousel({ images = [], exhibitionTitle = '' }) {
 
   return (
     <div className="install-carousel">
-      <div className="install-carousel-stage">
-        {/* Active image */}
-        <div className="install-carousel-active" onClick={() => openLightbox(current)}>
+      <div
+        ref={trackRef}
+        className="install-carousel-track"
+        onScroll={handleScroll}
+      >
+        {images.map((img, i) => (
           <div
-            className="install-carousel-image"
-            style={{ background: `linear-gradient(160deg, ${images[current].color}, ${images[current].color}dd)` }}
-          />
-
-          {/* Arrows — stacked vertically, right edge */}
-          {total > 1 && (
-            <div className="install-arrows">
-              <button className="install-arrow" onClick={(e) => { e.stopPropagation(); prev() }} aria-label="Previous">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M15 18l-6-6 6-6"/>
-                </svg>
-              </button>
-              <button className="install-arrow" onClick={(e) => { e.stopPropagation(); next() }} aria-label="Next">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M9 18l6-6-6-6"/>
-                </svg>
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Next peek */}
-        <div className="install-carousel-peek" onClick={next}>
-          <div
-            className="install-carousel-image"
-            style={{ background: `linear-gradient(160deg, ${images[getIndex(1)].color}, ${images[getIndex(1)].color}dd)` }}
-          />
-        </div>
+            key={i}
+            className="install-carousel-slide"
+            onClick={() => openLightbox(i)}
+          >
+            <div
+              className="install-carousel-image"
+              style={{ background: `linear-gradient(160deg, ${img.color}, ${img.color}dd)` }}
+            />
+          </div>
+        ))}
       </div>
 
-      {/* Caption */}
+      {total > 1 && (
+        <div className="install-carousel-arrows">
+          <button className="install-carousel-arrow" onClick={() => scrollTo(current - 1)} aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button className="install-carousel-arrow" onClick={() => scrollTo(current + 1)} aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
       <div className="install-carousel-caption">
         Installation view, <em>{exhibitionTitle}</em>
         <span className="install-carousel-counter">{current + 1} / {total}</span>
