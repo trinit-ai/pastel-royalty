@@ -37,7 +37,7 @@
   color: var(--text-muted);
   transition: color .15s;
 }
-.header-nav-link:hover { color: var(--nav-hover); }
+.header-nav-link:hover, .header-nav-link.active { color: var(--nav-hover); }
 
 .theme-toggle {
   background: none;

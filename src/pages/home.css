@@ -316,6 +316,8 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 .exhibit-card-image {
   width: 100%;

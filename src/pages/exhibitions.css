@@ -1,0 +1,300 @@
+/* ─── Exhibitions Page ──────────────────────────────────── */
+
+.exhibitions-page {
+  min-height: 80vh;
+}
+
+.exhibitions-page-header {
+  padding: 64px 52px 0;
+}
+
+/* ─── Tabs ─────────────────────────────────────────────── */
+
+.exhibitions-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.exhibitions-tabs-left {
+  display: flex;
+  gap: 0;
+}
+.exhibitions-tab {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exhibitions-tab:hover { color: var(--text); }
+.exhibitions-tab.active {
+  color: var(--text);
+  border-bottom-color: var(--accent-secondary);
+}
+.exhibitions-tab-count {
+  font-size: 10px;
+  background: var(--accent-secondary);
+  color: white;
+  padding: 1px 6px;
+  border-radius: 8px;
+}
+
+/* Filters */
+.exhibitions-filters {
+  display: flex;
+  gap: 4px;
+}
+.exhibitions-filter {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.exhibitions-filter:hover { border-color: var(--text-muted); }
+.exhibitions-filter.active {
+  background: var(--accent-secondary);
+  color: white;
+  border-color: var(--accent-secondary);
+}
+
+.exhibitions-empty {
+  padding: 80px 52px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ─── Current Exhibition ───────────────────────────────── */
+
+.exhibitions-current {
+  padding: 0 52px 64px;
+}
+
+.exhibition-current-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  text-decoration: none;
+  color: inherit;
+  padding: 32px 0;
+}
+
+.exhibition-current-image {
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+}
+.exhibition-current-image .exhibit-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.exhibition-current-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.exhibition-current-dates {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.exhibition-current-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.exhibition-current-artists {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.exhibition-current-description {
+  font-family: 'DM Sans';
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 20px;
+}
+.exhibition-current-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.exhibition-current-location {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.exhibition-current-link {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  transition: color .15s;
+}
+.exhibition-current-card:hover .exhibition-current-link { color: var(--text); }
+
+/* Type badge */
+.exhibition-type-badge {
+  font-family: 'DM Sans';
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 4px 10px;
+  border: 1px solid var(--accent);
+  opacity: .7;
+}
+
+/* ─── Forthcoming ──────────────────────────────────────── */
+
+.exhibitions-forthcoming {
+  padding: 0 52px 64px;
+}
+
+.exhibition-forthcoming-card {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exhibition-forthcoming-card:first-child { border-top: 1px solid var(--border); }
+
+.exhibition-forthcoming-season {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.exhibition-forthcoming-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.exhibition-forthcoming-artists {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.exhibition-forthcoming-description {
+  font-family: 'DM Sans';
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+.exhibition-forthcoming-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.exhibition-forthcoming-location {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── Archive Rows ─────────────────────────────────────── */
+
+.exhibitions-archive {
+  padding: 0 52px 64px;
+}
+
+.exhibition-archive-row {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: background .1s;
+}
+.exhibition-archive-row:first-child { border-top: 1px solid var(--border); }
+.exhibition-archive-row:hover { background: rgba(58,90,140,.03); margin: 0 -16px; padding: 28px 16px; }
+
+.exhibition-archive-thumb {
+  width: 160px;
+  height: 110px;
+}
+
+.exhibition-archive-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.exhibition-archive-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+}
+.exhibition-archive-location {
+  font-family: 'DM Sans';
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.exhibition-archive-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.exhibition-archive-dates {
+  font-family: 'DM Sans';
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.exhibition-archive-link {
+  font-family: 'DM Sans';
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  transition: color .15s;
+}
+.exhibition-archive-row:hover .exhibition-archive-link { color: var(--text); }

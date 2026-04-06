@@ -1,14 +1,16 @@
 import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import './layout.css'
 
 const NAV_ITEMS = [
-  { label: 'Exhibitions', href: '#exhibitions' },
-  { label: 'Artists', href: '#artists' },
-  { label: 'About', href: '#about' },
-  { label: 'Visit', href: '#visit' },
+  { label: 'Exhibitions', to: '/exhibitions' },
+  { label: 'Artists', to: '/#artists' },
+  { label: 'About', to: '/#about' },
+  { label: 'Visit', to: '/#visit' },
 ]
 
-export default function Header({ galleryName = 'Gallery Name' }) {
+export default function Header({ galleryName = 'Pastel Royalty Gallery' }) {
+  const location = useLocation()
   const [theme, setTheme] = useState(
     document.documentElement.getAttribute('data-theme') || 'light'
   )
@@ -19,14 +21,28 @@ export default function Header({ galleryName = 'Gallery Name' }) {
     setTheme(next)
   }
 
+  const handleNavClick = (e, item) => {
+    // If it's a hash link on the homepage, scroll to it
+    if (item.to.startsWith('/#') && location.pathname === '/') {
+      e.preventDefault()
+      const el = document.querySelector(item.to.replace('/', ''))
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <header className="header">
-      <a href="/" className="header-logo">{galleryName}</a>
+      <Link to="/" className="header-logo">{galleryName}</Link>
       <nav className="header-nav">
         {NAV_ITEMS.map(item => (
-          <a key={item.href} href={item.href} className="header-nav-link">
+          <Link
+            key={item.to}
+            to={item.to}
+            className={`header-nav-link ${location.pathname === item.to ? 'active' : ''}`}
+            onClick={(e) => handleNavClick(e, item)}
+          >
             {item.label}
-          </a>
+          </Link>
         ))}
         <button
           className={`theme-toggle ${theme}`}

@@ -1,20 +1,13 @@
-import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { EXHIBITIONS, ARTISTS } from '../data/demo'
 import './home.css'
 
-// Demo data — replaced by Supabase in production
-const DEMO_EXHIBITIONS = [
-  { id: 1, title: 'Still Life with Light', date: 'Summer 2026', artists: 'Elena Marsh & Julian Cole', status: 'current', color: '#C4D2C0' },
-  { id: 2, title: 'Salt & Stone', date: 'Winter 2025', artists: 'Group Exhibition', color: '#DDD8E8' },
-  { id: 3, title: 'Coastal Contemporary', date: 'Fall 2025', artists: 'Art Fair, NY', color: '#D4E4F0' },
-]
-
-const DEMO_ARTISTS = [
-  { id: 1, name: 'Elena Marsh', medium: 'Painting, Mixed Media', location: 'Brooklyn, NY', onView: true, color: '#d4ece8' },
-  { id: 2, name: 'Julian Cole', medium: 'Sculpture', location: 'Hudson Valley, NY', onView: true, color: '#e8e0d4' },
-  { id: 3, name: 'Artist Name', medium: 'Medium', location: '', onView: false, color: '#d8dce8' },
-  { id: 4, name: 'Artist Name', medium: 'Medium', location: '', onView: false, color: '#e8d8d4' },
-]
+// Homepage shows first 3 exhibitions and first 4 artists
+const FEATURED_EXHIBITIONS = EXHIBITIONS.filter(e => e.featured || e.status === 'current').concat(
+  EXHIBITIONS.filter(e => e.status === 'past')
+).slice(0, 3)
+const FEATURED_ARTISTS = ARTISTS.slice(0, 4)
 
 export default function Home({ galleryName }) {
   useScrollReveal()
@@ -91,21 +84,21 @@ export default function Home({ galleryName }) {
           <div className="section-divider reveal-line" />
         </div>
         <div className="exhibitions-grid">
-          {DEMO_EXHIBITIONS.map((ex, i) => (
-            <div key={ex.id} className={`exhibit-card ${i === 0 ? 'exhibit-card-featured' : ''} reveal ${i > 0 ? `reveal-delay-${i}` : ''}`}>
+          {FEATURED_EXHIBITIONS.map((ex, i) => (
+            <Link to={`/exhibitions/${ex.slug}`} key={ex.id} className={`exhibit-card ${i === 0 ? 'exhibit-card-featured' : ''} reveal ${i > 0 ? `reveal-delay-${i}` : ''}`}>
               <div className="exhibit-card-image" style={{ background: `linear-gradient(160deg, ${ex.color}, ${ex.color}dd, ${ex.color}bb)` }} />
               {ex.status === 'current' && <div className="exhibit-card-badge">On View</div>}
               <div className="exhibit-card-info">
-                <div className="exhibit-card-date">{ex.date}</div>
+                <div className="exhibit-card-date">{ex.artists}</div>
                 <div className="exhibit-card-title">{ex.title}</div>
-                <div className="exhibit-card-artists">{ex.artists}</div>
+                <div className="exhibit-card-artists">{ex.location}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="section-footer reveal">
-          <div className="section-footer-text">7 exhibitions since 2023</div>
-          <a href="#" className="section-footer-link">View Full Archive →</a>
+          <div className="section-footer-text">{EXHIBITIONS.length} exhibitions since 2024</div>
+          <Link to="/exhibitions" className="section-footer-link">View Full Archive →</Link>
         </div>
       </section>
 
@@ -121,7 +114,7 @@ export default function Home({ galleryName }) {
           <div className="section-divider reveal-line" />
         </div>
         <div className="artists-list">
-          {DEMO_ARTISTS.map(artist => (
+          {FEATURED_ARTISTS.map(artist => (
             <div key={artist.id} className="artist-row reveal">
               <div className="artist-row-thumb" style={{ background: `linear-gradient(160deg, ${artist.color}, ${artist.color}dd)` }} />
               <div className="artist-row-info">
