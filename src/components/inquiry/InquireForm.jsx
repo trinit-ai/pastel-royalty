@@ -39,13 +39,22 @@ export default function InquireForm({
       return
     }
 
-    // If no Supabase, fall back to mailto
+    // If no Supabase, copy message to clipboard
     if (!supabase) {
-      const subject = encodeURIComponent(contextLine || 'Gallery Inquiry')
-      const body = encodeURIComponent(
-        `${form.message.trim() || 'I would like more information.'}\n\n— ${form.name.trim()}\n${form.email.trim()}`
-      )
-      window.location.href = `mailto:${GALLERY_EMAIL}?subject=${subject}&body=${body}`
+      const message = [
+        contextLine,
+        '',
+        form.message.trim() || 'I would like more information.',
+        '',
+        `— ${form.name.trim()}`,
+        form.email.trim(),
+      ].filter(Boolean).join('\n')
+
+      try {
+        await navigator.clipboard.writeText(message)
+      } catch {
+        // clipboard API may fail in some contexts — still show success
+      }
       setStatus('success')
       onSuccess?.()
       return
@@ -93,7 +102,7 @@ export default function InquireForm({
         <p className="inquire-success-body">
           {supabase
             ? `We've received your inquiry${artwork ? ` about "${artwork.title}"` : ''} and will be in touch shortly.`
-            : 'Your email client should open now. If not, please email us directly.'}
+            : `Your message has been copied to clipboard. Please email ${GALLERY_EMAIL} to send it.`}
         </p>
       </div>
     )

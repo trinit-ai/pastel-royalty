@@ -74,10 +74,23 @@
 /* ─── Quote ───────────────────────────────────────────── */
 
 .about-quote {
-  padding: 32px 0 32px 28px;
-  margin: 8px 52px 0;
-  max-width: 620px;
-  border-left: 3px solid var(--accent);
+  padding: 48px 52px 48px 80px;
+  margin: 0;
+  max-width: none;
+  border-left: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+  position: relative;
+}
+.about-quote::before {
+  content: '';
+  position: absolute;
+  left: 52px;
+  top: 48px;
+  bottom: 48px;
+  width: 3px;
+  background: var(--accent);
 }
 
 .about-quote blockquote {
@@ -112,6 +125,14 @@
   font-style: italic;
   color: var(--text);
   margin-bottom: 0;
+}
+.about-contact-title::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 16px;
 }
 
 .about-contact-rule {
@@ -207,7 +228,12 @@
     min-height: 300px;
   }
   .about-quote {
-    padding: 32px 24px;
+    padding: 32px 24px 32px 44px;
+  }
+  .about-quote::before {
+    left: 24px;
+    top: 32px;
+    bottom: 32px;
   }
   .about-contact {
     padding: 40px 24px 56px;

@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useLightbox } from '../hooks/useLightbox'
+import { useInquire } from '../hooks/useInquire'
 import { ARTISTS, EXHIBITIONS, TYPE_LABELS } from '../data/demo'
 import './artist-detail.css'
 
@@ -39,6 +40,7 @@ export default function ArtistDetail() {
   const { slug } = useParams()
   useScrollReveal([slug])
   const { open } = useLightbox()
+  const { openInquire } = useInquire()
 
   const artist = ARTISTS.find(a => a.slug === slug)
   if (!artist) {
@@ -94,7 +96,7 @@ export default function ArtistDetail() {
             Recent exhibitions include group presentations at institutional and commercial venues across the United States. Work is held in private and public collections. The artist maintains an active studio practice and is available for commissions and site-specific projects.
           </p>
           <div className="atd-hero-actions fade-up fade-up-4">
-            <a href="mailto:info@yourgallery.com" className="btn btn-outline">Inquire</a>
+            <a className="btn btn-outline" onClick={() => openInquire()} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
             <a href="#" className="btn btn-gold">Download CV ↓</a>
           </div>
 

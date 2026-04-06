@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { useInquire } from '../hooks/useInquire'
 import { EXHIBITIONS, ARTISTS } from '../data/demo'
 import './home.css'
 
@@ -11,6 +12,7 @@ const FEATURED_ARTISTS = ARTISTS.slice(0, 4)
 
 export default function Home({ galleryName }) {
   useScrollReveal()
+  const { openInquire } = useInquire()
 
   return (
     <main className="home-page">
@@ -38,7 +40,7 @@ export default function Home({ galleryName }) {
             Two artists exploring the quiet tension between permanence and impermanence — painting and sculpture in conversation with coastal light.
           </p>
           <div className="hero-actions fade-up fade-up-4">
-            <a href="#" className="btn btn-outline">View Exhibition →</a>
+            <Link to="/exhibitions/still-life-with-light" className="btn btn-outline">View Exhibition →</Link>
             <a href="#" className="btn btn-gold">Download PDF ↓</a>
           </div>
 
@@ -48,7 +50,7 @@ export default function Home({ galleryName }) {
             </div>
             <div className="hero-contact-top">
               <span className="hero-contact-label">Stay connected</span>
-              <a href="mailto:info@gallery.com" className="hero-contact-link">Inquire</a>
+              <a className="hero-contact-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
             </div>
             <form className="hero-contact-form" onSubmit={e => e.preventDefault()}>
               <input type="email" className="hero-contact-input" placeholder="Your email" />
@@ -111,7 +113,7 @@ export default function Home({ galleryName }) {
         </div>
         <div className="artists-list">
           {FEATURED_ARTISTS.map(artist => (
-            <div key={artist.id} className="artist-row reveal">
+            <Link to={`/artists/${artist.slug}`} key={artist.id} className="artist-row reveal">
               <div className="artist-row-thumb" style={{ background: `linear-gradient(160deg, ${artist.color}, ${artist.color}dd)` }} />
               <div className="artist-row-info">
                 {artist.onView && <div className="artist-row-badge">On View</div>}
@@ -120,14 +122,14 @@ export default function Home({ galleryName }) {
               </div>
               <div className="artist-row-right">
                 {artist.location && <div className="artist-row-location">{artist.location}</div>}
-                <a href="#" className="artist-row-link">View →</a>
+                <span className="artist-row-link">View →</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="section-footer reveal">
           <div className="section-footer-text">32 represented artists</div>
-          <a href="#" className="section-footer-link">View Full Roster →</a>
+          <Link to="/artists" className="section-footer-link">View Full Roster →</Link>
         </div>
       </section>
 
@@ -146,19 +148,19 @@ export default function Home({ galleryName }) {
             <div className="service-icon" />
             <div className="service-title">Consultations</div>
             <div className="service-body">Private advisory for collectors at every stage — from first acquisitions to comprehensive collection strategy.</div>
-            <a href="mailto:info@gallery.com" className="service-link">Inquire</a>
+            <a className="service-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
           </div>
           <div className="service-card service-lavender reveal reveal-delay-1">
             <div className="service-icon" />
             <div className="service-title">Appraisals</div>
             <div className="service-body">USPAP-compliant appraisals for insurance, estate planning, charitable donation, and equitable distribution.</div>
-            <a href="mailto:info@gallery.com" className="service-link">Inquire</a>
+            <a className="service-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
           </div>
           <div className="service-card service-blush reveal reveal-delay-2">
             <div className="service-icon" />
             <div className="service-title">Art Advisory</div>
             <div className="service-body">Long-term advisory relationships with institutions and private clients seeking a trusted curatorial partner.</div>
-            <a href="mailto:info@gallery.com" className="service-link">Inquire</a>
+            <a className="service-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
           </div>
         </div>
       </section>
@@ -192,7 +194,7 @@ export default function Home({ galleryName }) {
             <p className="visit-right-body">
               The gallery presents contemporary painting, sculpture, and works on paper. We represent emerging and established artists working across media, with a focus on material craft, visual intensity, and curatorial precision.
             </p>
-            <a href="mailto:info@gallery.com" className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px' }}>
+            <a className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px', cursor: 'pointer' }} onClick={openInquire} role="button">
               Inquire
             </a>
           </div>

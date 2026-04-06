@@ -1,4 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { useInquire } from '../hooks/useInquire'
 
 import './services.css'
 
@@ -55,6 +56,7 @@ const SERVICES = [
 
 export default function Services() {
   useScrollReveal()
+  const { openInquire } = useInquire()
 
   return (
     <main className="services-page">
@@ -91,7 +93,7 @@ export default function Services() {
                   <div key={j} className="services-offering-item">— {o}</div>
                 ))}
               </div>
-              <a href="mailto:info@yourgallery.com" className="services-cta">Inquire</a>
+              <a className="services-cta" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
             </div>
           </div>
           {i < SERVICES.length - 1 && <div className="services-divider" />}

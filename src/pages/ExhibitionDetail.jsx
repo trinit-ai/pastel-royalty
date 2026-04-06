@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { useLightbox } from '../hooks/useLightbox'
+import { useInquire } from '../hooks/useInquire'
 import { EXHIBITIONS, ARTISTS, TYPE_LABELS } from '../data/demo'
 import InstallCarousel from '../components/ui/InstallCarousel'
 import './exhibition-detail.css'
@@ -10,6 +11,7 @@ export default function ExhibitionDetail() {
   const { slug } = useParams()
   useScrollReveal([slug])
   const { open } = useLightbox()
+  const { openInquire } = useInquire()
   const carouselRef = useRef(null)
 
   const exhibition = EXHIBITIONS.find(e => e.slug === slug)
@@ -73,7 +75,7 @@ export default function ExhibitionDetail() {
           <div className="exd-opening reveal">{exhibition.opening}</div>
         )}
 
-        <a href="mailto:info@yourgallery.com" className="exd-inquire-btn reveal">
+        <a className="exd-inquire-btn reveal" onClick={() => openInquire({ exhibition })} role="button" style={{ cursor: 'pointer' }}>
           Inquire
         </a>
       </div>

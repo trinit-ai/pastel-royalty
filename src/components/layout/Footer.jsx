@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useInquire } from '../../hooks/useInquire'
 import './layout.css'
 
 export default function Footer({ galleryName = 'Gallery Name' }) {
+  const { openInquire } = useInquire()
   return (
     <footer className="footer">
       <div className="footer-top">
@@ -20,11 +22,11 @@ export default function Footer({ galleryName = 'Gallery Name' }) {
         <div className="footer-col">
           <div className="footer-col-title">Navigate</div>
           <nav className="footer-nav">
-            <a href="#exhibitions">Exhibitions</a>
-            <a href="#artists">Artists</a>
-            <a href="#about">About</a>
-            <a href="#visit">Visit</a>
-            <a href="mailto:info@gallery.com">Inquire</a>
+            <Link to="/exhibitions">Exhibitions</Link>
+            <Link to="/artists">Artists</Link>
+            <Link to="/about">About</Link>
+            <Link to="/services">Services</Link>
+            <a onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
           </nav>
         </div>
         <div className="footer-col">

@@ -5,6 +5,7 @@ import './layout.css'
 const NAV_ITEMS = [
   { label: 'Exhibitions', to: '/exhibitions' },
   { label: 'Artists', to: '/artists' },
+  { label: 'News', to: '/news' },
   { label: 'Services', to: '/services' },
   { label: 'About', to: '/about' },
 ]

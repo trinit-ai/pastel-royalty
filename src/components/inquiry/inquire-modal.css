@@ -1,0 +1,74 @@
+/* ============================================================
+   INQUIRE MODAL — centered form overlay
+   Clean, gallery-appropriate. Not a SaaS modal.
+   ============================================================ */
+
+.inquire-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(26, 24, 20, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: inquire-fade-in 0.25s ease;
+}
+
+@keyframes inquire-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.inquire-modal {
+  background: #fafaf7;
+  width: 100%;
+  max-width: 480px;
+  padding: 48px 40px 40px;
+  position: relative;
+  animation: inquire-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes inquire-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.inquire-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.inquire-modal-close:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Override form styles inside modal */
+.inquire-modal .inquire-form {
+  gap: 16px;
+}
+
+.inquire-modal .inquire-form-title {
+  font-size: 24px;
+}
+
+.inquire-modal .inquire-submit {
+  width: 100%;
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .inquire-modal {
+    max-width: none;
+    padding: 40px 24px 32px;
+  }
+}
