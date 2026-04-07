@@ -233,26 +233,36 @@
   display: none;
   background: none;
   border: none;
-  padding: 6px;
+  padding: 0;
   cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
+  position: relative;
+  width: 34px;
+  height: 34px;
 }
 .header-hamburger span {
   display: block;
+  position: absolute;
+  left: 6px;
   width: 22px;
-  height: 1.5px;
+  height: 2px;
   background: var(--text);
-  transition: transform 0.25s, opacity 0.25s;
+  transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+  transform-origin: center;
 }
+.header-hamburger span:nth-child(1) { top: 10px; }
+.header-hamburger span:nth-child(2) { top: 16px; }
+.header-hamburger span:nth-child(3) { top: 22px; }
+
 .header-hamburger.open span:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
+  top: 16px;
+  transform: rotate(45deg);
 }
 .header-hamburger.open span:nth-child(2) {
   opacity: 0;
 }
 .header-hamburger.open span:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
+  top: 16px;
+  transform: rotate(-45deg);
 }
 
 /* ─── Mobile menu overlay ─────────────────────────────── */
