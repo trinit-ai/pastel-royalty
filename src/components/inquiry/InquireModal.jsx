@@ -34,6 +34,8 @@ export default function InquireModal() {
           </svg>
         </button>
 
+        <div className="inquire-modal-eyebrow">Private Inquiry</div>
+
         <InquireForm
           artwork={artwork}
           exhibition={exhibition}
