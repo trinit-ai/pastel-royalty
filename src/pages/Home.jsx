@@ -17,6 +17,13 @@ export default function Home({ galleryName }) {
   const [cookieDismissed, setCookieDismissed] = useState(
     () => localStorage.getItem('cookie_consent') !== null
   )
+  // Image loaded? Check if browser already cached it (preload usually completes before mount)
+  const [heroLoaded, setHeroLoaded] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const img = new Image()
+    img.src = '/hero-artwork.jpg'
+    return img.complete
+  })
 
   const handleDecline = () => {
     localStorage.setItem('cookie_consent', 'declined')
@@ -79,7 +86,14 @@ export default function Home({ galleryName }) {
         </div>
 
         <div className="hero-image">
-          <img src="/hero-artwork.jpg" alt="Detail, Fiona Garrett" className="hero-artwork-img" />
+          <img
+            src="/hero-artwork.jpg"
+            alt="Detail, Fiona Garrett"
+            className={`hero-artwork-img ${heroLoaded ? 'loaded' : ''}`}
+            onLoad={() => setHeroLoaded(true)}
+            decoding="async"
+            fetchPriority="high"
+          />
         </div>
       </section>
 

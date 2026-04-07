@@ -216,7 +216,8 @@
 
 /* Hero image */
 .hero-image {
-  background: #e8e4de;
+  /* Background matches artwork's dominant warm-cream tone — no tan flash */
+  background: #ece6d4;
   position: sticky;
   top: var(--header-height);
   height: calc(100vh - var(--header-height));
@@ -236,6 +237,11 @@
   object-position: center top;
   transform: scale(1.5) translateY(-15%);
   transform-origin: center top;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-artwork-img.loaded {
+  opacity: 1;
 }
 .artwork-label {
   margin-top: 24px;
