@@ -79,13 +79,7 @@ export default function Home({ galleryName }) {
         </div>
 
         <div className="hero-image">
-          <img src="/hero-artwork.jpg" alt="Fantastic Flowers with Peapod Leaves, Fiona Garrett" className="hero-artwork-img" />
-          <div className="artwork-label">
-            <div className="artwork-label-title">Fantastic Flowers with Peapod Leaves</div>
-            <div className="artwork-label-detail">
-              Fiona Garrett, 2024<br />Etching with à la poupée inking on paper<br />19.4 × 13.9 cm
-            </div>
-          </div>
+          <img src="/hero-artwork.jpg" alt="Detail, Fiona Garrett" className="hero-artwork-img" />
         </div>
       </section>
 
