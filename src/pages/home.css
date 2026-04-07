@@ -217,7 +217,10 @@
 /* Hero image */
 .hero-image {
   background: #e8e4de;
-  position: relative;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  align-self: start;
   overflow: hidden;
 }
 .hero-image-placeholder {
