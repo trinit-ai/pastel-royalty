@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "images": "node scripts/process-images.js",
     "check-images": "node scripts/check-images.js",
+    "ingest": "node scripts/ingest.js",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -20,7 +21,8 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "yaml": "^2.8.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

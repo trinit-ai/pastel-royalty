@@ -214,7 +214,7 @@ This structure isn't enforced by the code — it's just recommended for organiza
 
 ---
 
-## Image preparation workflow
+## Image preparation workflow (manual)
 
 1. Start from highest-resolution source (master files, RAW exports, original photography)
 2. Crop and color-correct in your tool of choice
@@ -223,6 +223,36 @@ This structure isn't enforced by the code — it's just recommended for organiza
 5. Run `npm run check-images` to verify nothing exceeds 500KB
 6. Update the relevant data file (`src/data/demo.js`) or page component to reference the new image
 7. Commit and push
+
+## Automated ingest workflow (recommended)
+
+The faster path: drop everything into `_intake/` and run one command.
+
+```bash
+npm run ingest
+```
+
+The script:
+- Walks `_intake/exhibitions/{slug}/` and `_intake/artists/{slug}/`
+- Validates each `meta.yml` against the typedefs in `src/data/demo.js`
+- Processes all images through Sharp (auto-rotates, resizes to optimal long edge, exports as WebP)
+- Copies PDFs to `public/pdfs/` with consistent naming
+- Generates `src/data/content.js` — a typed, auto-generated data file
+- Prints a summary
+
+After ingest, switch the imports in your pages:
+
+```js
+// Before
+import { EXHIBITIONS, ARTISTS } from '../data/demo'
+
+// After
+import { EXHIBITIONS, ARTISTS, ARTWORKS } from '../data/content'
+```
+
+`demo.js` stays as the placeholder content for the template; `content.js` is the buyer's real data.
+
+See `_intake/README.md` for the full folder convention and `meta.yml` format.
 
 ---
 
