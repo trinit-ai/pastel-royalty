@@ -140,3 +140,12 @@ To customize for a new gallery:
 - **Not e-commerce.** No cart, no checkout. Inquiry-driven only.
 - **Not multi-language.** English only.
 - **Not SSR.** Pure SPA. SEO comes from meta tags + sitemap, not server-rendered pages.
+
+## Deliberate omissions
+
+These were considered and intentionally left out:
+
+- **Social sharing buttons.** Galleries don't need Facebook/Twitter/Pinterest share widgets — those are blog conventions that look out of place next to gallery-grade design. Major contemporary galleries (Hauser & Wirth, David Zwirner, Pace, Gagosian) don't use them. Open Graph tags in `index.html` already produce beautiful link previews when URLs are pasted into iMessage, Slack, or email — that's the gallery-appropriate "share" experience. If a buyer specifically wants sharing, add a single "Copy Link" button (no third-party scripts, no tracking pixels) — never the row of branded social icons.
+- **Comments / reviews.** Inquiry modal is the only conversion. Public commentary doesn't fit the model.
+- **Newsletter analytics.** The newsletter form passes addresses to Mailchimp/Supabase. Open rates and click tracking belong in those tools, not in the site.
+- **Cookie banners with tracking categories.** The site uses essential cookies only (cookie consent dismissable in `Home.jsx`). No analytics, no tracking, nothing to consent to beyond the localStorage rate limit on inquiries.
