@@ -79,11 +79,11 @@ export default function Home({ galleryName }) {
         </div>
 
         <div className="hero-image">
-          <img src="/hero-artwork.jpg" alt="Woman with a Parasol — Madame Monet and Her Son, Claude Monet, 1875" className="hero-artwork-img" />
+          <img src="/hero-artwork.jpg" alt="Camellias I, Rob Ventura, 2025" className="hero-artwork-img" />
           <div className="artwork-label">
-            <div className="artwork-label-title">Woman with a Parasol</div>
+            <div className="artwork-label-title">Camellias I</div>
             <div className="artwork-label-detail">
-              Claude Monet, 1875<br />Oil on canvas<br />100 × 81 cm
+              Rob Ventura, 2025<br />Oil and beeswax on hemp<br />50 × 43 in
             </div>
           </div>
         </div>
