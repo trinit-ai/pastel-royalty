@@ -73,9 +73,13 @@ const COLUMN_ALIASES = {
   pull_quote: ['pull quote', 'quote', 'featured quote'],
   opening: ['opening', 'opening reception', 'reception'],
   status: ['status', 'state'],
-  hero_image: ['hero image', 'hero', 'featured image', 'main image'],
+  hero_image: ['hero image', 'hero', 'featured image', 'main image', 'main image url large', 'main image url medium'],
   press_release_pdf: ['press release', 'press release pdf', 'press release file'],
   checklist_pdf: ['checklist', 'checklist pdf'],
+  // ArtLogic-style image URL columns (for artworks)
+  image_url_large: ['main image url large', 'image url large'],
+  image_url_medium: ['main image url medium', 'image url medium'],
+  image_url_small: ['main image url small', 'image url small'],
 
   // Artists
   name: ['name', 'artist name', 'full name'],
@@ -92,6 +96,33 @@ const COLUMN_ALIASES = {
   year: ['year', 'date', 'created'],
   dimensions: ['dimensions', 'size'],
   image_filename: ['image', 'image filename', 'filename', 'file', 'image file'],
+}
+
+// Cache for downloaded images so we don't re-fetch
+const downloadCache = new Set()
+
+/**
+ * Download a URL to a file. Skips if already downloaded in this run.
+ * @param {string} url
+ * @param {string} destPath
+ */
+async function downloadFile(url, destPath) {
+  if (downloadCache.has(url) && fs.existsSync(destPath)) return true
+  try {
+    const res = await fetch(url)
+    if (!res.ok) {
+      warn(`  download failed (${res.status}): ${url}`)
+      return false
+    }
+    const buf = Buffer.from(await res.arrayBuffer())
+    fs.mkdirSync(path.dirname(destPath), { recursive: true })
+    fs.writeFileSync(destPath, buf)
+    downloadCache.add(url)
+    return true
+  } catch (e) {
+    warn(`  download error: ${url} — ${e.message}`)
+    return false
+  }
 }
 
 // ─── Helpers ───────────────────────────────────────────
@@ -124,13 +155,21 @@ function readCsv(filePath) {
   return parse(content, { columns: true, skip_empty_lines: true, trim: true })
 }
 
-function copyIfExists(filename, destDir, destName) {
-  if (!filename) return false
-  const src = path.join(IMAGES_SRC, filename)
-  const pdfSrc = path.join(PDFS_SRC, filename)
+/**
+ * Resolve a filename or URL to a local file at destDir/destName.
+ * - If it looks like a URL (http://, https://), download it.
+ * - Otherwise look for it in the local images/ or pdfs/ folder.
+ */
+async function resolveAsset(filenameOrUrl, destDir, destName) {
+  if (!filenameOrUrl) return false
+  if (/^https?:\/\//i.test(filenameOrUrl)) {
+    return await downloadFile(filenameOrUrl, path.join(destDir, destName))
+  }
+  const src = path.join(IMAGES_SRC, filenameOrUrl)
+  const pdfSrc = path.join(PDFS_SRC, filenameOrUrl)
   const actualSrc = fs.existsSync(src) ? src : fs.existsSync(pdfSrc) ? pdfSrc : null
   if (!actualSrc) {
-    warn(`  file not found: ${filename}`)
+    warn(`  file not found: ${filenameOrUrl}`)
     return false
   }
   fs.mkdirSync(destDir, { recursive: true })
@@ -144,7 +183,7 @@ function writeMeta(dir, data) {
 }
 
 // ─── Process exhibitions CSV ───────────────────────────
-function processExhibitions() {
+async function processExhibitions() {
   const csvPath = path.join(CSV_DIR, 'exhibitions.csv')
   const rows = readCsv(csvPath)
   if (!rows.length) return 0
@@ -181,14 +220,14 @@ function processExhibitions() {
 
     // Hero image
     const heroFilename = findColumn(row, 'hero_image')
-    if (heroFilename) copyIfExists(heroFilename, dir, 'hero.jpg')
+    if (heroFilename) await resolveAsset(heroFilename, dir, 'hero.jpg')
 
     // PDFs
     const pressFilename = findColumn(row, 'press_release_pdf')
-    if (pressFilename) copyIfExists(pressFilename, dir, 'press-release.pdf')
+    if (pressFilename) await resolveAsset(pressFilename, dir, 'press-release.pdf')
 
     const checklistFilename = findColumn(row, 'checklist_pdf')
-    if (checklistFilename) copyIfExists(checklistFilename, dir, 'checklist.pdf')
+    if (checklistFilename) await resolveAsset(checklistFilename, dir, 'checklist.pdf')
 
     ok(`  exhibition: ${slug}`)
   }
@@ -197,7 +236,7 @@ function processExhibitions() {
 }
 
 // ─── Process artists CSV ───────────────────────────────
-function processArtists() {
+async function processArtists() {
   const csvPath = path.join(CSV_DIR, 'artists.csv')
   const rows = readCsv(csvPath)
   if (!rows.length) return 0
@@ -231,10 +270,10 @@ function processArtists() {
     writeMeta(dir, meta)
 
     const heroFilename = findColumn(row, 'hero_image')
-    if (heroFilename) copyIfExists(heroFilename, dir, 'hero.jpg')
+    if (heroFilename) await resolveAsset(heroFilename, dir, 'hero.jpg')
 
     const cvFilename = findColumn(row, 'cv_pdf')
-    if (cvFilename) copyIfExists(cvFilename, dir, 'cv.pdf')
+    if (cvFilename) await resolveAsset(cvFilename, dir, 'cv.pdf')
 
     ok(`  artist: ${slug}`)
   }
@@ -243,7 +282,7 @@ function processArtists() {
 }
 
 // ─── Process artworks CSV ──────────────────────────────
-function processArtworks() {
+async function processArtworks() {
   const csvPath = path.join(CSV_DIR, 'artworks.csv')
   const rows = readCsv(csvPath)
   if (!rows.length) return 0
@@ -273,13 +312,21 @@ function processArtworks() {
         items: [],
       }
     }
+    // Prefer URL columns (ArtLogic-style) over local filename, large > medium > small
+    const imageRef =
+      findColumn(row, 'image_url_large') ||
+      findColumn(row, 'image_url_medium') ||
+      findColumn(row, 'image_url_small') ||
+      findColumn(row, 'image_filename') ||
+      null
+
     groups[key].items.push({
       title: findColumn(row, 'title') || 'Untitled',
       year: parseInt(findColumn(row, 'year')) || null,
       medium: findColumn(row, 'medium') || '',
       dimensions: findColumn(row, 'dimensions') || '',
       status: findColumn(row, 'status') || 'available',
-      _imageFilename: findColumn(row, 'image_filename') || null,
+      _imageFilename: imageRef,
     })
   }
 
@@ -297,7 +344,7 @@ function processArtworks() {
       if (item._imageFilename) {
         const ext = path.extname(item._imageFilename) || '.jpg'
         const destName = `${String(i).padStart(2, '0')}${ext}`
-        copyIfExists(item._imageFilename, group.dir, destName)
+        await resolveAsset(item._imageFilename, group.dir, destName)
       }
       i++
     }
@@ -308,7 +355,7 @@ function processArtworks() {
 }
 
 // ─── Main ──────────────────────────────────────────────
-function main() {
+async function main() {
   console.log()
   console.log(`${BOLD}Pastel Royalty — CSV → Meta Converter${RESET}`)
   console.log(`${DIM}Reading from ${path.relative(ROOT, CSV_DIR)}/${RESET}`)
@@ -322,9 +369,9 @@ function main() {
     process.exit(1)
   }
 
-  const exhibitionCount = processExhibitions()
-  const artistCount = processArtists()
-  const artworkCount = processArtworks()
+  const exhibitionCount = await processExhibitions()
+  const artistCount = await processArtists()
+  const artworkCount = await processArtworks()
 
   console.log()
   console.log(`${BOLD}Summary${RESET}`)
@@ -344,4 +391,8 @@ function main() {
   console.log()
 }
 
-main()
+main().catch((e) => {
+  err(e.message)
+  console.error(e)
+  process.exit(1)
+})

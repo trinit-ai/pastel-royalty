@@ -4,9 +4,28 @@ The fastest way to populate your gallery site from an existing CMS export (ArtLo
 
 ## What you need
 
-1. **One or more CSV files** describing your content
-2. **A folder of images** with filenames matching the CSV
-3. **A folder of PDFs** if you have press releases / checklists / CVs
+**Minimum:** just the CSV file. If your CSV has image URLs (e.g. ArtLogic exports include columns like `Main image URL (large)`), the script will download images directly — no folder management required.
+
+**Or, if your images are local files:**
+1. A folder of images with filenames matching the CSV → `_intake/_csv/images/`
+2. A folder of PDFs → `_intake/_csv/pdfs/`
+
+## ArtLogic export workflow (the easy path)
+
+1. In ArtLogic: **Database → Artworks → Export → CSV**
+2. Save the file as `_intake/_csv/artworks.csv`
+3. Run `npm run ingest:csv`
+
+That's it. The script will:
+- Read the `Main image URL (large)` column for each row
+- Download every image directly from ArtLogic's CDN
+- Process them through Sharp into optimized WebP
+- Generate the data file
+- You're done
+
+No image folders to manage. No Dropbox links. No manual file matching.
+
+The same workflow works for any CSV that includes image URLs in any column.
 
 ## Folder structure
 
@@ -90,19 +109,15 @@ You don't need to use these exact names — common variations are accepted (see 
 | `medium` | no | |
 | `dimensions` | no | e.g. "48 × 36 in" |
 | `status` | no | available / sold / nfs / on-hold |
-| `image_filename` | yes | Filename in images/ folder |
+| `image_filename` *or* `image_url_large` *or* `image_url_medium` | yes | Local filename in images/, or a public URL the script can download. ArtLogic's `Main image URL (large)` column matches automatically. |
 
 If a work belongs to **both** an exhibition and an artist, set `exhibition_slug` (it takes precedence). The work will appear in the exhibition's grid; you can also list it in the artist's grid by adding a separate row with `artist_slug` set.
 
-## Example: importing from ArtLogic
+## Importing from ArtLogic — full details
 
-ArtLogic's standard CSV exports include columns like `Artwork Title`, `Artist Name`, `Year`, `Medium`, `Dimensions`, `Image File`. The script's column aliasing handles these automatically — no renaming required.
+ArtLogic's CSV exports include image URL columns like `Main image URL (large)`, `Main image URL (medium)`, `Main image URL (small)` pointing to their CDN at `datastore.artlogic.net`. The script reads these URLs directly and downloads each image during ingest — you don't need to manually download anything.
 
-1. Export from ArtLogic: Database → Artworks → Export → CSV
-2. Save as `_intake/_csv/artworks.csv`
-3. Download the image folder from ArtLogic → put all images in `_intake/_csv/images/`
-4. Repeat for artists if you have an artists export → save as `artists.csv`
-5. Run `npm run ingest:csv`
+The script's column aliasing also handles standard ArtLogic columns like `Artwork Title`, `Artist Name`, `Year`, `Medium`, `Dimensions`. No CSV renaming required.
 
 If a column doesn't auto-match, open `scripts/csv-to-meta.js` and add the column variant to the relevant entry in `COLUMN_ALIASES`. For example:
 
