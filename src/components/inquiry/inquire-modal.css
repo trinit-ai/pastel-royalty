@@ -7,14 +7,12 @@
   position: fixed;
   inset: 0;
   z-index: 9998;
-  background: radial-gradient(ellipse at center, rgba(30, 28, 22, 0.25) 0%, rgba(20, 18, 14, 0.45) 100%);
-  backdrop-filter: blur(8px) saturate(0.9);
-  -webkit-backdrop-filter: blur(8px) saturate(0.9);
+  background: radial-gradient(ellipse at center, rgba(26, 22, 16, 0.32) 0%, rgba(10, 8, 4, 0.55) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  animation: inquire-fade-in 0.25s ease-out;
+  animation: inquire-fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity;
 }
 
@@ -33,7 +31,7 @@
     0 1px 0 rgba(255,255,255,0.6) inset,
     0 24px 80px -12px rgba(0,0,0,0.45),
     0 0 0 1px rgba(0,0,0,0.04);
-  animation: inquire-slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: inquire-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
   will-change: transform, opacity;
 }
 
@@ -47,8 +45,8 @@
 }
 
 @keyframes inquire-slide-up {
-  from { opacity: 0; transform: translateY(24px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 .inquire-modal-eyebrow {
