@@ -109,14 +109,13 @@ export default function ArtistDetail() {
 
         </div>
 
-        <div className="atd-hero-image" style={{ background: `linear-gradient(160deg, ${artist.color} 0%, ${artist.color}dd 40%, ${artist.color}bb 100%)` }}>
-          <div className="atd-hero-artwork" style={{ background: `linear-gradient(160deg, ${artist.color}99, ${artist.color}66)`, boxShadow: '0 6px 32px rgba(0,0,0,.1)' }} />
-          <div className="atd-hero-artwork-label">
-            <div className="atd-hero-artwork-title">Featured Work Title</div>
-            <div className="atd-hero-artwork-detail">
-              {artist.name}, 2025<br />{artist.medium}<br />48 × 36 in
-            </div>
-          </div>
+        <div className="atd-hero-image" style={{ background: `${artist.color}` }}>
+          <img
+            src="/hero-artwork.jpg"
+            alt={`Detail of work by ${artist.name}`}
+            className="atd-hero-artwork-img"
+            decoding="async"
+          />
         </div>
       </section>
 
