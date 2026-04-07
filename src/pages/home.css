@@ -649,12 +649,21 @@
   }
   .hero-image {
     order: 1;
-    min-height: auto;
-    padding: 32px 24px 24px;
+    position: static;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    aspect-ratio: 16/10;
+    overflow: hidden;
   }
   .hero-artwork-img {
     width: 100%;
-    aspect-ratio: 4/5;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.4) translateY(-10%);
+    transform-origin: center top;
+    aspect-ratio: auto;
   }
   .hero-image-placeholder {
     width: 100%;
