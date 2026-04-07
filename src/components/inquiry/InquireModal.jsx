@@ -9,7 +9,7 @@ import './inquire-modal.css'
  * Triggered from anywhere via useInquire().openInquire()
  */
 export default function InquireModal() {
-  const { isOpen, artwork, exhibition, closeInquire } = useInquire()
+  const { isOpen, artwork, exhibition, artist, closeInquire } = useInquire()
 
   // Lock scroll + ESC to close
   useEffect(() => {
@@ -39,6 +39,7 @@ export default function InquireModal() {
         <InquireForm
           artwork={artwork}
           exhibition={exhibition}
+          artist={artist}
           onSuccess={() => setTimeout(closeInquire, 2500)}
         />
       </div>

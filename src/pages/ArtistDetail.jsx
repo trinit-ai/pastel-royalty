@@ -96,7 +96,7 @@ export default function ArtistDetail() {
             Recent exhibitions include group presentations at institutional and commercial venues across the United States. Work is held in private and public collections. The artist maintains an active studio practice and is available for commissions and site-specific projects.
           </p>
           <div className="atd-hero-actions reveal">
-            <a className="btn btn-outline" onClick={() => openInquire()} role="button">Inquire</a>
+            <a className="btn btn-outline" onClick={() => openInquire({ artist })} role="button">Inquire</a>
             <a href="#" className="btn btn-gold">Download CV ↓</a>
           </div>
 

@@ -17,14 +17,15 @@ export function InquireProvider({ children }) {
     isOpen: false,
     artwork: null,
     exhibition: null,
+    artist: null,
   })
 
-  const openInquire = useCallback(({ artwork = null, exhibition = null } = {}) => {
-    setState({ isOpen: true, artwork, exhibition })
+  const openInquire = useCallback(({ artwork = null, exhibition = null, artist = null } = {}) => {
+    setState({ isOpen: true, artwork, exhibition, artist })
   }, [])
 
   const closeInquire = useCallback(() => {
-    setState({ isOpen: false, artwork: null, exhibition: null })
+    setState({ isOpen: false, artwork: null, exhibition: null, artist: null })
   }, [])
 
   return (

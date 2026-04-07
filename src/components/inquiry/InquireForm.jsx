@@ -44,8 +44,8 @@ function recordSubmission() {
  * Design: feels like writing a note to a gallerist, not a web form.
  * Minimal fields. Honeypot for spam. No CAPTCHA.
  */
-/** Build a pre-filled message body referencing the specific work */
-function buildPrefill(artwork, exhibition) {
+/** Build a pre-filled message body referencing the specific work, exhibition, or artist */
+function buildPrefill(artwork, exhibition, artist) {
   if (artwork) {
     const parts = [`I'm interested in "${artwork.title}"`]
     if (artwork.artistName) parts.push(`by ${artwork.artistName}`)
@@ -61,19 +61,27 @@ function buildPrefill(artwork, exhibition) {
   if (exhibition) {
     return `I'd like to learn more about "${exhibition.title}". Please share information about available works and viewing options.`
   }
+  if (artist) {
+    let message = `I'd like to learn more about ${artist.name}'s work`
+    if (artist.medium) message += ` (${artist.medium.toLowerCase()})`
+    message += '.'
+    message += '\n\nPlease share information on currently available works, recent exhibitions, and any forthcoming presentations.'
+    return message
+  }
   return ''
 }
 
 export default function InquireForm({
   artwork = null,
   exhibition = null,
+  artist = null,
   compact = false,
   onSuccess,
 }) {
   const [form, setForm] = useState(() => ({
     name: '',
     email: '',
-    message: buildPrefill(artwork, exhibition),
+    message: buildPrefill(artwork, exhibition, artist),
     _hp: '',
   }))
   const [status, setStatus] = useState('idle')
@@ -84,6 +92,8 @@ export default function InquireForm({
     ? `Inquiring about "${artwork.title}" by ${artwork.artistName}`
     : exhibition
     ? `Inquiring about the exhibition "${exhibition.title}"`
+    : artist
+    ? `Inquiring about ${artist.name}`
     : ''
 
   const handleSubmit = async (e) => {
@@ -182,7 +192,7 @@ export default function InquireForm({
       {!compact && (
         <div className="inquire-form-header">
           <h3 className="inquire-form-title">
-            {artwork ? 'Inquire About This Work' : exhibition ? 'Inquire About This Exhibition' : 'Get in Touch'}
+            {artwork ? 'Inquire About This Work' : exhibition ? 'Inquire About This Exhibition' : artist ? `Inquire About ${artist.name}` : 'Get in Touch'}
           </h3>
           {contextLine && (
             <p className="inquire-form-context">{contextLine}</p>
