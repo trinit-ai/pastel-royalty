@@ -22,7 +22,7 @@ export default function Artists() {
   return (
     <main className="artists-page">
       <div className="artists-page-header reveal">
-        <div className="eyebrow" style={{ marginBottom: 14 }}>Roster</div>
+        <div className="eyebrow">Roster</div>
         <h1 className="section-title">Artists</h1>
         <div className="section-divider reveal-line" />
         <div className="artists-count">{ARTISTS.length} represented artists</div>

@@ -28,7 +28,7 @@ export default function About() {
       {/* Split pane: text left, image right */}
       <section className="about-split">
         <div className="about-split-text">
-          <div className="eyebrow" style={{ marginBottom: 14 }}>The Gallery</div>
+          <div className="eyebrow">The Gallery</div>
           <h1 className="about-title">About</h1>
           {GALLERY_DESCRIPTION.map((p, i) => (
             <p key={i} className="about-body reveal">{p}</p>
@@ -89,7 +89,7 @@ export default function About() {
               123 Main Street<br />
               Your City, ST 00000
             </div>
-            <div className="about-contact-value" style={{ marginTop: 16 }}>
+            <div className="about-contact-value mt-16">
               Thursday – Sunday: 11 – 5 pm<br />
               Monday & Tuesday by appointment
             </div>

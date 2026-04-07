@@ -21,7 +21,7 @@ export default function ExhibitionDetail() {
       <main className="exd">
         <div className="exd-content">
           <Link to="/exhibitions" className="exd-back">← Back to Exhibitions</Link>
-          <h1 className="section-title" style={{ marginTop: 20 }}>Exhibition not found</h1>
+          <h1 className="section-title mt-20">Exhibition not found</h1>
         </div>
       </main>
     )
@@ -75,7 +75,7 @@ export default function ExhibitionDetail() {
           <div className="exd-opening reveal">{exhibition.opening}</div>
         )}
 
-        <a className="exd-inquire-btn reveal" onClick={() => openInquire({ exhibition })} role="button" style={{ cursor: 'pointer' }}>
+        <a className="exd-inquire-btn reveal" onClick={() => openInquire({ exhibition })} role="button">
           Inquire
         </a>
       </div>
@@ -104,7 +104,7 @@ export default function ExhibitionDetail() {
       {/* 5. INSTALLATION VIEWS — carousel */}
       <div className="exd-install">
         <div className="exd-install-header reveal">
-          <h2 className="exd-section-title" style={{ marginBottom: 0 }}>Installation Views</h2>
+          <h2 className="exd-section-title mb-0">Installation Views</h2>
           <div className="install-header-nav">
             <button className="install-header-arrow" onClick={() => carouselRef.current?.prev()}>
               <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3L5 8L10 13" /></svg>

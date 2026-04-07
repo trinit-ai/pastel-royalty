@@ -62,7 +62,7 @@ export default function Services() {
     <main className="services-page">
       {/* Hero */}
       <section className="services-hero reveal">
-        <div className="eyebrow" style={{ marginBottom: 14 }}>Services</div>
+        <div className="eyebrow">Services</div>
         <h1 className="services-hero-title">Advisory & Appraisal</h1>
         <p className="services-hero-subtitle">
           A full-service practice built on deep expertise, global relationships, and a commitment to every client's vision.
@@ -81,7 +81,7 @@ export default function Services() {
         <section key={svc.id} id={svc.id} className="services-section">
           <div className="services-section-inner reveal">
             <div className="services-section-header">
-              <div className="eyebrow" style={{ marginBottom: 10 }}>{svc.label}</div>
+              <div className="eyebrow mb-10">{svc.label}</div>
               <h2 className="services-section-title">{svc.title}</h2>
             </div>
             <div className="services-section-content">
@@ -93,7 +93,7 @@ export default function Services() {
                   <div key={j} className="services-offering-item">— {o}</div>
                 ))}
               </div>
-              <a className="services-cta" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
+              <a className="services-cta" onClick={openInquire} role="button">Inquire</a>
             </div>
           </div>
           {i < SERVICES.length - 1 && <div className="services-divider" />}

@@ -329,7 +329,7 @@
   color: var(--text);
   margin-bottom: 16px;
   position: sticky;
-  top: 72px;
+  top: var(--header-height);
   z-index: 5;
   padding: 12px 0;
 }

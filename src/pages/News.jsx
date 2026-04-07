@@ -138,7 +138,7 @@ export default function News() {
   return (
     <main className="news-page">
       <div className="news-header">
-        <div className="eyebrow" style={{ marginBottom: 14 }}>Gallery</div>
+        <div className="eyebrow">Gallery</div>
         <h1 className="news-title">News</h1>
         <p className="news-subtitle">Art fairs, events, publications, and announcements.</p>
       </div>

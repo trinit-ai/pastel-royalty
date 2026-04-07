@@ -200,7 +200,7 @@
   padding: 16px 52px;
   margin-bottom: 28px;
   position: sticky;
-  top: 72px;
+  top: var(--header-height);
   z-index: 5;
   background: var(--bg);
 }
@@ -245,7 +245,7 @@
   color: var(--text);
   margin-bottom: 12px;
   position: sticky;
-  top: 72px;
+  top: var(--header-height);
   z-index: 5;
   padding: 12px 0;
 }

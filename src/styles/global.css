@@ -85,29 +85,28 @@ img { display: block; max-width: 100%; }
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
-.eyebrow {
-  font-family: 'DM Sans';
-  font-size: 10px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--accent-secondary);
-}
-
-.eyebrow-gold {
-  font-family: 'DM Sans';
-  font-size: 10px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
+.eyebrow,
+.eyebrow-gold,
 .eyebrow-muted {
   font-family: 'DM Sans';
   font-size: 10px;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  display: block;
+  margin-bottom: 14px;
 }
+.eyebrow { color: var(--accent-secondary); }
+.eyebrow-gold { color: var(--accent); }
+.eyebrow-muted { color: var(--text-muted); }
+
+/* Anchors that act as buttons (onClick handlers, no href) */
+a[role="button"] { cursor: pointer; }
+
+/* Small utility classes — sparing use, prefer page CSS */
+.mb-10 { margin-bottom: 10px; }
+.mb-0 { margin-bottom: 0; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
 
 .section-title {
   font-family: 'Cormorant Garamond', serif;

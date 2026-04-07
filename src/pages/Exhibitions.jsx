@@ -48,7 +48,7 @@ export default function Exhibitions() {
     <main className="exhibitions-page">
       {/* Header */}
       <div className="exhibitions-page-header reveal">
-        <div className="eyebrow" style={{ marginBottom: 14 }}>Program</div>
+        <div className="eyebrow">Program</div>
         <h1 className="section-title">Exhibitions</h1>
         <div className="section-divider reveal-line" />
       </div>

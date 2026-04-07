@@ -3,6 +3,15 @@
    Two skins: dark (default) and light
    ============================================================ */
 
+/* ─── Layout tokens (theme-independent) ──────────────── */
+:root {
+  --header-height: 72px;
+  --page-padding-x: 52px;
+  --page-padding-x-mobile: 24px;
+  --section-gap: 80px;
+  --section-gap-mobile: 48px;
+}
+
 :root,
 [data-theme="dark"] {
   --ink: #1A1814;

@@ -218,8 +218,8 @@
 .hero-image {
   background: #e8e4de;
   position: sticky;
-  top: 72px;
-  height: calc(100vh - 72px);
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
   align-self: start;
   overflow: hidden;
 }
@@ -275,7 +275,7 @@
 .section-header {
   margin-bottom: 56px;
   position: sticky;
-  top: 72px;
+  top: var(--header-height);
   z-index: 10;
   padding: 24px 52px;
   margin-left: -52px;
@@ -284,6 +284,16 @@
 #exhibitions .section-header { background: var(--bg); }
 #artists .section-header { background: var(--bg-alt); }
 #about .section-header { background: var(--bg); }
+#about { padding-bottom: 0; }
+#visit { border-bottom: none; }
+#visit .eyebrow,
+#visit .eyebrow-gold { margin-bottom: 20px; }
+.visit-right .btn-primary {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+}
 
 .about-summary {
   font-family: 'Cormorant Garamond', serif;

@@ -59,7 +59,7 @@ export default function Home({ galleryName }) {
             </div>
             <div className="hero-contact-top">
               <span className="hero-contact-label">Stay connected</span>
-              <a className="hero-contact-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
+              <a className="hero-contact-link" onClick={openInquire} role="button">Inquire</a>
             </div>
             <form className="hero-contact-form" onSubmit={e => e.preventDefault()}>
               <input type="email" className="hero-contact-input" placeholder="Your email" />
@@ -86,7 +86,7 @@ export default function Home({ galleryName }) {
       {/* EXHIBITIONS */}
       <section className="section" id="exhibitions">
         <div className="section-header reveal">
-          <div className="eyebrow" style={{ marginBottom: 14 }}>Featured</div>
+          <div className="eyebrow">Featured</div>
           <h2 className="section-title">Exhibitions</h2>
           <div className="section-divider reveal-line" />
         </div>
@@ -112,7 +112,7 @@ export default function Home({ galleryName }) {
       {/* ARTISTS */}
       <section className="section section-alt" id="artists">
         <div className="section-header reveal">
-          <div className="eyebrow" style={{ marginBottom: 14 }}>On View</div>
+          <div className="eyebrow">On View</div>
           <h2 className="section-title">Artists</h2>
           <div className="section-divider reveal-line" />
         </div>
@@ -139,9 +139,9 @@ export default function Home({ galleryName }) {
       </section>
 
       {/* ABOUT / SERVICES */}
-      <section className="section" id="about" style={{ paddingBottom: 0 }}>
+      <section className="section" id="about">
         <div className="section-header reveal">
-          <div className="eyebrow" style={{ marginBottom: 14 }}>About</div>
+          <div className="eyebrow">About</div>
           <h2 className="section-title">Gallery Information</h2>
           <div className="section-divider reveal-line" />
           <p className="about-summary reveal">
@@ -153,28 +153,28 @@ export default function Home({ galleryName }) {
             <div className="service-icon" />
             <div className="service-title">Consultations</div>
             <div className="service-body">Private advisory for collectors at every stage — from first acquisitions to comprehensive collection strategy.</div>
-            <a className="service-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
+            <a className="service-link" onClick={openInquire} role="button">Inquire</a>
           </div>
           <div className="service-card service-lavender reveal reveal-delay-1">
             <div className="service-icon" />
             <div className="service-title">Appraisals</div>
             <div className="service-body">USPAP-compliant appraisals for insurance, estate planning, charitable donation, and equitable distribution.</div>
-            <a className="service-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
+            <a className="service-link" onClick={openInquire} role="button">Inquire</a>
           </div>
           <div className="service-card service-blush reveal reveal-delay-2">
             <div className="service-icon" />
             <div className="service-title">Art Advisory</div>
             <div className="service-body">Long-term advisory relationships with institutions and private clients seeking a trusted curatorial partner.</div>
-            <a className="service-link" onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
+            <a className="service-link" onClick={openInquire} role="button">Inquire</a>
           </div>
         </div>
       </section>
 
       {/* VISIT + ABOUT */}
-      <section id="visit" style={{ borderBottom: 'none' }}>
+      <section id="visit">
         <div className="visit-grid reveal">
           <div className="visit-left">
-            <div className="eyebrow-gold" style={{ marginBottom: 20 }}>Visit</div>
+            <div className="eyebrow-gold">Visit</div>
             <div className="visit-title">Your City,<br />Your State</div>
             <div className="visit-detail">
               <div className="visit-label">Address</div>
@@ -188,18 +188,18 @@ export default function Home({ galleryName }) {
               <div className="visit-label">Contact</div>
               <div className="visit-value">info@yourgallery.com</div>
             </div>
-            <div className="visit-detail" style={{ borderBottom: 'none' }}>
+            <div className="visit-detail">
               <div className="visit-label">Instagram</div>
               <div className="visit-value">@yourgallery</div>
             </div>
           </div>
           <div className="visit-right">
-            <div className="eyebrow" style={{ marginBottom: 20 }}>About</div>
+            <div className="eyebrow">About</div>
             <div className="visit-right-title">Contemporary art<br />for the modern collector.</div>
             <p className="visit-right-body">
               The gallery presents contemporary painting, sculpture, and works on paper. We represent emerging and established artists working across media, with a focus on material craft, visual intensity, and curatorial precision.
             </p>
-            <a className="btn btn-primary" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', padding: '14px 32px', cursor: 'pointer' }} onClick={openInquire} role="button">
+            <a className="btn btn-primary" onClick={openInquire} role="button">
               Inquire
             </a>
           </div>
