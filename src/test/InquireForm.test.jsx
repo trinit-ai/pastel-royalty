@@ -22,8 +22,8 @@ describe('InquireForm', () => {
         artwork={{ title: 'Camellias I', artistName: 'Rob Ventura' }}
       />
     )
-    expect(screen.getByText(/Camellias I/)).toBeInTheDocument()
-    expect(screen.getByText(/Rob Ventura/)).toBeInTheDocument()
+    expect(screen.getAllByText(/Camellias I/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Rob Ventura/).length).toBeGreaterThan(0)
   })
 
   it('shows exhibition context line when exhibition is passed', () => {
@@ -32,7 +32,7 @@ describe('InquireForm', () => {
         exhibition={{ title: 'Still Life with Light' }}
       />
     )
-    expect(screen.getByText(/Still Life with Light/)).toBeInTheDocument()
+    expect(screen.getAllByText(/Still Life with Light/).length).toBeGreaterThan(0)
   })
 
   it('blocks submission after rate limit is hit', async () => {

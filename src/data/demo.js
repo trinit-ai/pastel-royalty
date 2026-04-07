@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Demo data — replaced by Supabase queries in production.
  * Structured to match the database schema exactly.
