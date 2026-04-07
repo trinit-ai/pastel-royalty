@@ -42,7 +42,7 @@ export default function Home({ galleryName }) {
             <div className="hero-label">Current Exhibition</div>
           </div>
           <h1 className="hero-title fade-up fade-up-2">Still Life with Light</h1>
-          <div className="hero-artist fade-up fade-up-2">Elena Marsh &amp; Julian Cole</div>
+          <div className="hero-artist fade-up fade-up-2">Elena Marsh &amp; Fiona Garrett</div>
           <div className="hero-dates fade-up fade-up-3">Summer 2026</div>
           <div className="hero-divider fade-up fade-up-3" />
           <p className="hero-body fade-up fade-up-3">

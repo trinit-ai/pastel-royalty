@@ -231,8 +231,8 @@
   box-shadow: 0 6px 32px rgba(0,0,0,.1);
 }
 .hero-artwork-img {
-  max-width: 70%;
-  max-height: 80vh;
+  max-width: 60%;
+  max-height: 65vh;
   width: auto;
   height: auto;
   object-fit: contain;
