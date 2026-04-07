@@ -26,7 +26,7 @@ export default function Footer({ galleryName = 'Gallery Name' }) {
             <Link to="/artists">Artists</Link>
             <Link to="/about">About</Link>
             <Link to="/services">Services</Link>
-            <a onClick={openInquire} role="button" style={{ cursor: 'pointer' }}>Inquire</a>
+            <a onClick={openInquire} role="button">Inquire</a>
           </nav>
         </div>
         <div className="footer-col">

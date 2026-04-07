@@ -1,7 +1,66 @@
 /**
  * Demo data — replaced by Supabase queries in production.
  * Structured to match the database schema exactly.
+ *
+ * ─── Type definitions (JSDoc) ────────────────────────────
+ * These document the shape of every record in this file. When
+ * wiring up Supabase, your tables should match these exactly.
+ *
+ * @typedef {Object} Exhibition
+ * @property {string} id                  - Unique identifier
+ * @property {string} title               - Display title
+ * @property {string} slug                - URL slug (lowercase, hyphenated)
+ * @property {'solo'|'group'|'fair'} type - Exhibition format
+ * @property {string} start_date          - ISO date YYYY-MM-DD
+ * @property {string} end_date            - ISO date YYYY-MM-DD
+ * @property {string} location            - Physical location / venue
+ * @property {string} description         - Short summary (1-3 sentences)
+ * @property {string} [essay]             - Long-form curatorial essay
+ * @property {string} [pullQuote]         - Featured quote (artist or curator)
+ * @property {string} [opening]           - Reception details
+ * @property {string[]} artistIds         - References to ARTISTS[].id
+ * @property {'current'|'forthcoming'|'past'} status
+ * @property {boolean} [featured]         - Show on homepage
+ * @property {string} artists             - Display string (e.g. "Elena Marsh & Julian Cole")
+ * @property {string} color               - Hex color for placeholder gradient
+ *
+ * @typedef {Object} Artist
+ * @property {string} id                  - Unique identifier
+ * @property {string} name                - Full name
+ * @property {string} slug                - URL slug
+ * @property {string} medium              - Primary medium(s)
+ * @property {string} location            - City, State
+ * @property {number} born                - Birth year
+ * @property {string} [instagram]         - Handle with @
+ * @property {string} [website]           - Domain only, no https://
+ * @property {string} bio                 - Short bio (1-2 sentences)
+ * @property {boolean} [featured]         - Show on homepage
+ * @property {boolean} [onView]           - Currently in an exhibition
+ * @property {string} color               - Hex color for placeholder gradient
+ *
+ * @typedef {Object} NewsItem
+ * @property {string|number} year         - Year or "Forthcoming"
+ * @property {string} slug                - URL slug for detail page
+ * @property {string} date                - Display date (e.g. "March 20–23")
+ * @property {string} title               - Headline
+ * @property {string} body                - Body copy (1-3 sentences)
+ * @property {'Art Fair'|'Publication'|'Event'|'Announcement'|'Exhibition'} tag
+ * @property {string} color               - Hex color for placeholder gradient
+ * @property {string} [href]              - Optional override link (external URL or internal path)
+ *
+ * @typedef {Object} Artwork
+ * @property {string} id                  - Unique identifier
+ * @property {string} title               - Title (will be italicized in UI)
+ * @property {string} artistId            - Reference to ARTISTS[].id
+ * @property {number} year                - Creation year
+ * @property {string} medium              - Medium description
+ * @property {string} dimensions          - Display dimensions (e.g. "48 × 36 in")
+ * @property {'available'|'sold'|'nfs'|'on-hold'} [status]
+ * @property {string} [imageUrl]          - Image path
+ * @property {string} color               - Hex color for placeholder gradient
  */
+
+/** @type {Exhibition[]} */
 
 export const EXHIBITIONS = [
   // Current
@@ -125,6 +184,7 @@ export const EXHIBITIONS = [
   },
 ]
 
+/** @type {Artist[]} */
 export const ARTISTS = [
   { id: '1', name: 'Elena Marsh', slug: 'elena-marsh', medium: 'Painting, Mixed Media', location: 'Brooklyn, NY', born: 1988, instagram: '@elenamarsh.studio', website: 'elenamarsh.com', bio: 'Layered oil and beeswax paintings exploring coastal light and seasonal color shifts.', featured: true, onView: true, color: '#d4ece8' },
   { id: '2', name: 'Julian Cole', slug: 'julian-cole', medium: 'Sculpture', location: 'Hudson Valley, NY', born: 1982, instagram: '@juliancole.art', website: 'juliancole.com', bio: 'Carved wood and stone forms evoking driftwood, bone, and geological strata.', featured: true, onView: true, color: '#e8e0d4' },
