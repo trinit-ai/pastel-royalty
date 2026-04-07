@@ -102,6 +102,16 @@ img { display: block; max-width: 100%; }
 /* Anchors that act as buttons (onClick handlers, no href) */
 a[role="button"] { cursor: pointer; }
 
+/* Image protection — basic deterrent against drag-to-save and selection.
+   Not real DRM, but raises the bar for casual lifting. */
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /* Small utility classes — sparing use, prefer page CSS */
 .mb-10 { margin-bottom: 10px; }
 .mb-0 { margin-bottom: 0; }

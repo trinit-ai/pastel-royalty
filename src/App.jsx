@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { LightboxProvider } from './hooks/useLightbox'
 import { InquireProvider } from './hooks/useInquire'
@@ -28,6 +29,15 @@ function AppShell() {
   useSmoothScroll()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
+
+  // Disable right-click on images (basic deterrent — not real DRM)
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.target?.tagName === 'IMG') e.preventDefault()
+    }
+    document.addEventListener('contextmenu', handler)
+    return () => document.removeEventListener('contextmenu', handler)
+  }, [])
 
   // Private portal renders without any chrome
   if (pathname === '/private') {
