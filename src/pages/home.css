@@ -661,7 +661,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    transform: scale(1.4) translateY(-10%);
+    transform: scale(1.4) translateY(-20%);
     transform-origin: center top;
     aspect-ratio: auto;
   }
