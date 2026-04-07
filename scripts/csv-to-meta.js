@@ -183,7 +183,51 @@ function writeMeta(dir, data) {
 }
 
 // ─── Process exhibitions CSV ───────────────────────────
-async function processExhibitions() {
+/**
+ * Build a lookup of slugified-name → artist id from the artists.csv.
+ * Used to auto-populate artistIds on exhibitions.
+ */
+function buildArtistLookup() {
+  const csvPath = path.join(CSV_DIR, 'artists.csv')
+  const rows = readCsv(csvPath)
+  /** @type {Record<string, string>} */
+  const lookup = {}
+  for (const row of rows) {
+    const name = findColumn(row, 'name')
+    if (!name) continue
+    const slug = findColumn(row, 'slug') || slugify(name)
+    const id = findColumn(row, 'id') || slug
+    lookup[slug] = id
+    // Also map last name → id for fuzzy fallback
+    const last = name.trim().split(/\s+/).pop()
+    if (last) lookup[slugify(last)] = id
+  }
+  return lookup
+}
+
+/**
+ * Resolve a comma/ampersand/semicolon-separated artist names string into ids.
+ * "Elena Marsh & Julian Cole" → ['1', '2'] (using artistLookup)
+ */
+function resolveArtistIds(artistsString, lookup) {
+  if (!artistsString) return []
+  const names = artistsString
+    .split(/[,&;]| and /i)
+    .map((n) => n.trim())
+    .filter(Boolean)
+  const ids = []
+  for (const name of names) {
+    const slug = slugify(name)
+    if (lookup[slug]) ids.push(lookup[slug])
+    else {
+      const last = slugify(name.split(/\s+/).pop() || '')
+      if (lookup[last]) ids.push(lookup[last])
+    }
+  }
+  return ids
+}
+
+async function processExhibitions(artistLookup) {
   const csvPath = path.join(CSV_DIR, 'exhibitions.csv')
   const rows = readCsv(csvPath)
   if (!rows.length) return 0
@@ -200,6 +244,9 @@ async function processExhibitions() {
     const slug = findColumn(row, 'slug') || slugify(title)
     const dir = path.join(INTAKE_DIR, 'exhibitions', slug)
 
+    const artistsString = findColumn(row, 'artists') || ''
+    const artistIds = resolveArtistIds(artistsString, artistLookup)
+
     const meta = {
       id: findColumn(row, 'id') || slug,
       title,
@@ -208,7 +255,8 @@ async function processExhibitions() {
       start_date: findColumn(row, 'start_date') || '',
       end_date: findColumn(row, 'end_date') || '',
       location: findColumn(row, 'location') || 'Main Gallery',
-      artists: findColumn(row, 'artists') || '',
+      artists: artistsString,
+      artistIds,
       description: findColumn(row, 'description') || '',
       essay: findColumn(row, 'essay') || '',
       pullQuote: findColumn(row, 'pull_quote') || '',
@@ -371,8 +419,10 @@ async function main() {
     process.exit(1)
   }
 
-  const exhibitionCount = await processExhibitions()
+  // Build artist lookup first (needed for exhibition → artistIds resolution)
+  const artistLookup = buildArtistLookup()
   const artistCount = await processArtists()
+  const exhibitionCount = await processExhibitions(artistLookup)
   const artworkCount = await processArtworks()
 
   console.log()

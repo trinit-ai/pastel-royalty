@@ -19,12 +19,9 @@ function getWorks(artist) {
   }))
 }
 
-// Find real exhibitions + generate placeholder history
+// Find real exhibitions for this artist via explicit artistIds relationship
 function getExhibitions(artist) {
-  const real = EXHIBITIONS.filter(ex =>
-    ex.artists?.toLowerCase().includes(artist.name.split(' ')[1]?.toLowerCase()) ||
-    ex.artistIds?.includes(artist.id)
-  )
+  const real = EXHIBITIONS.filter(ex => ex.artistIds?.includes(artist.id))
   // Placeholder exhibition history so every artist has entries
   const placeholders = [
     { year: 2025, title: 'New Perspectives', type: 'Group', venue: 'Pastel Royalty Gallery' },
