@@ -79,11 +79,11 @@ export default function Home({ galleryName }) {
         </div>
 
         <div className="hero-image">
-          <img src="/hero-artwork.jpg" alt="Camellias I, Rob Ventura, 2025" className="hero-artwork-img" />
+          <img src="/hero-artwork.jpg" alt="Fantastic Flowers with Peapod Leaves, Fiona Garrett" className="hero-artwork-img" />
           <div className="artwork-label">
-            <div className="artwork-label-title">Camellias I</div>
+            <div className="artwork-label-title">Fantastic Flowers with Peapod Leaves</div>
             <div className="artwork-label-detail">
-              Rob Ventura, 2025<br />Oil and beeswax on hemp<br />50 × 43 in
+              Fiona Garrett, 2024<br />Etching with à la poupée inking on paper<br />19.4 × 13.9 cm
             </div>
           </div>
         </div>
