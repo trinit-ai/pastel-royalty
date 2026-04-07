@@ -296,35 +296,69 @@ a[role="button"] { cursor: pointer; }
   font-size: 12px;
   color: var(--text-muted);
 }
-.inquire-fields { display: flex; flex-direction: column; gap: 10px; }
+.inquire-fields { display: flex; flex-direction: column; gap: 12px; }
 .inquire-input, .inquire-textarea {
-  font-family: 'DM Sans';
-  font-size: 12px;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  background: white;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 14px 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+  background: rgba(255,255,255,0.6);
   color: var(--text);
   outline: none;
-  transition: border-color .15s;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
 }
-.inquire-input:focus, .inquire-textarea:focus { border-color: var(--accent-secondary); }
-.inquire-input::placeholder, .inquire-textarea::placeholder { color: #B0ACA6; }
-.inquire-textarea { resize: vertical; min-height: 80px; }
+.inquire-input:hover, .inquire-textarea:hover {
+  border-color: rgba(0,0,0,0.18);
+}
+.inquire-input:focus, .inquire-textarea:focus {
+  border-color: var(--accent-secondary);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(51,102,153,0.08);
+}
+.inquire-input::placeholder, .inquire-textarea::placeholder {
+  color: #B0ACA6;
+  font-style: italic;
+}
+.inquire-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.65;
+}
 .inquire-submit {
-  font-family: 'DM Sans';
-  font-size: 10px;
-  letter-spacing: .14em;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  padding: 14px 28px;
+  font-weight: 500;
+  padding: 16px 32px;
   background: var(--accent-secondary);
   color: white;
   border: none;
+  border-radius: 2px;
   cursor: pointer;
-  transition: background .15s;
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
   align-self: flex-start;
+  box-shadow: 0 2px 8px rgba(51,102,153,0.15);
 }
-.inquire-submit:hover { background: #2A5580; }
-.inquire-submit:disabled { opacity: .5; cursor: not-allowed; }
+.inquire-submit:hover {
+  background: #2A5580;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(51,102,153,0.25);
+}
+.inquire-submit:active {
+  transform: translateY(0);
+}
+.inquire-submit:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 .inquire-error {
   font-family: 'DM Sans';
   font-size: 12px;

@@ -44,13 +44,38 @@ function recordSubmission() {
  * Design: feels like writing a note to a gallerist, not a web form.
  * Minimal fields. Honeypot for spam. No CAPTCHA.
  */
+/** Build a pre-filled message body referencing the specific work */
+function buildPrefill(artwork, exhibition) {
+  if (artwork) {
+    const parts = [`I'm interested in "${artwork.title}"`]
+    if (artwork.artistName) parts.push(`by ${artwork.artistName}`)
+    if (artwork.year) parts.push(`(${artwork.year})`)
+    let message = parts.join(' ') + '.'
+    const details = []
+    if (artwork.medium) details.push(artwork.medium)
+    if (artwork.dimensions) details.push(artwork.dimensions)
+    if (details.length) message += ` ${details.join(', ')}.`
+    message += '\n\nPlease share availability, price, and any additional details.'
+    return message
+  }
+  if (exhibition) {
+    return `I'd like to learn more about "${exhibition.title}". Please share information about available works and viewing options.`
+  }
+  return ''
+}
+
 export default function InquireForm({
   artwork = null,
   exhibition = null,
   compact = false,
   onSuccess,
 }) {
-  const [form, setForm] = useState({ name: '', email: '', message: '', _hp: '' })
+  const [form, setForm] = useState(() => ({
+    name: '',
+    email: '',
+    message: buildPrefill(artwork, exhibition),
+    _hp: '',
+  }))
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState(null)
   const formRef = useRef(null)
@@ -194,11 +219,11 @@ export default function InquireForm({
           className="inquire-input"
         />
         <textarea
-          placeholder={compact ? 'Message (optional)' : 'Tell us what you\'re looking for...'}
+          placeholder={compact ? 'Add a personal note (optional)' : 'Tell us what you\'re looking for...'}
           value={form.message}
           onChange={(e) => setForm(prev => ({ ...prev, message: e.target.value }))}
           className="inquire-textarea"
-          rows={compact ? 3 : 4}
+          rows={compact ? 8 : 5}
         />
       </div>
 
