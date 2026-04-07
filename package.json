@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "images": "node scripts/process-images.js"
+    "images": "node scripts/process-images.js",
+    "check-images": "node scripts/check-images.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.101.1",
