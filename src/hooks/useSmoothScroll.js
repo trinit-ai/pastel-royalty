@@ -3,6 +3,10 @@ import Lenis from 'lenis'
 
 let lenisInstance = null
 
+export function getLenis() {
+  return lenisInstance
+}
+
 export function useSmoothScroll() {
   useEffect(() => {
     if (lenisInstance) return
