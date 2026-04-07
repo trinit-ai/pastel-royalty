@@ -295,12 +295,14 @@ async function processArtworks() {
   const groups = {}
 
   for (const row of rows) {
-    const artistSlug = findColumn(row, 'artist_slug')
+    // Accept artist_slug, exhibition_slug, or fall back to slugifying the artist Name column
+    const artistName = findColumn(row, 'name')
+    const artistSlug = findColumn(row, 'artist_slug') || (artistName ? slugify(artistName) : null)
     const exhibitionSlug = findColumn(row, 'exhibition_slug')
     const parentSlug = exhibitionSlug || artistSlug
     const parentKind = exhibitionSlug ? 'exhibitions' : 'artists'
     if (!parentSlug) {
-      warn(`  artwork "${findColumn(row, 'title') || '?'}": no artist or exhibition slug, skipping`)
+      warn(`  artwork "${findColumn(row, 'title') || '?'}": no artist name/slug or exhibition slug, skipping`)
       continue
     }
 
