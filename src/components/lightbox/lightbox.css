@@ -85,9 +85,11 @@
   z-index: 2;
 }
 
-/* Placeholder art (no real image) — fill stage height, aspect-ratio constrains width */
+/* Placeholder art (no real image) — aspect-ratio sets shape, max-* constrain to stage */
 .lightbox-placeholder-art {
-  height: 90%;
+  max-height: 90%;
+  max-width: 90%;
+  height: auto;
   width: auto;
 }
 
