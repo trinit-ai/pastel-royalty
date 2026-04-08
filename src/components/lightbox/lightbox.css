@@ -85,12 +85,12 @@
   z-index: 2;
 }
 
-/* Placeholder art (no real image) — aspect-ratio sets shape, max-* constrain to stage */
+/* Placeholder art (no real image) — height drives size, aspect-ratio determines width,
+   max-width kicks in for landscape pieces so they stay within the stage */
 .lightbox-placeholder-art {
-  max-height: 90%;
-  max-width: 90%;
-  height: auto;
+  height: 90%;
   width: auto;
+  max-width: 90%;
 }
 
 /* The image — large and centered */
