@@ -54,19 +54,21 @@ function AppShell() {
       <LightboxProvider>
         <ScrollToTop />
         <Header galleryName={GALLERY_NAME} />
-        <Routes>
-          <Route path="/" element={<Home galleryName={GALLERY_NAME} />} />
-          <Route path="/exhibitions" element={<Exhibitions />} />
-          <Route path="/exhibitions/:slug" element={<ExhibitionDetail />} />
-          <Route path="/artists" element={<Artists />} />
-          <Route path="/artists/:slug" element={<ArtistDetail />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news/:slug" element={<NewsDetail />} />
-          <Route path="/legal/:slug" element={<Legal />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main key={pathname} className="route-fade">
+          <Routes>
+            <Route path="/" element={<Home galleryName={GALLERY_NAME} />} />
+            <Route path="/exhibitions" element={<Exhibitions />} />
+            <Route path="/exhibitions/:slug" element={<ExhibitionDetail />} />
+            <Route path="/artists" element={<Artists />} />
+            <Route path="/artists/:slug" element={<ArtistDetail />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:slug" element={<NewsDetail />} />
+            <Route path="/legal/:slug" element={<Legal />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
         <Newsletter hideGuild={isHome} />
         <Footer galleryName={GALLERY_NAME} />
         <Lightbox />
