@@ -20,6 +20,7 @@ import NewsDetail from './pages/NewsDetail'
 import Legal from './pages/Legal'
 import NotFound from './pages/NotFound'
 import Private from './pages/Private'
+import PrivateView from './pages/PrivateView'
 import ScrollToTop from './components/ui/ScrollToTop'
 import './styles/global.css'
 
@@ -38,6 +39,26 @@ function AppShell() {
     document.addEventListener('contextmenu', handler)
     return () => document.removeEventListener('contextmenu', handler)
   }, [])
+
+  // Private views are unlisted collector links: no header, footer or
+  // newsletter, but they still need the lightbox and inquiry providers.
+  if (pathname.startsWith('/private-view/')) {
+    return (
+      <InquireProvider>
+        <LightboxProvider>
+          <ScrollToTop />
+          <Routes>
+            <Route
+              path="/private-view/:token"
+              element={<PrivateView galleryName={GALLERY_NAME} />}
+            />
+          </Routes>
+          <Lightbox />
+          <InquireModal />
+        </LightboxProvider>
+      </InquireProvider>
+    )
+  }
 
   // Private portal renders without any chrome
   if (pathname === '/private') {

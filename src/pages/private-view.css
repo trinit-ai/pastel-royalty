@@ -1,0 +1,404 @@
+/* ============================================================
+   PRIVATE VIEW — unlisted per-collector viewing room
+   Ribbon → masthead → note → count → works → closing
+   → confidential footer
+
+   Shares type and spacing with ExhibitionDetail; the differences
+   are deliberate — prices, a dealer's note, and an expiry.
+   ============================================================ */
+
+.pv {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 80px;
+}
+
+/* ─── 1. Confidential ribbon ───────────────────────────── */
+
+.pv-ribbon {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 11px 24px;
+  background: var(--ticker-bg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ticker-strong);
+}
+
+.pv-ribbon-mark {
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+.pv-ribbon-quiet { color: var(--ticker-text); }
+
+.pv-ribbon-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+
+/* ─── 2. Masthead ──────────────────────────────────────── */
+
+.pv-head {
+  padding: 72px 52px 0;
+  max-width: 860px;
+}
+
+.pv-gallery {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.pv-eyebrow {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.pv-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(34px, 4.6vw, 58px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.06;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.pv-prepared {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ─── 3. The note ──────────────────────────────────────── */
+
+.pv-note {
+  padding: 48px 52px 8px;
+  max-width: 680px;
+}
+
+.pv-note-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.4;
+  margin-bottom: 32px;
+}
+
+.pv-note-para {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text);
+  opacity: 0.86;
+  margin-bottom: 20px;
+}
+
+/* ─── 4. Toolbar ───────────────────────────────────────── */
+
+.pv-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 56px 52px 28px;
+  border-bottom: 1px solid var(--border);
+  margin: 0 52px 40px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pv-count {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── 5a. Grid ─────────────────────────────────────────── */
+
+.pv-grid {
+  padding: 0 52px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px 40px;
+}
+
+.pv-card { display: flex; flex-direction: column; }
+
+.pv-card-image {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.25s;
+  margin-bottom: 18px;
+}
+.pv-card-image:hover { opacity: 0.9; }
+
+.pv-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: var(--bg);
+}
+
+/* Status colours match the lightbox details panel. */
+.pv-badge.status-available { color: #4a7a50; }
+.pv-badge.status-on_hold,
+.pv-badge.status-reserved { color: #c9a844; }
+.pv-badge.status-sold,
+.pv-badge.status-nfs { color: #7a7670; }
+
+.pv-card-artist {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.pv-card-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.pv-card-meta {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.pv-card-price {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.pv-card-note {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--accent-secondary);
+  margin-top: 12px;
+}
+
+.pv-card-action {
+  align-self: flex-start;
+  margin-top: 18px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  background: transparent;
+  border: 1px solid var(--accent-secondary);
+  color: var(--accent-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.pv-card-action:hover {
+  background: var(--accent-secondary);
+  color: #fff;
+}
+
+/* ─── 6. Closing + contact ─────────────────────────────── */
+
+.pv-close {
+  padding: 88px 52px 0;
+  max-width: 680px;
+}
+
+.pv-close-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.4;
+  margin-bottom: 32px;
+}
+
+.pv-close-body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.pv-contact-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text);
+}
+
+.pv-contact-role {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.pv-contact-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+}
+.pv-contact-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.pv-contact-links a:hover { color: var(--accent-secondary); }
+
+.pv-contact-btn {
+  margin-top: 28px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  background: var(--accent-secondary);
+  border: 1px solid var(--accent-secondary);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pv-contact-btn:hover { background: #2a5580; }
+
+/* ─── 7. Confidential footer ───────────────────────────── */
+
+.pv-foot {
+  margin-top: 88px;
+  padding: 24px 52px 0;
+  border-top: 1px solid var(--border);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ─── Closed / expired / unknown token ─────────────────── */
+
+.pv-closed {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.pv-closed-inner {
+  max-width: 460px;
+  text-align: center;
+}
+
+.pv-closed-gallery {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.pv-closed-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 30px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.pv-closed-body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+/* ─── Mobile ───────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .pv-head { padding: 48px var(--page-padding-x-mobile) 0; }
+  .pv-gallery { margin-bottom: 28px; }
+  .pv-note { padding: 36px var(--page-padding-x-mobile) 0; }
+  .pv-note-para { font-size: 17px; }
+
+  .pv-toolbar {
+    margin: 0 var(--page-padding-x-mobile) 32px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+
+  .pv-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 0 var(--page-padding-x-mobile);
+  }
+
+  .pv-close { padding: 64px var(--page-padding-x-mobile) 0; }
+  .pv-foot { padding: 20px var(--page-padding-x-mobile) 0; margin-top: 64px; }
+
+  .pv-ribbon { font-size: 9px; gap: 8px; padding: 10px 16px; }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .pv-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Respect reduced-motion preferences on the hover transitions. */
+@media (prefers-reduced-motion: reduce) {
+  .pv-card-image,
+  .pv-card-action,
+  .pv-contact-btn { transition: none; }
+}
