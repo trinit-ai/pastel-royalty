@@ -38,7 +38,7 @@ export const PRIVATE_VIEWS = {
     contact: {
       name: 'Caitlin Kelly-McKenna',
       role: 'Director',
-      email: 'Caitlin@email.com',
+      email: 'caitlin@kellymckennagallery.com',
       phone: '+1 (732) 449-0001',
     },
 
