@@ -129,6 +129,28 @@ AI-assisted contact management. Read inbound from all channels (inquiries, email
 
 ---
 
+## Private Views
+
+### Private View Page
+Unlisted per-collector viewing room at `/private-view/:token`. Renders without site chrome — a collector arriving from an emailed link lands on the selection, not on the gallery's navigation. Borrows type and spacing from Exhibition Detail so it reads as the same house. Three things separate it from a public exhibition page: prices are shown, the selection is addressed to one person and says so, and it expires.
+
+### Confidential Ribbon
+Sticky gold strip at the top: "Private View · Prepared for [Collector] · Open through [date]". The first thing that says this page is not public. Repeated as a quieter line in the footer.
+
+### The Note
+A letter from the dealer in italic serif, not marketing copy. Sits where the curatorial essay sits on an exhibition page. Supports paragraph breaks. Per-work notes appear under individual pieces in the gallery's accent blue — "See this one in person if you can."
+
+### Work Grid
+Three-column (two at tablet, one at mobile). Each card: image at the work's true aspect ratio, artist, title in italic serif, medium, dimensions, then price above a hairline rule. Status badge overlays non-available works. Sold and NFS works show no number and offer no action — they stay visible for context and scale.
+
+### Expiry and Unknown Tokens
+Both render the same neutral closed state. A wrong guess must not reveal whether a token was ever real. Expiry is inclusive of the final day.
+
+### Reserve vs Inquire
+Available works offer "Reserve this work"; works on hold offer "Ask about this work". Both open the existing InquireForm pre-filled with the artwork. The distinction is the collector's intent, not two different backends.
+
+---
+
 ## Services / Gallery Information
 
 ### Service Cards
