@@ -18,11 +18,12 @@
 export const PRIVATE_VIEWS = {
   'harding-autumn-2026': {
     token: 'harding-autumn-2026',
+    galleryName: 'Kelly-McKenna Gallery',
     title: 'Flowers, Cells, and the Golden Spiral',
     subtitle: 'A private selection',
     collector: 'Ms. Harding',
     preparedBy: 'Caitlin Kelly-McKenna',
-    preparedByRole: 'Director',
+    preparedByRole: 'Owner/Director',
     preparedOn: '2026-09-23',
     expiresOn: '2026-10-21',
     currency: 'USD',
@@ -37,9 +38,9 @@ export const PRIVATE_VIEWS = {
 
     contact: {
       name: 'Caitlin Kelly-McKenna',
-      role: 'Director',
+      role: 'Owner/Director',
       email: 'caitlin@kellymckennagallery.com',
-      phone: '+1 (732) 449-0001',
+      phone: '(732) 359-4008',
     },
 
     works: [

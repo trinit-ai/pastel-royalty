@@ -29,6 +29,9 @@ export default function PrivateView({ galleryName = 'Pastel Royalty Gallery' }) 
   const { token } = useParams()
   const view = getPrivateView(token)
 
+  // A view names its own gallery; the prop is the fallback.
+  const gallery = view?.galleryName ?? galleryName
+
   useScrollReveal([token])
   const { open } = useLightbox()
   const { openInquire } = useInquire()
@@ -59,7 +62,7 @@ export default function PrivateView({ galleryName = 'Pastel Royalty Gallery' }) 
     return (
       <div className="pv-closed">
         <div className="pv-closed-inner">
-          <div className="pv-closed-gallery">{galleryName}</div>
+          <div className="pv-closed-gallery">{gallery}</div>
           <h1 className="pv-closed-title">This view is no longer available</h1>
           <p className="pv-closed-body">
             Private views are held open for a limited period. If you would like it
@@ -87,7 +90,7 @@ export default function PrivateView({ galleryName = 'Pastel Royalty Gallery' }) 
 
       {/* 2. MASTHEAD */}
       <header className="pv-head">
-        <div className="pv-gallery reveal">{galleryName}</div>
+        <div className="pv-gallery reveal">{gallery}</div>
         <div className="pv-eyebrow reveal">{view.subtitle}</div>
         <h1 className="pv-title reveal">{view.title}</h1>
         <div className="pv-prepared reveal">

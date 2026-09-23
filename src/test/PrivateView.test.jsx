@@ -87,3 +87,16 @@ describe('private-view helpers', () => {
     expect(isExpired(v, new Date('2026-10-22T00:00:01'))).toBe(true)
   })
 })
+
+describe('gallery identity', () => {
+  it('prefers the gallery named on the view over the site default', () => {
+    renderAt(TOKEN)
+    expect(screen.getByText('Kelly-McKenna Gallery')).toBeInTheDocument()
+    expect(screen.queryByText('Test Gallery')).not.toBeInTheDocument()
+  })
+
+  it('falls back to the site gallery name on the closed state', () => {
+    renderAt('not-a-real-token')
+    expect(screen.getByText('Test Gallery')).toBeInTheDocument()
+  })
+})
